@@ -1,0 +1,5 @@
+.div-secondary-panel{
+    width: calc((100vw - 1280px)/2);
+    height: 92vh;
+    background-color: aquamarine;
+}

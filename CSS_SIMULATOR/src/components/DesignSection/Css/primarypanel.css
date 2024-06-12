@@ -1,0 +1,5 @@
+.div-primary-panel{
+    height: 92vh;
+    width: calc((100vw - 1280px)/2);
+    background-color: bisque;
+}
