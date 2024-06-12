@@ -1,5 +1,10 @@
+:root{
+  --sim-width: 900px;
+}
+
 .div-primary-panel{
     height: 92vh;
-    width: calc((100vw - 1280px)/2);
+    width: calc((100vw - var(--sim-width))/2);
     background-color: bisque;
 }
+
