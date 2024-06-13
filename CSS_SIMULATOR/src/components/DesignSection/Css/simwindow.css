@@ -1,3 +1,7 @@
+:root{
+  --sim-width: 66.667vw;
+}
+
 .div-simwindow{
   width: var(--sim-width);
   height: 81vh;
