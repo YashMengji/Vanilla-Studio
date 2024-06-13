@@ -1,7 +1,12 @@
+:root{
+  --sim-width: 66.667vw;
+}
+
 .div-simwindow{
-  width: var(--sim-width);
-  height: 92vh;
+  min-width: var(--sim-width);
+  height: 81vh;
   /* flex: 1; */
   /* position: absolute; */
-  background-color: azure;
+  background-color: rgb(172, 172, 172);
+  margin: auto;
 }
