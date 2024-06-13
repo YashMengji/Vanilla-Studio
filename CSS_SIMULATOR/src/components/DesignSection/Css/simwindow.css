@@ -3,10 +3,10 @@
 }
 
 .div-simwindow{
-  min-width: var(--sim-width);
+  width: var(--sim-width);
   height: 81vh;
+  margin: auto;
   /* flex: 1; */
   /* position: absolute; */
-  background-color: rgb(172, 172, 172);
-  margin: auto;
+  background-color: rgb(187, 254, 254);
 }
