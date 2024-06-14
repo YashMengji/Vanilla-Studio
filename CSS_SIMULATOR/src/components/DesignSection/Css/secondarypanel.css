@@ -1,6 +1,13 @@
+.div-secondary-parent-panel{
+  position: relative;
+} 
+
 .div-secondary-panel{
+  display: none;
   width: calc((100vw - var(--sim-width))/2);
   /* flex: 1; */
+  position: absolute;
+  right: 0;
   height: 92vh;
   background-color: aquamarine;
 }
