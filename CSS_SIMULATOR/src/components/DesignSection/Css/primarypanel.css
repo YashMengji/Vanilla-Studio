@@ -4,17 +4,19 @@
 
 .div-primary-panel{
   display: flex;
-  width: calc((100vw - var(--sim-width))/2);
   height: 92vh;
-  background-color: bisque;
 }
+
 .div-elements-panel{
-  display: grid;
+  display: none;
   grid-template-columns: repeat(3, 60px);
   justify-content: center;
+  position: absolute;
+  height: 92vh;
+  left: 3.5vw;
   /* align-items: flex-start; */
   background-color: rgb(255, 141, 141);
-  width: 80%;
+  width: calc((100vw - var(--sim-width))/2);
 }
 .div-element-btn{
   border: 1px solid rgb(219, 219, 219);
@@ -28,8 +30,8 @@
   gap: 5px;
 }
 .div-side-panel{
-    width: 20%;
-    height: 100%;
+    width: 3.5vw;
+    height: 92vh;
     background-color: brown;
     padding-top: 10px;
 }
@@ -41,7 +43,7 @@
     width: 100%;
     height: 60px;
     font-size: 40px;
-    background-color: white;
+    border: 2px solid;
     cursor: pointer;
     transition: background-color .3s;
 }
