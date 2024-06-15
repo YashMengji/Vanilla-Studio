@@ -1,6 +1,3 @@
-:root{
-  --sim-width: 1280px;
-}
 
 .div-simwindow{
   width: var(--sim-width);

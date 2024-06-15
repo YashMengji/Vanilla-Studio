@@ -7,33 +7,42 @@
   height: 92vh;
 }
 
+.div-side-panel{
+  width: 3.5vw;
+  height: 92vh;
+  background-color: brown;
+  padding-top: 10px;
+}
 .div-elements-panel{
-  display: none;
+  display: grid;
+  grid-template-rows: max-content;
   grid-template-columns: repeat(3, 60px);
   justify-content: center;
+  row-gap: 50px;
+  column-gap: 10px;
   position: absolute;
-  height: 92vh;
   left: 3.5vw;
-  /* align-items: flex-start; */
-  background-color: rgb(255, 141, 141);
-  width: calc((100vw - var(--sim-width))/2);
+  background-color: lightcyan;
+  width: calc((100vw - var(--sim-width)) / 2);
+  height: 92vh;
+  padding: 20px 10px 10px 10px;
 }
 .div-element-btn{
-  border: 1px solid rgb(219, 219, 219);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
   /* background-color: aqua; */
   width: 60px;
   height: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 4px;
+  cursor: pointer;
 }
-.div-side-panel{
-    width: 3.5vw;
-    height: 92vh;
-    background-color: brown;
-    padding-top: 10px;
+.div-element-btn-text{
+  color: rgba(140, 140, 140, 0.764);
+  font-size: 12px;
 }
 
 .side-icons{
