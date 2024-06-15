@@ -1,5 +1,5 @@
 import React from 'react'
-import './Css/simwindow.css'
+import './Css/SimWindow.css'
 
 function SimWindow() {
   return (

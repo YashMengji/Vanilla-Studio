@@ -2,18 +2,35 @@
   --sim-width: 66.667vw;
 }
 
-.div-primary-panel{
+.div-elements-panel{
   display: flex;
   height: 92vh;
 }
 
-.div-side-panel{
+.div-left-elements{
   width: 3.5vw;
   height: 92vh;
   background-color: brown;
   padding-top: 10px;
 }
-.div-elements-panel{
+.left-elements-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    font-size: 40px;
+    border: 2px solid;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.left-elements-icons:hover{
+    background-color: rgb(174, 174, 174);
+    transition: background-color .3s;
+}
+
+.div-right-elements{
   display: grid;
   grid-template-rows: max-content;
   grid-template-columns: repeat(3, 60px);
@@ -43,21 +60,4 @@
 .div-element-btn-text{
   color: rgba(140, 140, 140, 0.764);
   font-size: 12px;
-}
-
-.side-icons{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 60px;
-    font-size: 40px;
-    border: 2px solid;
-    cursor: pointer;
-    transition: background-color .3s;
-}
-
-.side-icons:hover{
-    background-color: rgb(174, 174, 174);
-    transition: background-color .3s;
 }

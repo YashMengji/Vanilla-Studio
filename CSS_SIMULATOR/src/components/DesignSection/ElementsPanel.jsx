@@ -1,19 +1,17 @@
-import ElementBtn from "./ElementBtn.jsx"
+import React from 'react'
+import './Css/ElementsPanel.css'
+import LeftElementsPanel from './LeftElementsPanel'
+import RightElementsPanel from './RightElementsPanel'
 
-function ElementsPanel(){
-  return(
+function ElementsPanel() {
+  return (
     <>
-      <div className="div-elements-panel">
-        <ElementBtn image={"title"} text={"Title"} />
-        <ElementBtn image={"image"} text={"Image"}/>
-        <ElementBtn image={"segment"} text={"Paragraph"}/>
-        <ElementBtn image={"videocam"} text={"Video"}/>
-        <ElementBtn image={"link"} text={"Links"}/>
-        <ElementBtn image={"box"} text={"Container"}/>
-
+      <div className='div-elements-panel'>
+        <LeftElementsPanel />
+        <RightElementsPanel/>
       </div>
     </>
-  );
+  )
 }
 
 export default ElementsPanel

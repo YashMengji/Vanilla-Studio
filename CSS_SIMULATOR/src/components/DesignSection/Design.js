@@ -1,6 +1,6 @@
 import Navbar from './Navbar'
-import PrimaryPanel from './PrimaryPanel'
+import ElementsPanel from './ElementsPanel'
 import SimWindow from './SimWindow'
-import SecondaryPanel from './SecondaryPanel';
+import PropertiesPanel from './PropertiesPanel';
 
-export {Navbar, PrimaryPanel, SimWindow, SecondaryPanel};
+export {Navbar, ElementsPanel, SimWindow, PropertiesPanel};
