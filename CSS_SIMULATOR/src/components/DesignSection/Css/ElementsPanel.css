@@ -2,7 +2,7 @@
   --sim-width: 66.667vw;
 }
 
-.div-elements-panel{
+.div-elements-panel {
   display: flex;
   height: 92vh;
 }
@@ -30,7 +30,7 @@
     transition: background-color .3s;
 }
 
-.div-right-elements{
+.div-right-elements, .div-section-elements{
   display: grid;
   grid-template-rows: max-content;
   grid-template-columns: repeat(3, 60px);
