@@ -3,7 +3,14 @@ import ElementBtn from "./ElementBtn.jsx"
 function RightElementsPanel(){
   return(
     <>
-      <div className="div-right-elements">
+    <div className="div-right-elements">
+      <div className="div-heading">
+        <h4>Add Elements</h4>
+        <span className="material-symbols-outlined">
+          arrow_back_ios
+        </span>
+      </div>
+      <div className="div-quick-add-elements">
         <ElementBtn image={"title"} text={"Title"} />
         <ElementBtn image={"image"} text={"Image"}/>
         <ElementBtn image={"segment"} text={"Paragraph"}/>
@@ -11,6 +18,7 @@ function RightElementsPanel(){
         <ElementBtn image={"link"} text={"Links"}/>
         <ElementBtn image={"box"} text={"Container"}/>
       </div>
+    </div>
     </>
   );
 }

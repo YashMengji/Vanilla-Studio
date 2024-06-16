@@ -3,14 +3,16 @@ import './Css/ElementsPanel.css'
 import LeftElementsPanel from './LeftElementsPanel'
 import RightElementsPanel from './RightElementsPanel'
 import SectionElements from './SectionElements'
+import PageContent from './PageContent'
 
 function ElementsPanel() {
   return (
     <>
       <div className='div-elements-panel'>
         <LeftElementsPanel />
-        <SectionElements />
         {/* <RightElementsPanel/> */}
+        {/* <SectionElements /> */}
+        <PageContent />
       </div>
     </>
   )

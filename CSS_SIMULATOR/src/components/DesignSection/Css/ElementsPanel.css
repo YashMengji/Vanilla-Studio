@@ -6,7 +6,7 @@
   display: flex;
   height: 92vh;
 }
-
+/*-------------------left element panel style------------------------*/
 .div-left-elements{
   width: 3.5vw;
   height: 92vh;
@@ -20,7 +20,6 @@
     width: 100%;
     height: 60px;
     font-size: 40px;
-    border: 2px solid;
     cursor: pointer;
     transition: background-color .3s;
 }
@@ -30,20 +29,38 @@
     transition: background-color .3s;
 }
 
-.div-right-elements, .div-section-elements{
+/*--------------------right element panel, section elements style--------------------*/
+.div-heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: chocolate;
+  padding: 16px 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+.div-heading:hover{
+  background-color: rgb(235, 120, 37);
+  transition: background-color .3s;
+}
+.div-right-elements, .div-section-element, .div-page-content{
+  position: absolute;
+  left: 3.8vw;
+  background-color: lightcyan;
+  width: calc((100vw - var(--sim-width)) / 2);
+  height: 92vh;
+}
+
+.div-quick-add-elements, .div-section-elements-btns{
   display: grid;
   grid-template-rows: max-content;
   grid-template-columns: repeat(3, 60px);
   justify-content: center;
   row-gap: 50px;
   column-gap: 10px;
-  position: absolute;
-  left: 3.5vw;
-  background-color: lightcyan;
-  width: calc((100vw - var(--sim-width)) / 2);
-  height: 92vh;
-  padding: 20px 10px 10px 10px;
 }
+/*--------------------------element buttons style-----------------------*/
 .div-element-btn{
   display: flex;
   justify-content: center;
@@ -57,7 +74,25 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.div-section-elements > .div-element-btn:nth-child(1) > .div-element-btn-img{
+  transform: rotate(180deg);
+}
+.div-section-elements > .div-element-btn:nth-child(9) > .div-element-btn-img{
+  transform: rotate(180deg);
+}
+
 .div-element-btn-text{
   color: rgba(140, 140, 140, 0.764);
   font-size: 12px;
+}
+/*--------------------------page content style--------------------------*/
+
+.div-page-indicator{
+  padding: 20px 10px;
+  background-color: bisque;
+}
+
+.div-head-page{
+  margin: 0;
 }

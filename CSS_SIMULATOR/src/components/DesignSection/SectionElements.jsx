@@ -3,14 +3,25 @@ import ElementBtn from "./ElementBtn"
 function SectionElements(){
   return(
     <>
-      <div className="div-section-elements">
-        <ElementBtn image={"title"} text={"Title"} />
-        <ElementBtn image={"image"} text={"Image"}/>
-        <ElementBtn image={"segment"} text={"Paragraph"}/>
-        <ElementBtn image={"videocam"} text={"Video"}/>
-        <ElementBtn image={"link"} text={"Links"}/>
-        <ElementBtn image={"box"} text={"Container"}/>
+    <div className="div-section-element">
+      <div className="div-heading">
+        <h4>Sections</h4>
+        <span className="material-symbols-outlined">
+          arrow_back_ios
+        </span>
       </div>
+      <div className="div-section-elements-btns">
+        <ElementBtn image={"dock_to_bottom"} text={"Header"} btnId = {"header"}/>
+        <ElementBtn image={"list"} text={"Navbar"}/>
+        <ElementBtn image={"dock"} text={"Main"}/>
+        <ElementBtn image={"space_dashboard"} text={"Section"}/>
+        <ElementBtn image={"dock_to_bottom"} text={"Footer"}/>
+        <ElementBtn image={"newsmode"} text={"Article"}/>
+        <ElementBtn image={"code"} text={"Code"}/>
+        <ElementBtn image={"photo_frame"} text={"Figure"}/>
+        <ElementBtn image={"padding"} text={"FigCaption"}/>
+      </div>
+    </div>
     </>
   )
 }

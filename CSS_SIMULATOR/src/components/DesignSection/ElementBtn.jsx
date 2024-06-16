@@ -1,14 +1,14 @@
 
 
-function ElementBtn(props){
+function ElementBtn({heading, image, text}){
   return(
     <>
-      <div className="div-element-btn">
+      <div className="div-element-btn" >
         <span className="div-element-btn-img material-symbols-outlined">
-          {props.image}
+          {image}
         </span>
         <div className="div-element-btn-text">
-          {props.text}
+          {text}
         </div>
       </div>
     </>

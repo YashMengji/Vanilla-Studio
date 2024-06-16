@@ -7,8 +7,8 @@ function LeftElementsPanel() {
           <div className="div-left-elements-icons">
             <span className="material-symbols-outlined left-elements-icons">add_circle</span>
             <span className="material-symbols-outlined left-elements-icons">layers</span>
+            <span className="material-symbols-outlined left-elements-icons">find_in_page</span>
             <span className="material-symbols-outlined left-elements-icons">stack</span>
-            <span className="material-symbols-outlined left-elements-icons">code_blocks</span>
           </div>
         </div>
     </>
