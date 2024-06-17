@@ -1,9 +1,9 @@
 import React from 'react'
 
-function PageContent() {
+function PageContent({status}) {
   return (
     <>
-        <div className='div-page-content'>
+        <div className={`${status ? 'div-page-content-expand' : 'div-page-content'}`}>
           <div className="div-heading div-head-page">
             <h4>Page contents</h4>
             <span className="material-symbols-outlined">

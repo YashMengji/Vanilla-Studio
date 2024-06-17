@@ -1,9 +1,12 @@
+import { useState } from "react";
 import ElementBtn from "./ElementBtn.jsx"
 
-function RightElementsPanel(){
+
+function RightElementsPanel({status}){ 
+  
   return(
     <>
-    <div className="div-right-elements">
+    <div className ={`${status ? 'div-right-elements-expand' : 'div-right-elements'}`}>
       <div className="div-heading">
         <h4>Add Elements</h4>
         <span className="material-symbols-outlined">
@@ -11,7 +14,7 @@ function RightElementsPanel(){
         </span>
       </div>
       <div className="div-quick-add-elements">
-        <ElementBtn image={"title"} text={"Title"} />
+        <ElementBtn clickEvent = {(e) => console.log(e.target)} image={"title"} text={"Title"} />
         <ElementBtn image={"image"} text={"Image"}/>
         <ElementBtn image={"segment"} text={"Paragraph"}/>
         <ElementBtn image={"videocam"} text={"Video"}/>

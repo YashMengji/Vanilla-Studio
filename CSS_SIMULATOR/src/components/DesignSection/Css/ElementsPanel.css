@@ -1,13 +1,17 @@
 :root{
   --sim-width: 66.667vw;
+  --calculated-width: calc((100vw - var(--sim-width)) / 2);
 }
 
 .div-elements-panel {
+  position: relative;
   display: flex;
   height: 92vh;
 }
 /*-------------------left element panel style------------------------*/
 .div-left-elements{
+  position: absolute;
+  z-index: 2;
   width: 3.5vw;
   height: 92vh;
   background-color: brown;
@@ -44,12 +48,26 @@
   background-color: rgb(235, 120, 37);
   transition: background-color .3s;
 }
-.div-right-elements, .div-section-element, .div-page-content{
+.div-right-elements, .div-section-elements, .div-page-content{
   position: absolute;
-  left: 3.8vw;
+  left: -16vw;
   background-color: lightcyan;
-  width: calc((100vw - var(--sim-width)) / 2);
+  width: 16vw;
   height: 92vh;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+}
+
+.div-right-elements-expand, .div-section-element-expand, .div-page-content-expand{
+  position: absolute;
+  left: 3.5vw;
+  background-color: lightcyan;
+  width: 16vw;
+  height: 92vh;
+  opacity: 1;
+  visibility: visible;
+  transition: all .3s;
 }
 
 .div-quick-add-elements, .div-section-elements-btns{

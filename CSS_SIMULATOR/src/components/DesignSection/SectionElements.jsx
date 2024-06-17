@@ -1,9 +1,9 @@
 import ElementBtn from "./ElementBtn"
 
-function SectionElements(){
+function SectionElements({status}){
   return(
     <>
-    <div className="div-section-element">
+    <div className={`${status ? 'div-section-element-expand' : 'div-section-elements'}`}>
       <div className="div-heading">
         <h4>Sections</h4>
         <span className="material-symbols-outlined">
