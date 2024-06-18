@@ -1,9 +1,7 @@
 .div-properties-panel{
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   width: calc((100vw - var(--sim-width))/2);
-  /* flex: 1; */
   position: absolute;
   right: 0;
   height: 92vh;
@@ -18,45 +16,22 @@
   padding-left: 15px;
   margin-top: 20px;
 }
-
+/*--------------------------Properties Section -----------------------*/
 .div-properties-section{
   display: grid;
   grid-template-columns: repeat(3, 33.33%);
   justify-content: space-around;
   margin-top: 20px;
 }
-.div-properties-section div{
+.div-basic-properties-btn, .div-layout-properties-btn, .div-animation-properties-btn{
   display: flex;
   justify-content: center;
   background-color: lightcoral;
   height: 55px;
-  /* padding: 14px; */
   cursor: pointer;
   align-items: center;
-
 }
-.div-basic-properties{
-  display: flex;
-  justify-content: center;
-  background-color: lightcoral;
-  height: 55px;
-  /* padding: 14px; */
-  cursor: pointer;
-  align-items: center;
-
-}
-.div-basic-properties, .div-layout-properties, .div-animation-properties{
-  display: flex;
-  justify-content: center;
-  background-color: lightcoral;
-  height: 55px;
-  /* padding: 14px; */
-  cursor: pointer;
-  align-items: center;
-  transition: border 0.2s;
-  
-}
-.div-animation-properties :hover, .div-layout-properties :hover, .div-basic-properties :hover{
+.div-animation-properties-btn :hover, .div-layout-properties-btn :hover, .div-basic-properties-btn :hover{
   border-bottom: 3px solid black;
   display: flex;
   justify-content: center;
@@ -64,11 +39,20 @@
   background-color: lightcoral;
   width: 100%;
   height: 100%;
-  /* padding: 14px; */
   cursor: pointer;
-  transition: border 0.2s;
 }
-
+/*-------------------------- Basic properties Panel-----------------------*/
+.div-edit-properties-panel{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.div-basic-properties-panel, .div-layout-properties-panel, .div-animation-properties-panel{
+  /* background-color: rgb(255, 150, 150); */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 
 
 
