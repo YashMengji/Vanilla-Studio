@@ -1,10 +1,10 @@
 import ElementBtn from "./ElementBtn"
 
-function SectionElements({status}){
+function SectionElements({ clickEvent , status }){
   return(
     <>
     <div className={`${status ? 'div-section-element-expand' : 'div-section-elements'}`}>
-      <div className="div-heading">
+      <div className="div-heading" onClick={clickEvent}>
         <h4>Sections</h4>
         <span className="material-symbols-outlined">
           arrow_back_ios
