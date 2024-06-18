@@ -1,10 +1,10 @@
 import React from 'react'
 
-function PageContent({status}) {
+function PageContent({ clickEvent , status }) {
   return (
     <>
         <div className={`${status ? 'div-page-content-expand' : 'div-page-content'}`}>
-          <div className="div-heading div-head-page">
+          <div className="div-heading div-head-page" onClick={clickEvent}>
             <h4>Page contents</h4>
             <span className="material-symbols-outlined">
               arrow_back_ios

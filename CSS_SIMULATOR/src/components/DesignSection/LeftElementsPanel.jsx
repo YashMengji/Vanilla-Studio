@@ -8,7 +8,7 @@ function LeftElementsPanel({clickEvent}) {
             <span onClick={clickEvent[0]} className="material-symbols-outlined left-elements-icons">add_circle</span>
             <span onClick={clickEvent[1]} className="material-symbols-outlined left-elements-icons">layers</span>
             <span onClick={clickEvent[2]} className="material-symbols-outlined left-elements-icons">find_in_page</span>
-            <span className="material-symbols-outlined left-elements-icons">stack</span>
+            <span onClick={clickEvent[3]} className="material-symbols-outlined left-elements-icons">stack</span>
           </div>
         </div>
     </>

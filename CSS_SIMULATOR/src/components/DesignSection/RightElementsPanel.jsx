@@ -2,12 +2,12 @@ import { useState } from "react";
 import ElementBtn from "./ElementBtn.jsx"
 
 
-function RightElementsPanel({status}){ 
+function RightElementsPanel({ clickEvent , status }){ 
   
   return(
     <>
     <div className ={`${status ? 'div-right-elements-expand' : 'div-right-elements'}`}>
-      <div className="div-heading">
+      <div className="div-heading" onClick={clickEvent}>
         <h4>Add Elements</h4>
         <span className="material-symbols-outlined">
           arrow_back_ios
