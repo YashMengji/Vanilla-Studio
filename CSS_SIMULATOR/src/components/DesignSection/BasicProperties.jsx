@@ -86,14 +86,28 @@ function BasicProperties() {
             Opacity & color
           </div>
           <div className="div-border-color-edit">
-            <input type="color" />
-            <input type="range" min="0" max="1" step="0.01" value={borderOpacity} onChange={() => {setBorderOpacity(borderOpacity)}} defaultValue="1" />
-            <input type="text" value={borderOpacity}/>
+            <input type="color" className='border-color-input-color' />
+            <input type="range" min="0" max="1" step="0.01" className='border-color-range' defaultValue="1" />
+            <div className="div-border-color-input">
+              <input type="number" className='border-color-input'/>
+              <div className="div-percent-text">
+                %
+              </div>
+            </div>
           </div>
         </div>
         <div className="div-border-width">
           <div className="div-border-width-heading">
-            Width
+            Width(px)
+          </div>
+          <div className="div-border-width-edit">
+            <input type="range" min="0" max="14" step="1" defaultValue="0" className="border-width-range"/>
+            <div className="div-border-width-input">
+              <input type="number" className='border-width-input' />
+              <div className="div-px-text">
+                px
+              </div>
+            </div>
           </div>
         </div>
       </div>

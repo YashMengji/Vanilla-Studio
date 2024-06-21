@@ -98,7 +98,7 @@
   border-top: 1px solid rgb(211, 211, 211);
   margin-top: 8px;
 }
-
+/*-------------------------- Dimension section-----------------------*/
 .div-dimension-section{
   display: flex;
   flex-direction: column;
@@ -170,6 +170,73 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .border{
   margin-top: 14px;
+}
+/*-------------------------- Border section-----------------------*/
+.div-border-section{
+  display: flex;
+  flex-direction: column;
+}
+.div-border-color{
+  display: flex;
+  flex-direction: column;
+}
+.div-border-color-edit{
+  display: flex;
+}
+.div-border-color-input{
+  display: flex;
+  align-items: center;
+  width: 67px;
+  height: 31px;
+  border: 1px solid rgb(130, 130, 130);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.border-color-input{
+  border: none;
+  background-color: lightcyan;
+  width: 60px;
+  height: 18px;
+  width: 71%;
+  height: 100%;
+  padding-left: 8px;
+  cursor: pointer;
+}
+.border-color-input:focus{
+  outline: none;
+  cursor: auto;
+}
+.div-percent-text{
+  
+}
+
+
+
+.div-border-width-edit{
+  display: flex;
+  justify-content: space-around;
+}
+.div-border-width-input{
+  display: flex;
+  width: 67px;
+  height: 31px;
+  border: 1px solid rgb(130, 130, 130);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.border-width-input{
+  border: none;
+  background-color: lightcyan;
+  width: 60px;
+  height: 18px;
+  width: 71%;
+  height: 100%;
+  padding-left: 8px;
+  cursor: pointer;
+}
+.border-width-input:focus{
+  outline: none;
+  cursor: auto;
 }
   
 
