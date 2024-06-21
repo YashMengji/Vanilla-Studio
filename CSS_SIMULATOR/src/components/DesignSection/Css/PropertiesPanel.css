@@ -103,8 +103,12 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  /* background-color: aqua; */
+  margin-top: 16px;
 }
 .div-dimension-heading{
+  color: rgb(96, 96, 96);
+  font-size: 13px;
   padding-left: 20px;
 }
 .div-edit-dimension{
@@ -115,19 +119,57 @@
 .div-xy-dim, .div-wh-dim{
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 33px;
 }
 .div-x-dim, .div-y-dim, .div-w-dim, .div-h-dim{
   display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.div-x-dim-text, .div-y-dim-text, .div-w-dim-text, .div-h-dim-text{
+  color: rgb(96, 96, 96);
 }
 .div-x-dim-input, .div-y-dim-input, .div-w-dim-input, .div-h-dim-input{
   display: flex;
+  width: 67px;
+  height: 31px;
+  border: 1px solid rgb(130, 130, 130);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.div-x-dim-input:hover, .div-y-dim-input:hover, .div-w-dim-input:hover, .div-h-dim-input:hover{
+  border: 1px solid rgb(92, 92, 92);
 }
 .x-dim-input, .y-dim-input, .w-dim-input, .h-dim-input{
   border: none;
   background-color: lightcyan;
   width: 60px;
   height: 18px;
+  width: 71%;
+  height: 100%;
+  padding-left: 8px;
+  cursor: pointer;
+}
+.x-dim-input:focus, .y-dim-input:focus, .w-dim-input:focus, .h-dim-input:focus{
+  outline: none;
+  cursor: auto;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.div-px-text{
+  display: flex;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+  font-size: 11px;
+}
+.border{
+  margin-top: 14px;
 }
   
 
