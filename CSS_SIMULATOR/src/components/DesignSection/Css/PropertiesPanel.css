@@ -6,6 +6,7 @@
   right: 0;
   height: 92vh;
   background-color: lightcyan;
+  overflow: auto;
 }
 
 .div-properties-path{
@@ -240,5 +241,69 @@ input[type="number"]::-webkit-outer-spin-button {
 }
   
 
+.div-typography-section{
+  background-color: rgb(0, 136, 255);
+  padding: 20px;
+}
 
+#font-type, #font-family{
+  padding: 1vh 1vw;
+  border: none;
+  width: 100%;
+  background-color: aquamarine;
+  border-radius: 5px;
+}
 
+#font-type:focus, #font-family:focus{
+  outline: none;
+}
+
+#font-type > option{
+  background-color: azure;
+}
+
+.div-font-size{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.font-size > input {
+  width: 3vw;
+  padding: 1vh 1vw;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: none;
+}
+
+.font-size > select {
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1vh 0;
+}
+
+#font-style{
+  display: flex;
+}
+
+#font-style > p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5vw;
+  height: 5vh;
+  font-size: 28px;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: azure;
+  cursor: pointer;
+}
+
+.div-font-alignment > span{
+  margin-right: 10px;
+  padding: 1.5vh;
+  border-radius: 5px;
+  background-color: azure;
+  cursor: pointer;
+}
