@@ -149,6 +149,7 @@
   height: 18px;
   width: 71%;
   height: 100%;
+  border-radius: 4px;
   padding-left: 8px;
   cursor: pointer;
 }
@@ -200,6 +201,7 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 18px;
   width: 71%;
   height: 100%;
+  border-radius: 4px;
   padding-left: 8px;
   cursor: pointer;
 }
@@ -232,6 +234,7 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 18px;
   width: 71%;
   height: 100%;
+  border-radius: 4px;
   padding-left: 8px;
   cursor: pointer;
 }
