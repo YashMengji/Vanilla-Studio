@@ -7,6 +7,7 @@
   height: 92vh;
   background-color: lightcyan;
   overflow: auto;
+  display: none; /*Testing code*/
 }
 
 .div-properties-path{
