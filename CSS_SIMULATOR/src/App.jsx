@@ -13,7 +13,6 @@ function App() {
       <Navbar />
       <div className="div-main">
         <ElementsPanel />
-
         <SimWindow />
         <PropertiesPanel />
       </div>
