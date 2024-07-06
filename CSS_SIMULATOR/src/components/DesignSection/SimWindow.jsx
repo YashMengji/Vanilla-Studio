@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import './Css/SimWindow.css'
+import './Css/simwindow.css'
 
 function SimWindow() {
 
