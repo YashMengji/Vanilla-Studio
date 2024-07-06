@@ -15,7 +15,7 @@ function RightElementsPanel({ clickEvent , status }){
     <div className ={`${status ? 'div-right-elements-expand' : 'div-right-elements'}`}>
       <div className="div-heading" onClick={clickEvent}>
         <h4>Add Elements</h4>
-` `        <span className="material-symbols-outlined">
+        <span className="material-symbols-outlined">
           arrow_back_ios
         </span> 
       </div>

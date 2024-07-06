@@ -1,18 +1,19 @@
-import { useEffect } from 'react'
-import './Css/SimWindow.css'
+import { useEffect, useRef } from 'react';
+import './Css/SimWindow.css';
+
 
 function SimWindow() {
-
-
-
+  const iframeRef = useRef(null);
 
   function iframeConfig() {
+    let iframe = iframeRef.current;
+    if (!iframe) return; // Ensure iframe is available
+
     let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    let iframe = document.querySelector('iframe')
     iframeDoc.open();
     iframeDoc.write(
-      `<html>
-
+      `
+<html>
 <head>
   <style>
     * {
@@ -33,67 +34,69 @@ function SimWindow() {
       color: white;
       background-color: black;
       border: none;
-      border-radius: 3px;t
+      border-radius: 3px;
       font-weight: bold;
     }
   </style>
 </head>
 
 <body>
-  <div class="div-main" ondragover="allowDrop(event)" ondrop="handleDrop(e)" id="main"></div>
+  <div class="div-main" ondragover="allowDrop(event)" ondrop="handleDrop(event)" id="main"></div>
 </body>
-<script>
-  function handleDrop(e) {
-    e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
+<script >
+function handleDrop(e) {
+  
+  e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
 
-    const selectedElement = e.dataTransfer.getData('source');
-    console.log(selectedElement)
+  // const selectedElement = e.dataTransfer.getData('source');
+  // console.log(selectedElement)
 
-    //get the (x,y) position of the cursor to place element at that position when it is dropped
-    const dropX = e.clientX;
-    const dropY = e.clientY;
+  //get the (x,y) position of the cursor to place element at that position when it is dropped
+  const dropX = e.clientX;
+  const dropY = e.clientY;
 
-    if (selectedElement === "title-img") {
+  // if (selectedElement === "title-img") {
 
-      // Create an input field at the drop location
-      const inputField = document.createElement('input');
-      inputField.type = 'text';
-      inputField.className = 'input-field';
-      inputField.style.position = 'absolute';
-      inputField.style.display = 'block';
-      inputField.style.left = dropX + 'px';
-      inputField.style.top = dropY + 'px';
-      inputField.style.cursor = 'grab';
-      document.body.querySelector(".div-main").appendChild(inputField);
-      inputField.focus();
-      dragElement(inputField);
-      inputField.addEventListener('click', (e) => {
-        enableResize(e.target);
-      });
-      // inputField.onclick = "enableResize(inputField)";
-    }
-    else if (selectedElement === "image-img") {
+    // Create an input field at the drop location
+    const inputField = document.createElement('input');
+    inputField.type = 'text';
+    inputField.className = 'input-field';
+    inputField.style.position = 'absolute';
+    inputField.style.display = 'block';
+    inputField.style.left = dropX + 'px';
+    inputField.style.top = dropY + 'px';
+    inputField.style.cursor = 'grab';
+    document.body.querySelector(".div-main").appendChild(inputField);
+    inputField.focus();
+    // dragElement(inputField);
+    inputField.addEventListener('click', (e) => {
+      // enableResize(e.target);
+    });
+    // inputField.onclick = "enableResize(inputField)";
+  // }
+  // else if (selectedElement === "image-img") {
 
-      // Create an button at the drop location
-      const button = document.createElement('button');
-      button.className = 'button-field';
-      button.innerHTML = "Click me";
-      button.style.position = 'absolute';
-      button.style.display = 'block';
-      button.style.left = dropX + 'px';
-      button.style.top = dropY + 'px';
-      document.body.querySelector(".div-main").appendChild(button);
+  //   // Create an button at the drop location
+  //   const button = document.createElement('button');
+  //   button.className = 'button-field';
+  //   button.innerHTML = "Click me";
+  //   button.style.position = 'absolute';
+  //   button.style.display = 'block';
+  //   button.style.left = dropX + 'px';
+  //   button.style.top = dropY + 'px';
+  //   document.body.querySelector(".div-main").appendChild(button);
 
-      dragElement(button);
-      button.addEventListener('click', (e) => {
-        enableResize(e.target);
-      });
-    }
-  }
+  //   dragElement(button);
+  //   button.addEventListener('click', (e) => {
+  //     enableResize(e.target);
+  //   });
+  // }
+}
 
-  function allowDrop(event) {
-    event.preventDefault(); // Necessary to allow dropping
-  }
+function allowDrop(event) {
+  event.preventDefault(); // Necessary to allow dropping
+}
+
 </script>
 
 </html>`
@@ -102,16 +105,16 @@ function SimWindow() {
   }
 
   useEffect(() => {
-    window.addEventListener('DOMContentLoaded', iframeConfig);
+    iframeConfig();  
   }, []);
 
   return (
     <>
       <div className='div-simwindow'>
-        <iframe className="iframe-simwindow" frameBorder="0"></iframe>
+        <iframe className="iframe-simwindow" ref={iframeRef} frameBorder="0"></iframe>
       </div>
     </>
-  )
+  );
 }
 
-export default SimWindow
+export default SimWindow;
