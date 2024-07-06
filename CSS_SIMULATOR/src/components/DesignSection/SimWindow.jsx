@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
 import './Css/SimWindow.css';
 
-
 function SimWindow() {
   const iframeRef = useRef(null);
-
+  
   function iframeConfig() {
     let iframe = iframeRef.current;
     if (!iframe) return; // Ensure iframe is available
@@ -43,19 +42,19 @@ function SimWindow() {
 <body>
   <div class="div-main" ondragover="allowDrop(event)" ondrop="handleDrop(event)" id="main"></div>
 </body>
-<script >
-function handleDrop(e) {
+<script>
+    function handleDrop(e) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
 
-  // const selectedElement = e.dataTransfer.getData('source');
-  // console.log(selectedElement)
+  const selectedElement = e.dataTransfer.getData('source');
+  console.log(selectedElement)
 
   //get the (x,y) position of the cursor to place element at that position when it is dropped
   const dropX = e.clientX;
   const dropY = e.clientY;
 
-  // if (selectedElement === "title-img") {
+  if (selectedElement === "title-img") {
 
     // Create an input field at the drop location
     const inputField = document.createElement('input');
@@ -73,7 +72,7 @@ function handleDrop(e) {
       // enableResize(e.target);
     });
     // inputField.onclick = "enableResize(inputField)";
-  // }
+  }
   // else if (selectedElement === "image-img") {
 
   //   // Create an button at the drop location
@@ -102,8 +101,7 @@ function allowDrop(event) {
 </html>`
     );
     iframeDoc.close();
-  }
-
+}
   useEffect(() => {
     iframeConfig();  
   }, []);

@@ -1,15 +1,15 @@
-function handleDrop(e) {
+export function handleDrop(e) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
 
-  // const selectedElement = e.dataTransfer.getData('source');
-  // console.log(selectedElement)
+  const selectedElement = e.dataTransfer.getData('source');
+  console.log(selectedElement)
 
   //get the (x,y) position of the cursor to place element at that position when it is dropped
   const dropX = e.clientX;
   const dropY = e.clientY;
 
-  // if (selectedElement === "title-img") {
+  if (selectedElement === "title-img") {
 
     // Create an input field at the drop location
     const inputField = document.createElement('input');
@@ -27,7 +27,7 @@ function handleDrop(e) {
       // enableResize(e.target);
     });
     // inputField.onclick = "enableResize(inputField)";
-  // }
+  }
   // else if (selectedElement === "image-img") {
 
   //   // Create an button at the drop location
@@ -47,6 +47,6 @@ function handleDrop(e) {
   // }
 }
 
-function allowDrop(event) {
+export function allowDrop(event) {
   event.preventDefault(); // Necessary to allow dropping
 }

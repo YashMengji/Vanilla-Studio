@@ -20,12 +20,12 @@ function RightElementsPanel({ clickEvent , status }){
         </span> 
       </div>
       <div className="div-quick-add-elements">
-        <ElementBtn onDragStart={(e) => {e.dataTransfer.setData('source', 'title-img');}}  clickEvent = {(e) => console.log(e.target)} image={"title"} text={"Title"} />
-        <ElementBtn onDragStart={(e) => {e.dataTransfer.setData('source', 'image-img');}} image={"image"} text={"Image"}/>
-        <ElementBtn onDragStart={(e) => {e.dataTransfer.setData('source', 'para-img');}}   image={"segment"} text={"Paragraph"}/>
-        <ElementBtn onDragStart={(e) => {e.dataTransfer.setData('source', 'video-img');}}  image={"videocam"} text={"Video"}/>
-        <ElementBtn onDragStart={(e) => {e.dataTransfer.setData('source', 'link-img');}}   image={"link"} text={"Links"}/>
-        <ElementBtn onDragStart={(e) => {e.dataTransfer.setData('source', 'container-img');}}  image={"box"} text={"Container"}/>
+        <ElementBtn setDataProp = {(e) => {e.dataTransfer.setData('source', 'title-img');}}  onClick = {()=> console.log('hi')} image={"title"} text={"Title"} />
+        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'image-img');}} image={"image"} text={"Image"}/>
+        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'para-img');}}   image={"segment"} text={"Paragraph"}/>
+        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'video-img');}}  image={"videocam"} text={"Video"}/>
+        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'link-img');}}   image={"link"} text={"Links"}/>
+        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'container-img');}}  image={"box"} text={"Container"}/>
       </div>
     </div>
     </>

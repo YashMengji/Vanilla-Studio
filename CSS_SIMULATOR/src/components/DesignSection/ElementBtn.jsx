@@ -1,9 +1,9 @@
 
 
-function ElementBtn({clickEvent, image, text}){
+function ElementBtn({ image, text, setDataProp }){
   return(
     <>
-      <div className="div-element-btn" onClick={clickEvent} draggable="true">
+      <div className="div-element-btn" onDragStart={setDataProp} draggable="true">
         <span className="div-element-btn-img material-symbols-outlined">
           {image}
         </span>
