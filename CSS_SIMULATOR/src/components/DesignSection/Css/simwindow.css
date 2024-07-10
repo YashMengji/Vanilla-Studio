@@ -13,3 +13,7 @@
   height: 100%;
   overflow-x: auto;
 }
+
+iframe{
+  border: none;
+}

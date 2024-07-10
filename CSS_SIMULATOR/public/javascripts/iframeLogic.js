@@ -1,4 +1,4 @@
-export function handleDrop(e) {
+function handleDrop(e) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
 
@@ -47,6 +47,6 @@ export function handleDrop(e) {
   // }
 }
 
-export function allowDrop(event) {
+function allowDrop(event) {
   event.preventDefault(); // Necessary to allow dropping
 }
