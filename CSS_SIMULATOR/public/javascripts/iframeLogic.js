@@ -10,17 +10,16 @@ function handleDrop(e) {
   const dropY = e.clientY;
 
   if (selectedElement === "title-img") {
-    // Create an input field at the drop location
-    const inputField = document.createElement('input');
-    inputField.type = 'text';
-    inputField.className = 'input-field';
-    inputField.style.position = 'absolute';
-    inputField.style.display = 'block';
-    inputField.style.left = dropX + 'px';
-    inputField.style.top = dropY + 'px';
-    inputField.style.cursor = 'grab';
-    document.body.querySelector(".div-main").appendChild(inputField);
-    inputField.focus();
+    // Create a title element (e.g., h1 for main title) at the drop location
+    const title = document.createElement('h1'); // Use 'h1' for main titles
+    title.className = 'title-field';
+    title.textContent = "Your Title Here"; // Set the title text
+    title.style.position = 'absolute';
+    title.style.display = 'block';
+    title.style.fontWeight = 'block';
+    title.style.left = dropX + 'px';
+    title.style.top = dropY + 'px';
+    document.body.querySelector(".div-main").appendChild(title);
   }
   else if (selectedElement === "image-img") {
     // Create an button at the drop location
@@ -76,6 +75,19 @@ function handleDrop(e) {
     container.style.top = dropY + 'px';
     document.body.querySelector(".div-main").appendChild(container);
   }
+  else if (selectedElement === "link-img") {
+    // Create a link element at the drop location
+    const link = document.createElement('a');
+    link.className = 'link-field';
+    link.href = "http://example.com"; // Set the URL for the link
+    link.textContent = "Visit Example"; // Set the display text for the link
+    link.style.position = 'absolute';
+    link.style.display = 'block';
+    link.style.left = dropX + 'px';
+    link.style.top = dropY + 'px';
+    document.body.querySelector(".div-main").appendChild(link);
+  }
+
 }
 
 function allowDrop(event) {
