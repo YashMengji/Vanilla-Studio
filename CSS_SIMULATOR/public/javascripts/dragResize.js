@@ -3,12 +3,22 @@ const resizableTemplate = document.getElementById('resizableTemplate');
 let resizable;
 mainDiv.addEventListener('click', (e) => {
     console.log(e.target.id);
-    if (resizable) {
+    // e.stopPropagation();
+    if (
+        resizable 
+        && e.target.id != 'resizableTemplate'
+        && e.target.classList[0] != 'handle'
+    ) {
         resizable.remove();
     }
-    if(e.target.id != 'main'){
+    if(
+        e.target.id != 'main' 
+        && e.target.id != 'resizableTemplate' 
+        && e.target.classList[0] != 'handle'
+    ) {
         // Clone the template and attach it to the input
         resizable = resizableTemplate.cloneNode(true);
+        // resizable = resizableTemplate;
         resizable.style.display = 'block';
         resizable.style.position = 'absolute';
         resizable.style.width = e.target.offsetWidth + 'px';
@@ -16,37 +26,14 @@ mainDiv.addEventListener('click', (e) => {
         resizable.style.top = e.target.offsetTop + 'px';
         resizable.style.left = e.target.offsetLeft + 'px';
 
-        document.body.appendChild(resizable);
+        mainDiv.appendChild(resizable);
 
         // Apply the resize and drag functionality to the new resizable element
         applyResizeAndDrag(resizable, e.target);
     }
 });
-// const targetInput = document.getElementById('targetInput');
-//     const resizableTemplate = document.getElementById('resizableTemplate');
-//     let resizable;
 
-//     targetInput.addEventListener('click', () => {
-//             // Remove any existing resizable element
-//             if (resizable) {
-//                 resizable.remove();
-//             }
-
-//             // Clone the template and attach it to the input
-//             resizable = resizableTemplate.cloneNode(true);
-//             resizable.style.display = 'block';
-//             resizable.style.width = targetInput.offsetWidth + 'px';
-//             resizable.style.height = targetInput.offsetHeight + 'px';
-//             resizable.style.top = targetInput.offsetTop + 'px';
-//             resizable.style.left = targetInput.offsetLeft + 'px';
-
-//             document.body.appendChild(resizable);
-
-//             // Apply the resize and drag functionality to the new resizable element
-//             applyResizeAndDrag(resizable, targetInput);
-//     });
-
-    function applyResizeAndDrag(resizable, target) {
+function applyResizeAndDrag(resizable, target) {
             const handles = resizable.querySelectorAll('.handle');
             let offsetX, offsetY, isResizing = false;
 
@@ -55,9 +42,9 @@ mainDiv.addEventListener('click', (e) => {
                     isResizing = true;
                     initResize(e, handle.classList[1]);
                 });
-    });
+});
 
-    function initResize(e, handleType) {
+function initResize(e, handleType) {
                 function getCursorType(handleType) {
                     switch(handleType) {
                         case 'top-left': return 'nw-resize';
@@ -158,4 +145,4 @@ mainDiv.addEventListener('click', (e) => {
                 target.style.top = resizable.offsetTop + 'px';
                 target.style.left = resizable.offsetLeft + 'px';
             }
-        }
+}
