@@ -79,7 +79,7 @@ function handleDrop(e) {
     // Create a link element at the drop location
     const link = document.createElement('a');
     link.className = 'link-field';
-    link.href = "http://example.com"; // Set the URL for the link
+    link.href = "#"; // Set the URL for the link
     link.textContent = "Visit Example"; // Set the display text for the link
     link.style.position = 'absolute';
     link.style.display = 'block';

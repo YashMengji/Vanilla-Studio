@@ -26,6 +26,7 @@
     font-size: 40px;
     cursor: pointer;
     transition: background-color .3s;
+    color: white;
 }
 
 .left-elements-icons:hover{
@@ -90,8 +91,7 @@
   height: 60px;
   border: 1px solid rgb(199, 199, 199);
   border-radius: 4px;
-  cursor: pointer;
-  
+  cursor: grab;
 }
 
 .div-section-elements > .div-element-btn:nth-child(1) > .div-element-btn-img{
