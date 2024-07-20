@@ -7,17 +7,16 @@ import EditPropertiesPanel from './EditPropertiesPanel'
 
 function PropertiesPanel() {
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <>
-      <div 
-      onClick={() => {setIsExpanded(!isExpanded)}} 
+      <div onClick={() => {setIsExpanded(!isExpanded)}} 
       className={`${isExpanded ? 'div-toggle-button-expand' : 'div-toggle-button' }`}
       >
-      <span className="material-symbols-outlined">
-        {isExpanded ? 'arrow_forward_ios' : 'arrow_back_ios' }
-      </span>
+        <span className="material-symbols-outlined">
+          {isExpanded ? 'arrow_forward_ios' : 'arrow_back_ios' }
+        </span>
       </div>
       <div className={`${isExpanded ? 'div-properties-panel-expand' : 'div-properties-panel' }`}>
         <PropertiesPath/>
