@@ -7,7 +7,7 @@ import EditPropertiesPanel from './EditPropertiesPanel'
 
 function PropertiesPanel() {
 
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <>

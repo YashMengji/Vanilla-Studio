@@ -4,13 +4,14 @@ import './Css/LayoutProperties.css'
 function LayoutProperties() {
 
   const [iscolumnDrop, setIsColumnDrop] = useState(false);
+  const [isrowDrop, setIsrowDrop] = useState(false);
 
   return (
     <div className="div-layout-properties-panel">
       <div className="div-layout-heading">
         Layout
       </div>
-      {/* <div className="div-choose-layout">
+      <div className="div-choose-layout">
         <p>Choose Layout</p>
         <div className="div-layout-options-grid">
           <div className="div-layout-option">1</div>
@@ -23,7 +24,7 @@ function LayoutProperties() {
           <div className="div-layout-option">8</div>
           <div className="div-layout-option">9</div>
         </div>
-      </div> */}
+      </div>
       <div className="div-layout-details">
         <p>Layout details</p>
         <div className="div-split-section">
@@ -47,12 +48,18 @@ function LayoutProperties() {
               <li>Column 2</li>
             </ul>
         </div>
-        <div className="div-row-details">
+        <div className="div-row-details" onClick={() => {setIsrowDrop(!isrowDrop)}}>
           <p>Rows (2)</p>
           <div className="div-row-functions">
             <span className='material-symbols-outlined'>add</span>
             <span className='material-symbols-outlined'>arrow_drop_down</span>
           </div>
+        </div>
+        <div className= {`${isrowDrop ? 'div-row-menu-expand' : 'div-row-menu' }`}>
+            <ul>
+              <li>Row 1</li>
+              <li>Row 2</li>
+            </ul>
         </div>
         <div className="div-gap-details">
           <p>Gap</p>
