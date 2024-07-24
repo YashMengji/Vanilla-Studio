@@ -38,7 +38,7 @@ function SimWindow() {
       .handle {
         width: 10px;
         height: 10px;
-        border-radius : 3px;
+        border-radius : 50px;
         background-color: rgb(0, 128, 255);
         position: absolute;
         cursor: pointer;

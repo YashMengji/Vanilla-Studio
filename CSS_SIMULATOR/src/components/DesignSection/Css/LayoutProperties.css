@@ -62,6 +62,8 @@
     align-items: center;
     background-color: rgb(239, 175, 0);
     border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     padding: 8px;
     cursor: pointer;
 }
@@ -72,17 +74,19 @@
 
 .div-column-menu, .div-row-menu{
     visibility: hidden;
-    height: 0;
+    max-height: 0;
     opacity: 0;
-    transition: height .3s;
+    /* transition: max-height .35s ease-out; */
 }
 
 .div-column-menu-expand, .div-row-menu-expand{
     visibility: visible;
-    height: fit-content;
+    max-height: 100px;
+    overflow: auto;
+    scrollbar-width: thin;
     opacity: 1;
     background-color: rgb(255, 132, 0);
-    transition: height .3s;
+    transition: all .35s;
 }
 
 .div-column-menu-expand li, .div-row-menu-expand li{
@@ -92,4 +96,60 @@
 
 .div-gap-details{
     margin-top: 10px;
+}
+
+/* ---------------------------gap details style----------------------------- */
+
+.div-gap-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.div-gap-dimensions input {
+    width: 60px;
+    padding: 5px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+
+.div-gap-dimensions{
+    display:grid;
+    grid-template-columns: repeat(2, 60px);
+    place-items: center;
+    column-gap: 4px;
+}
+
+.row-gap, .column-gap{
+    position: relative;
+    border-radius: 6px;
+}
+.column-gap:hover, .row-gap:hover{
+    outline: 1px solid #212121;
+}
+
+.div-gap-dimensions select{
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    height: 100%;
+    outline: none;
+    border: none;
+    padding: 0 4px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    appearance: none;
+}
+.div-gap-dimensions select:hover{
+    background-color: #eaeaea;
+    outline: 1px solid black;
+}
+
+.div-gap-dimensions option {
+    padding: 0 20px;
+}
+
+.arrow-symbol{
+    color: #00000093;
 }

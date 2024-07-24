@@ -36,7 +36,7 @@ function LayoutProperties() {
           </span>
         </div>
         <div className="div-column-details" onClick={() => {setIsColumnDrop(!iscolumnDrop)}}>
-          <p>Columns (2)</p>
+          <p>Columns (4)</p>
           <div className="div-column-functions">
             <span className='material-symbols-outlined'>add</span>
             <span className='material-symbols-outlined'>arrow_drop_down</span>
@@ -46,6 +46,8 @@ function LayoutProperties() {
             <ul>
               <li>Column 1</li>
               <li>Column 2</li>
+              <li>Column 3</li>
+              <li>Column 4</li>
             </ul>
         </div>
         <div className="div-row-details" onClick={() => {setIsrowDrop(!isrowDrop)}}>
@@ -63,6 +65,30 @@ function LayoutProperties() {
         </div>
         <div className="div-gap-details">
           <p>Gap</p>
+          <div className="div-gap-dimensions">
+            <div className="row-gap">
+              <input type="number" />
+              <select className="unit-selector row-gap-unit" name="" id="">
+                <option value="px">px</option>
+                <option value="vh">vh</option>
+                <option value="vw">vw</option>
+              </select>
+            </div>
+            <div className="column-gap">
+              <input type="number" />
+              <select className="unit-selector column-gap-unit" name="" id="">
+                <option value="px">px</option>
+                <option value="vh">vh</option>
+                <option value="vw">vw</option>
+              </select>
+            </div>
+            <span className='arrow-symbol material-symbols-outlined'>
+              height
+            </span>
+            <span className='arrow-symbol material-symbols-outlined'>
+              width
+            </span>
+          </div>
         </div>
       </div>
     </div>
