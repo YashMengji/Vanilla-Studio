@@ -42,12 +42,54 @@ function AnimationProperties() {
           Entrance
         </div>
         <div className="div-entrance-section"  ref={entranceRef}>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Glide_animated.png" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Glide
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Fade_animated.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Fade
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
         </div>
         <div className="div-break-line"></div>
 
@@ -55,12 +97,54 @@ function AnimationProperties() {
           Hover
         </div>
         <div className="div-entrance-section"  ref={hoverRef}>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
+        <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Glide_animated.png" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Glide
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Fade_animated.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Fade
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
         </div>
         <div className="div-break-line"></div>
 
@@ -68,12 +152,54 @@ function AnimationProperties() {
           Click
         </div>
         <div className="div-entrance-section"  ref={clickRef}>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
+        <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Glide_animated.png" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Glide
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Fade_animated.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Fade
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
         </div>
         <div className="div-break-line"></div>
 
@@ -81,12 +207,54 @@ function AnimationProperties() {
           Scroll
         </div>
         <div className="div-entrance-section"  ref={scrollRef}>
-          <div>2</div>
-          <div>2</div> 
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
+        <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Glide_animated.png" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Glide
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Fade_animated.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Fade
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
         </div>
         <div className="div-break-line"></div>
 
@@ -94,12 +262,54 @@ function AnimationProperties() {
           Loop
         </div>
         <div className="div-entrance-section" ref={loopRef}>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
-          <div>2</div>
+        <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Glide_animated.png" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Glide
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/Fade_animated.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              Fade
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
+          <div className="div-entrance-animation">
+            <div className="div-entrance-animation-img">
+              <img className="entrance-animation-img" src="images/None_selected.gif" alt="" />
+            </div>
+            <div className="div-entrance-animation-text">
+              None
+            </div>
+          </div>
         </div>
         <div className="div-break-line"></div>
       </div>

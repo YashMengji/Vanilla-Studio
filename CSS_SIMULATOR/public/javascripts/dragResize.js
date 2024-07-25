@@ -2,20 +2,11 @@ let mainDiv = document.querySelector('.div-main');
 const resizableTemplate = document.getElementById('resizableTemplate');
 let resizable;
 mainDiv.addEventListener('click', (e) => {
-    console.log(e.target.id);
-    // e.stopPropagation();
-    if (
-        resizable 
-        && e.target.id != 'resizableTemplate'
-        && e.target.classList[0] != 'handle'
-    ) {
-        resizable.remove();
-    }
     if(
         e.target.id != 'main' 
         && e.target.id != 'resizableTemplate' 
         && e.target.classList[0] != 'handle'
-    ) {
+    ) { 
         // Clone the template and attach it to the input
         resizable = resizableTemplate.cloneNode(true);
         // resizable = resizableTemplate;
@@ -31,6 +22,15 @@ mainDiv.addEventListener('click', (e) => {
         // Apply the resize and drag functionality to the new resizable element
         applyResizeAndDrag(resizable, e.target);
     }
+});
+mainDiv.addEventListener('mousedown', (e) => {
+  if (
+    resizable 
+    && e.target.id != 'resizableTemplate'
+    && e.target.classList[0] != 'handle'
+  ) {
+    resizable.remove();
+  }
 });
 
 function applyResizeAndDrag(resizable, target) {
