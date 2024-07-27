@@ -1,6 +1,6 @@
 .div-layout-heading{
     padding: 15px 20px;
-    background-color: gray;
+    background-color: var(--shadow-color);
 }
 /*-------------------choose layout style --------------------------*/
 .div-choose-layout{
@@ -12,7 +12,7 @@
 }
 
 .div-layout-options-grid{
-    background-color: burlywood;
+    background-color: var(--base-color);
     margin-top: 20px;
     display: grid;
     gap: 8px;
@@ -23,11 +23,11 @@
 
 .div-layout-option{
     cursor: pointer;
-    background-color: rgb(121, 46, 46);
+    background-color: var(--shadow-color);
     border-radius: 5px;
     width: 100%;
     height: 100%;
-    color: white;
+    color: var(--secondary-color);
 }
 
 /* -------------------layout details style ------------------------- */
@@ -45,7 +45,7 @@
 }
 
 .split{
-    background-color: rgb(234, 140, 0);
+    background-color: var(--shadow-color);
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
@@ -60,7 +60,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(239, 175, 0);
+    background-color: var(--shadow-color);
     border-radius: 5px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -85,7 +85,7 @@
     overflow: auto;
     scrollbar-width: thin;
     opacity: 1;
-    background-color: rgb(255, 132, 0);
+    background-color: var(--shadow-color);
     transition: all .35s;
 }
 
@@ -110,7 +110,7 @@
     width: 60px;
     padding: 5px;
     border: none;
-    border-radius: 6px;
+    border-radius: 2px;
     outline: none;
 }
 
@@ -123,10 +123,10 @@
 
 .row-gap, .column-gap{
     position: relative;
-    border-radius: 6px;
+    border-radius: 2px;
 }
 .column-gap:hover, .row-gap:hover{
-    outline: 1px solid #212121;
+    outline: 1px solid var(--secondary-color);
 }
 
 .div-gap-dimensions select{
@@ -137,13 +137,13 @@
     outline: none;
     border: none;
     padding: 0 4px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
     appearance: none;
 }
 .div-gap-dimensions select:hover{
-    background-color: #eaeaea;
-    outline: 1px solid black;
+    background-color: var(--shadow-color);
+    outline: 1px solid var(--secondary-color);
 }
 
 .div-gap-dimensions option {

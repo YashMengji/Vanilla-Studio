@@ -22,7 +22,7 @@ function SimWindow() {
 
       \n.div-main {
         \nposition: relative;
-        \nbackground-color: lightcoral;
+        \nbackground-color: white;
         \noverflow-x: auto;
         \nheight: 100vh;
       }

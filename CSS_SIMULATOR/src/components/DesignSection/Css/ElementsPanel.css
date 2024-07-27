@@ -1,6 +1,13 @@
 :root{
   --sim-width: 66.667vw;
   --calculated-width: calc((100vw - var(--sim-width)) / 2);
+  --white-color:white;
+  --base-color: #dfebec;
+  --primary-color: #263f40;
+  --secondary-color: #426e70;
+  --accent-color: #76abae;
+  --accent-hover-color: #5e9da1;
+  --shadow-color: #bfd8d9;
 }
 
 .div-elements-panel {
@@ -15,7 +22,7 @@
   z-index: 2;
   width: 3.5vw;
   height: 92vh;
-  background-color: brown;
+  background-color: var(--shadow-color);
 }
 .left-elements-icons{
     display: flex;
@@ -26,11 +33,11 @@
     font-size: 40px;
     cursor: pointer;
     transition: background-color .3s;
-    color: white;
+    color: var(--secondary-color);
 }
 
 .left-elements-icons:hover{
-    background-color: rgb(174, 174, 174);
+    background-color: var(--accent-color);
     transition: background-color .3s;
 }
 
@@ -39,20 +46,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: chocolate;
+  background-color: var(--shadow-color);
   padding: 16px 10px;
   margin-bottom: 20px;
   cursor: pointer;
   transition: background-color .3s;
 }
 .div-heading:hover{
-  background-color: rgb(235, 120, 37);
+  background-color: var(--accent-color);
   transition: background-color .3s;
 }
 .div-right-elements, .div-section-elements, .div-page-content, .div-page-status{
   position: absolute;
   left: -18vw;
-  background-color: lightcyan;
+  background-color: var(--base-color);
   width: 18vw;
   height: 92vh;
   opacity: 0;
@@ -63,7 +70,7 @@
 .div-right-elements-expand, .div-section-element-expand, .div-page-content-expand, .div-page-status-expand{
   position: absolute;
   left: 3.5vw;
-  background-color: lightcyan;
+  background-color: var(--base-color);
   width: 18vw;
   height: 92vh;
   opacity: 1;
@@ -89,7 +96,7 @@
   /* background-color: aqua; */
   width: 60px;
   height: 60px;
-  border: 1px solid rgb(199, 199, 199);
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
   cursor: grab;
 }
@@ -102,14 +109,14 @@
 }
 
 .div-element-btn-text{
-  color: rgba(140, 140, 140, 0.764);
+  color: var(--secondary-color);
   font-size: 12px;
 }
 /*--------------------------page content style--------------------------*/
 
 .div-page-indicator{
   padding: 20px 10px;
-  background-color: bisque;
+  background-color: var(--shadow-color);
 }
 
 .div-head-page{
@@ -122,7 +129,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(112, 47, 0);
+  background-color: #9fc4c6;
   gap: 3px;
   padding: 20px 10px;
 }
@@ -134,12 +141,13 @@
   font-size: 16px;
   outline: none;
   border: none;
+  background-color: var(--white-color);
 }
 
 .create-page-icon{
   height: 100%;
   padding: 5px;
-  background-color: azure;
+  background-color: var(--shadow-color);
   cursor: pointer;
   border-radius: 5px;
 }

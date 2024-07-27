@@ -3,7 +3,7 @@
   position: absolute;
   right: 0;
   height: 92vh;
-  background-color: lightcyan;
+  background-color: var(--base-color);
   overflow: auto;
   opacity: 0;
   visibility: hidden;
@@ -22,8 +22,8 @@
   display: flex;
   justify-content: center;
   height: fit-content;
-  color: white;
-  background-color: rgb(0, 139, 178);
+  color: var(--secondary-color);
+  background-color: var(--accent-color);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   cursor: pointer;
@@ -34,8 +34,8 @@
 .div-toggle-button {
   right: 0vw;
   padding: 10px 18px;
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   transition: right .3s;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .div-toggle-button:hover, .div-toggle-button-expand:hover{
-  background-color: rgb(0, 200, 255);
+  background-color: #558e91;
   transition: background-color .3s;
 }
 
@@ -56,7 +56,7 @@
 
 .div-properties-path{
   width: 100%;
-  color: rgb(130, 130, 130);
+  color: var(--secondary-color);
   font-family:  arial;
   font-size: 13px;
   padding-left: 15px;
@@ -72,17 +72,17 @@
 .div-basic-properties-btn, .div-layout-properties-btn, .div-animation-properties-btn{
   display: flex;
   justify-content: center;
-  background-color: lightcoral;
+  background-color: var(--accent-color);
   height: 55px;
   cursor: pointer;
   align-items: center;
 }
 .div-animation-properties-btn :hover, .div-layout-properties-btn :hover, .div-basic-properties-btn :hover{
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid var(--secondary-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightcoral;
+  background-color: var(--accent-hover-color);
   width: 100%;
   height: 100%;
   cursor: pointer;
@@ -170,22 +170,22 @@
   font-size: 11px;
 }
 .div-x-dim-text, .div-y-dim-text, .div-w-dim-text, .div-h-dim-text{
-  color: rgb(96, 96, 96);
+  color: var(--primary-color);
 }
 .div-x-dim-input, .div-y-dim-input, .div-w-dim-input, .div-h-dim-input{
   display: flex;
   width: 67px;
   height: 31px;
-  border: 1px solid rgb(130, 130, 130);
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   cursor: pointer;
 }
 .div-x-dim-input:hover, .div-y-dim-input:hover, .div-w-dim-input:hover, .div-h-dim-input:hover{
-  border: 1px solid rgb(92, 92, 92);
+  border: 1px solid var(--primary-color);
 }
 .x-dim-input, .y-dim-input, .w-dim-input, .h-dim-input{
   border: none;
-  background-color: lightcyan;
+  background-color: var(--white-color);
   width: 60px;
   height: 18px;
   width: 71%;
@@ -231,13 +231,13 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
   width: 67px;
   height: 31px;
-  border: 1px solid rgb(130, 130, 130);
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
   cursor: pointer;
 }
 .border-color-input{
   border: none;
-  background-color: lightcyan;
+  background-color: var(--base-color);
   width: 60px;
   height: 18px;
   width: 71%;
@@ -264,13 +264,13 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   width: 67px;
   height: 31px;
-  border: 1px solid rgb(130, 130, 130);
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
   cursor: pointer;
 }
 .border-width-input{
   border: none;
-  background-color: lightcyan;
+  background-color: var(--base-color);
   width: 60px;
   height: 18px;
   width: 71%;
@@ -286,7 +286,7 @@ input[type="number"]::-webkit-outer-spin-button {
   
 
 .div-typography-section{
-  background-color: rgb(0, 136, 255);
+  background-color: var(--base-color);
   padding: 20px;
 }
 
@@ -294,7 +294,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 1vh 1vw;
   border: none;
   width: 100%;
-  background-color: aquamarine;
+  background-color: var(--shadow-color);
   border-radius: 5px;
 }
 
@@ -303,7 +303,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #font-type > option{
-  background-color: azure;
+  background-color: var(--base-color);
 }
 
 .div-font-size{
@@ -340,7 +340,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 28px;
   border-radius: 5px;
   margin-right: 10px;
-  background-color: azure;
+  background-color: var(--shadow-color);
   cursor: pointer;
 }
 
@@ -348,7 +348,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-right: 10px;
   padding: 1.5vh;
   border-radius: 5px;
-  background-color: azure;
+  background-color: var(--shadow-color);
   cursor: pointer;
 }
 
@@ -386,7 +386,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .div-break-line{
   width: 100%;
-  border-top: 1px solid rgb(155, 155, 155);
+  border-top: 1px solid var(--primary-color);
 }
 .div-entrance-section{
   display: none;
@@ -414,6 +414,6 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 4px;
 }
 .div-entrance-animation-text{
-  color: rgb(43, 46, 54);
+  color: var(--secondary-color);
   font-size: 11px;
 }
