@@ -16,6 +16,7 @@
   opacity: 1;
   visibility: visible;
   transition: all .3s;
+  box-shadow: var(--shadow-gray) -5px 0px 10px 2px;
 }
 
 .div-toggle-button, .div-toggle-button-expand {

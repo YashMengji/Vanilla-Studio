@@ -6,12 +6,16 @@
   /* flex: 1; */
   /* position: absolute; */
   background-color: rgb(187, 254, 254);
+  box-shadow: var(--shadow-gray) 0px 0px 29px 0px;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
+  border-radius: 6px;
 }
 .iframe-simwindow{
   position: relative;
   width: 100%;
   height: 100%;
   overflow-x: auto;
+  border-radius: 6px;
 }
 
 iframe{

@@ -8,6 +8,7 @@
   --accent-color: #76abae;
   --accent-hover-color: #5e9da1;
   --shadow-color: #bfd8d9;
+  --shadow-gray: rgba(100, 100, 111, 0.2);
 }
 
 .div-elements-panel {
@@ -23,6 +24,7 @@
   width: 3.5vw;
   height: 92vh;
   background-color: var(--shadow-color);
+  box-shadow: var(--shadow-gray) 2px 0px 5px 1px;
 }
 .left-elements-icons{
     display: flex;
@@ -76,6 +78,7 @@
   opacity: 1;
   visibility: visible;
   transition: all .3s;
+  box-shadow: var(--shadow-gray) 5px 0px 10px 1px;
 }
 
 .div-quick-add-elements, .div-section-elements-btns{
@@ -96,11 +99,18 @@
   /* background-color: aqua; */
   width: 60px;
   height: 60px;
-  border: 1px solid var(--secondary-color);
+  /* border: 1px solid var(--secondary-color); */
   border-radius: 4px;
   cursor: grab;
+  box-shadow: var(--shadow-gray) 0px 0px 5px 1px;
+  /* transition: all .2s; */
 }
 
+.div-element-btn:hover{
+  box-shadow: var(--shadow-gray) 0px 0px 5px 2px;
+  transform: scale(1.05);
+  transition: all .05s;
+}
 .div-section-elements > .div-element-btn:nth-child(1) > .div-element-btn-img{
   transform: rotate(180deg);
 }
