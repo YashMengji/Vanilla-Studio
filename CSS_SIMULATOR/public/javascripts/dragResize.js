@@ -1,6 +1,7 @@
 let mainDiv = document.querySelector('.div-main');
 const resizableTemplate = document.getElementById('resizableTemplate');
-let resizable, targetElement;
+let resizable;
+let targetElement = window.targetElement;
 
 mainDiv.addEventListener('click', (e) => {
     if(

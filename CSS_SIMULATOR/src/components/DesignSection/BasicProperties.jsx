@@ -1,11 +1,22 @@
 import React from 'react'
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 function BasicProperties() {
 
   const [borderOpacity, setBorderOpacity] = useState(1)
-  // let borderOpacity = 50;
+  const [widthInput, setWidthInput] = useState(0);
+  let targetElement = window.targetElement;
+  
 
+  // useEffect( () => {
+  //   targetElement = window.targetElement;
+  //   setWidthInput(targetElement ? targetElement.style.width : 0)
+  // }, [])
+
+  // useEffect( () => {
+  //   targetElement.style.width = widthInput;
+  // }, [widthInput])
+  
   return (
     <div className="div-basic-properties-panel">
       <div className="div-alignment-section">
@@ -60,7 +71,7 @@ function BasicProperties() {
                 W 
               </div>
               <div className="div-w-dim-input">
-                <input type="number" className="w-dim-input" />
+                <input type="number" className="w-dim-input" value={targetElement!=undefined ? targetElement.style.width : 0} onChange={() => {targetElement.style.width = e.target.value; console.log(targetElement);}} />
                 <div className="div-px-text">px*</div>
               </div>
             </div>

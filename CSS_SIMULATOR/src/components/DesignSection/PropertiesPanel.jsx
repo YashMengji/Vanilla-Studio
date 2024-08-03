@@ -5,6 +5,7 @@ import PropertiesSection from './PropertiesSection'
 import EditPropertiesPanel from './EditPropertiesPanel'
 
 
+
 function PropertiesPanel() {
 
   const [isExpanded, setIsExpanded] = useState(false);
