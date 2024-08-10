@@ -1,21 +1,15 @@
 import React from 'react'
 import {useState, useEffect} from "react"
+// import {targetElement} from './javascripts/dragResize.js'
 
 function BasicProperties() {
 
   const [borderOpacity, setBorderOpacity] = useState(1)
   const [widthInput, setWidthInput] = useState(0);
-  let targetElement = window.targetElement;
+  // let targetElement = window.targetElement;
+  //console.log(targetElement);
   
 
-  // useEffect( () => {
-  //   targetElement = window.targetElement;
-  //   setWidthInput(targetElement ? targetElement.style.width : 0)
-  // }, [])
-
-  // useEffect( () => {
-  //   targetElement.style.width = widthInput;
-  // }, [widthInput])
   
   return (
     <div className="div-basic-properties-panel">
@@ -71,7 +65,7 @@ function BasicProperties() {
                 W 
               </div>
               <div className="div-w-dim-input">
-                <input type="number" className="w-dim-input" value={targetElement!=undefined ? targetElement.style.width : 0} onChange={() => {targetElement.style.width = e.target.value; console.log(targetElement);}} />
+                <input type="number" className="w-dim-input" />
                 <div className="div-px-text">px*</div>
               </div>
             </div>

@@ -1,4 +1,10 @@
-function handleDrop(e) {
+let simwindow;
+
+export function getReference(simwindowRef) {
+  simwindow = simwindowRef.current;
+} 
+
+function handleDrop(e, simwindowRef) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
 
@@ -19,7 +25,7 @@ function handleDrop(e) {
     title.style.fontWeight = 'block';
     title.style.left = dropX + 'px';
     title.style.top = dropY + 'px';
-    document.body.querySelector(".div-main").appendChild(title);
+    simwindow.appendChild(title);
   }
   else if (selectedElement === "image-img") {
     // Create an button at the drop location
@@ -32,7 +38,7 @@ function handleDrop(e) {
     image.style.height = "100px";
     image.style.left = dropX + 'px';
     image.style.top = dropY + 'px';
-    document.body.querySelector(".div-main").appendChild(image);
+    simwindow.appendChild(image);
   }
   else if (selectedElement === "para-img") {
     // Create a paragraph at the drop location
@@ -45,7 +51,7 @@ function handleDrop(e) {
     paragraph.style.minHeight = "100px"; // Adjust height as needed
     paragraph.style.left = dropX + 'px';
     paragraph.style.top = dropY + 'px';
-    document.body.querySelector(".div-main").appendChild(paragraph);
+    simwindow.appendChild(paragraph);
   }
   else if (selectedElement === "video-img") {
     // Create a video element at the drop location
@@ -59,7 +65,7 @@ function handleDrop(e) {
     video.controls = true; // Show video controls like play, pause, etc.
     video.style.left = dropX + 'px';
     video.style.top = dropY + 'px';
-    document.body.querySelector(".div-main").appendChild(video);
+    simwindow.appendChild(video);
   }
   else if (selectedElement === "container-img") {
     // Create a video element at the drop location
@@ -73,7 +79,7 @@ function handleDrop(e) {
     container.style.height = "240px"; // Adjust height as needed
     container.style.left = dropX + 'px';
     container.style.top = dropY + 'px';
-    document.body.querySelector(".div-main").appendChild(container);
+    simwindow.appendChild(container);
   }
   else if (selectedElement === "link-img") {
     // Create a link element at the drop location
@@ -85,7 +91,7 @@ function handleDrop(e) {
     link.style.display = 'block';
     link.style.left = dropX + 'px';
     link.style.top = dropY + 'px';
-    document.body.querySelector(".div-main").appendChild(link);
+    simwindow.appendChild(link);
   }
 
 }
@@ -93,3 +99,5 @@ function handleDrop(e) {
 function allowDrop(event) {
   event.preventDefault(); // Necessary to allow dropping
 }
+
+export {handleDrop, allowDrop};

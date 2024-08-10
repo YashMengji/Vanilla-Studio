@@ -1,34 +1,52 @@
+// let targetElement = Window.targetElement;
 let mainDiv = document.querySelector('.div-main');
-const resizableTemplate = document.getElementById('resizableTemplate');
-let resizable;
-let targetElement = window.targetElement;
+// const resizableTemplate = document.getElementById('resizableTemplate');
 
-mainDiv.addEventListener('click', (e) => {
-    if(
-        e.target.id != 'main' 
-        && e.target.id != 'resizableTemplate' 
+let resizable, targetElement;
+
+export function handleReference(simwindowRef, resizableTemplate){
+
+    let simwindow = simwindowRef.current;
+    let resizableTemplateElement = resizableTemplate.current;
+
+    simwindow.addEventListener('click', (e) => {
+        if(
+            e.target.classList[0] != 'div-simwindow' 
+            && e.target.id != 'resizableTemplate' 
+            && e.target.classList[0] != 'handle'
+        ) { 
+            targetElement = e.target;
+            // console.log(targetElement);
+            // Clone the template and attach it to the input
+            // resizable = resizableTemplate.cloneNode(true);
+            resizable = resizableTemplateElement;
+            resizable.style.display = 'block';
+            resizable.style.position = 'absolute';
+            resizable.style.width = e.target.offsetWidth + 'px';
+            resizable.style.height = e.target.offsetHeight + 'px';
+            resizable.style.top = e.target.offsetTop + 'px';
+            resizable.style.left = e.target.offsetLeft + 'px';
+
+            simwindow.appendChild(resizable);
+
+            // Apply the resize and drag functionality to the new resizable element
+            applyResizeAndDrag(resizable, e.target);
+
+            
+        }
+    });
+
+    simwindow.addEventListener('mousedown', (e) => {
+    if (
+        resizable 
+        && e.target.id != 'resizableTemplate'
         && e.target.classList[0] != 'handle'
-    ) { 
-        targetElement = e.target;
-        console.log(targetElement);
-        // Clone the template and attach it to the input
-        resizable = resizableTemplate.cloneNode(true);
-        // resizable = resizableTemplate;
-        resizable.style.display = 'block';
-        resizable.style.position = 'absolute';
-        resizable.style.width = e.target.offsetWidth + 'px';
-        resizable.style.height = e.target.offsetHeight + 'px';
-        resizable.style.top = e.target.offsetTop + 'px';
-        resizable.style.left = e.target.offsetLeft + 'px';
-
-        mainDiv.appendChild(resizable);
-
-        // Apply the resize and drag functionality to the new resizable element
-        applyResizeAndDrag(resizable, e.target);
-
-        
+    ) {
+        resizable.remove();
     }
-});
+    });
+
+}
 
 window.addEventListener('keydown', (e) => {
     if(e.key == 'Delete') {
@@ -36,17 +54,6 @@ window.addEventListener('keydown', (e) => {
         targetElement.remove();
     }
 })
-
-
-mainDiv.addEventListener('mousedown', (e) => {
-  if (
-    resizable 
-    && e.target.id != 'resizableTemplate'
-    && e.target.classList[0] != 'handle'
-  ) {
-    resizable.remove();
-  }
-});
 
 function applyResizeAndDrag(resizable, target) {
             const handles = resizable.querySelectorAll('.handle');
