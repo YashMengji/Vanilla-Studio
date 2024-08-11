@@ -4,7 +4,7 @@ let mainDiv = document.querySelector('.div-main');
 
 let resizable, targetElement;
 
-export function handleReference(simwindowRef, resizableTemplate){
+export function handleReference(simwindowRef, resizableTemplate) {
 
     let simwindow = simwindowRef.current;
     let resizableTemplateElement = resizableTemplate.current;
@@ -31,31 +31,31 @@ export function handleReference(simwindowRef, resizableTemplate){
 
             // Apply the resize and drag functionality to the new resizable element
             applyResizeAndDrag(resizable, e.target);
-
-            
+            // Make simwindow focusable and set focus to it
+    
         }
     });
 
     simwindow.addEventListener('mousedown', (e) => {
-    if (
-        resizable 
-        && e.target.id != 'resizableTemplate'
-        && e.target.classList[0] != 'handle'
-    ) {
-        resizable.remove();
-    }
-    });
-
+      if (
+          resizable 
+          && e.target.id != 'resizableTemplate'
+          && e.target.classList[0] != 'handle'
+      ) {
+          resizable.remove();
+      }
+    });    
 }
 
 window.addEventListener('keydown', (e) => {
-    if(e.key == 'Delete') {
-        resizable.remove();
-        targetElement.remove();
-    }
-})
+  if(e.key == 'Delete') {
+      resizable.remove();
+      targetElement.remove();
+  }
+});
 
 function applyResizeAndDrag(resizable, target) {
+            // All code below is of RESIZE (below resize is drag)
             const handles = resizable.querySelectorAll('.handle');
             let offsetX, offsetY, isResizing = false;
 
@@ -64,9 +64,9 @@ function applyResizeAndDrag(resizable, target) {
                     isResizing = true;
                     initResize(e, handle.classList[1]);
                 });
-});
+            });
 
-function initResize(e, handleType) {
+            function initResize(e, handleType) {
                 function getCursorType(handleType) {
                     switch(handleType) {
                         case 'top-left': return 'nw-resize';
@@ -137,6 +137,14 @@ function initResize(e, handleType) {
                 }
             }
 
+            function updateTargetSize() {
+              target.style.width = resizable.offsetWidth + 'px';
+              target.style.height = resizable.offsetHeight + 'px';
+              target.style.top = resizable.offsetTop + 'px';
+              target.style.left = resizable.offsetLeft + 'px';
+            }
+
+            // All code below is For DRAG
             resizable.addEventListener('mousedown', (e) => {
                 if (isResizing) return;
                 e.preventDefault();
@@ -145,6 +153,7 @@ function initResize(e, handleType) {
 
                 document.addEventListener('mousemove', onMouseMove);
                 document.addEventListener('mouseup', onMouseUp);
+                      
             });
 
             function onMouseMove(e) {
@@ -152,6 +161,12 @@ function initResize(e, handleType) {
                 document.body.style.cursor = 'move';
                 resizable.style.left = `${e.clientX - offsetX}px`;
                 resizable.style.top = `${e.clientY - offsetY}px`;
+                let rect = resizable.getBoundingClientRect();
+                // THIS IF STATEMENT LIMITS ELEMENT TO SIMWINDOW ONLY
+                if(rect.top<=90 || rect.left<=225 || rect.right<=200 ){
+                  document.removeEventListener('mousemove', onMouseMove);
+                  document.removeEventListener('mouseup', onMouseUp);
+                }  
                 updateTargetSize();
             }
 
@@ -161,10 +176,5 @@ function initResize(e, handleType) {
                 document.removeEventListener('mouseup', onMouseUp);
             }
 
-            function updateTargetSize() {
-                target.style.width = resizable.offsetWidth + 'px';
-                target.style.height = resizable.offsetHeight + 'px';
-                target.style.top = resizable.offsetTop + 'px';
-                target.style.left = resizable.offsetLeft + 'px';
-            }
+                     
 }
