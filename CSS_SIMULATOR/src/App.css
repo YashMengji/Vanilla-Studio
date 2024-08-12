@@ -5,5 +5,5 @@ body{
 .div-main{
     display: flex;
     justify-content: center;
-    
+    position: relative;
 }

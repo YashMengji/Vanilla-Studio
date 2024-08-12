@@ -17,7 +17,6 @@ function SimWindow() {
       <div 
       className='div-simwindow' 
       ref={simwindowRef} 
-      style={{backgroundColor: "lightcoral"}}
       onDragOver={(e, simwindowRef) => {allowDrop(e, simwindowRef)}} 
       onDrop={(e, simwindowRef) => {handleDrop(e, simwindowRef)}}
       >

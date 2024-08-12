@@ -163,10 +163,10 @@ function applyResizeAndDrag(resizable, target) {
                 resizable.style.top = `${e.clientY - offsetY}px`;
                 let rect = resizable.getBoundingClientRect();
                 // THIS IF STATEMENT LIMITS ELEMENT TO SIMWINDOW ONLY
-                if(rect.top<=90 || rect.left<=225 || rect.right<=200 ){
-                  document.removeEventListener('mousemove', onMouseMove);
-                  document.removeEventListener('mouseup', onMouseUp);
-                }  
+                // if(rect.top<=90 || rect.left<=225 || rect.right<=200 ){
+                //   document.removeEventListener('mousemove', onMouseMove);
+                //   document.removeEventListener('mouseup', onMouseUp);
+                // }  
                 updateTargetSize();
             }
 
