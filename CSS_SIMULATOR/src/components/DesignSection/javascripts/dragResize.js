@@ -1,6 +1,4 @@
-// let targetElement = Window.targetElement;
 let mainDiv = document.querySelector('.div-main');
-// const resizableTemplate = document.getElementById('resizableTemplate');
 
 let resizable, targetElement;
 let simwindow, simwindowRect;
@@ -17,11 +15,15 @@ export function handleReference(simwindowRef, resizableTemplate) {
             && e.target.id != 'resizableTemplate' 
             && e.target.classList[0] != 'handle'
         ) { 
+            if (resizable) {
+                resizable.remove();
+            }
+
             targetElement = e.target;
-            // console.log(targetElement);
+            console.log(targetElement);
             // Clone the template and attach it to the dropped element
-            // resizable = resizableTemplateElement.cloneNode(true);
-            resizable = resizableTemplateElement;
+            resizable = resizableTemplateElement.cloneNode(true);
+            // resizable = resizableTemplateElement;
             resizable.style.display = 'block';
             resizable.style.position = 'absolute';
             resizable.style.width = e.target.offsetWidth + 'px';
@@ -147,8 +149,8 @@ function applyResizeAndDrag(resizable, target) {
             }
 
             // All code below is For DRAG
-            let dragOffsetX = 0;
-            let dragOffsetY = 0;
+            let dragOffsetX;
+            let dragOffsetY;
             resizable.addEventListener('mousedown', (e) => {
                 if (isResizing) return;
                 e.preventDefault();
