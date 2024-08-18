@@ -12,8 +12,9 @@ function handleDrop(e, simwindowRef) {
   console.log(selectedElement)
 
   //get the (x,y) position of the cursor to place element at that position when it is dropped
-  const dropX = e.clientX;
-  const dropY = e.clientY;
+  const rect = simwindow.getBoundingClientRect();
+  const dropX = e.clientX - rect.left;
+  const dropY = e.clientY - rect.top;
 
   if (selectedElement === "title-img") {
     // Create a title element (e.g., h1 for main title) at the drop location

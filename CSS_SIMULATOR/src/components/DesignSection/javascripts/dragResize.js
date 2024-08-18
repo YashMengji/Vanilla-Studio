@@ -3,10 +3,12 @@ let mainDiv = document.querySelector('.div-main');
 // const resizableTemplate = document.getElementById('resizableTemplate');
 
 let resizable, targetElement;
+let simwindow, simwindowRect;
 
 export function handleReference(simwindowRef, resizableTemplate) {
 
-    let simwindow = simwindowRef.current;
+    simwindow = simwindowRef.current;
+    simwindowRect = simwindow.getBoundingClientRect();
     let resizableTemplateElement = resizableTemplate.current;
 
     simwindow.addEventListener('click', (e) => {
@@ -17,8 +19,8 @@ export function handleReference(simwindowRef, resizableTemplate) {
         ) { 
             targetElement = e.target;
             // console.log(targetElement);
-            // Clone the template and attach it to the input
-            // resizable = resizableTemplate.cloneNode(true);
+            // Clone the template and attach it to the dropped element
+            // resizable = resizableTemplateElement.cloneNode(true);
             resizable = resizableTemplateElement;
             resizable.style.display = 'block';
             resizable.style.position = 'absolute';
@@ -93,17 +95,17 @@ function applyResizeAndDrag(resizable, target) {
                         case 'top-left':
                             resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY + 'px';
-                            resizable.style.left = event.clientX + 'px';
+                            resizable.style.top = event.clientY - simwindowRect.top  + 'px';
+                            resizable.style.left = event.clientX - simwindowRect.left  + 'px';
                             break;
                         case 'top-center':
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY + 'px';
+                            resizable.style.top = event.clientY - simwindowRect.top + 'px';
                             break;
                         case 'top-right':
                             resizable.style.width = event.clientX - rect.left + 'px';
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY + 'px';
+                            resizable.style.top = event.clientY - simwindowRect.top + 'px';
                             break;
                         case 'right-center':
                             resizable.style.width = event.clientX - rect.left + 'px';
@@ -113,16 +115,16 @@ function applyResizeAndDrag(resizable, target) {
                             resizable.style.height = event.clientY - rect.top + 'px';
                             break;
                         case 'bottom-center':
-                            resizable.style.height = event.clientY - rect.top + 'px';
+                            resizable.style.height = event.clientY - rect.top+ 'px';
                             break;
                         case 'bottom-left':
                             resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.height = event.clientY - rect.top + 'px';
-                            resizable.style.left = event.clientX + 'px';
+                            resizable.style.left = event.clientX- simwindowRect.left  + 'px';
                             break;
                         case 'left-center':
                             resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.left = event.clientX + 'px';
+                            resizable.style.left = event.clientX - simwindowRect.left + 'px';
                             break;
                     }
                     updateTargetSize();
@@ -145,11 +147,16 @@ function applyResizeAndDrag(resizable, target) {
             }
 
             // All code below is For DRAG
+            let dragOffsetX = 0;
+            let dragOffsetY = 0;
             resizable.addEventListener('mousedown', (e) => {
                 if (isResizing) return;
                 e.preventDefault();
-                offsetX = e.clientX - resizable.getBoundingClientRect().left;
-                offsetY = e.clientY - resizable.getBoundingClientRect().top;
+                //rect -> dimensions of resizable template div
+                let rect = resizable.getBoundingClientRect()
+
+                dragOffsetX = e.clientX - rect.left;
+                dragOffsetY = e.clientY - rect.top;
 
                 document.addEventListener('mousemove', onMouseMove);
                 document.addEventListener('mouseup', onMouseUp);
@@ -159,14 +166,11 @@ function applyResizeAndDrag(resizable, target) {
             function onMouseMove(e) {
                 if (isResizing) return;
                 document.body.style.cursor = 'move';
-                resizable.style.left = `${e.clientX - offsetX}px`;
-                resizable.style.top = `${e.clientY - offsetY}px`;
-                let rect = resizable.getBoundingClientRect();
-                // THIS IF STATEMENT LIMITS ELEMENT TO SIMWINDOW ONLY
-                // if(rect.top<=90 || rect.left<=225 || rect.right<=200 ){
-                //   document.removeEventListener('mousemove', onMouseMove);
-                //   document.removeEventListener('mouseup', onMouseUp);
-                // }  
+                const newX = e.clientX - simwindowRect.left - dragOffsetX;
+                const newY = e.clientY - simwindowRect.top - dragOffsetY;
+                resizable.style.left = `${newX}px`;
+                resizable.style.top = `${newY}px`;
+
                 updateTargetSize();
             }
 

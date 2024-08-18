@@ -9,6 +9,7 @@
   box-shadow: var(--shadow-gray) 0px 0px 29px 0px;
   border-radius: 6px;
   overflow: auto;
+  scrollbar-width: thin;
 }
 
 /*----------------------------resizableTemplate style------------------------------*/
