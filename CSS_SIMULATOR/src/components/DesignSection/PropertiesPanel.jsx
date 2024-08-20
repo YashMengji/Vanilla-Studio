@@ -20,8 +20,8 @@ function PropertiesPanel() {
         </span>
       </div>
       <div className={`${isExpanded ? 'div-properties-panel-expand' : 'div-properties-panel' }`}>
-        <PropertiesPath/>
         <PropertiesSection/>
+        <PropertiesPath/>
         <EditPropertiesPanel/>
       </div>
     </>

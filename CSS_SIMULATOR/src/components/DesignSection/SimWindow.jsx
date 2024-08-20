@@ -1,14 +1,16 @@
 import { useEffect, useRef } from 'react';
 import './Css/SimWindow.css';
 import { allowDrop, handleDrop , getReference} from './javascripts/iframeLogic';
-import { handleReference } from './javascripts/dragResize';
+import BasicProperties from "./BasicProperties"
 
 function SimWindow() {
   const iframeRef = useRef(null);
   const simwindowRef = useRef(null);
   const resizableTemplateRef = useRef(null);
+  
+  
   useEffect(() => {
-    handleReference(simwindowRef, resizableTemplateRef);
+    BasicProperties.handleReference(simwindowRef, resizableTemplateRef);
     getReference(simwindowRef);
   }, []);
 
