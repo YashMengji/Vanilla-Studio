@@ -6,7 +6,7 @@
   position: absolute;
   top: 5vh;
   /* background-color: lightcoral; */
-  background-color: white;
+  background-color: rgb(255, 137, 137);
   box-shadow: var(--shadow-gray) 0px 0px 29px 0px;
   border-radius: 6px;
   overflow: auto;

@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from "react"
+import {useState, useEffect, useRef} from "react"
 
 // import {targetElement} from './javascripts/dragResize.js'
 
@@ -32,6 +32,7 @@ const handleReference = (simwindowRef, resizableTemplate) => {
 
             targetElement = e.target;
             setWidthInput(Number(targetElement.style.width.slice(0, -2)));
+            setHeightInput(Number(targetElement.style.height.slice(0, -2)));
             console.log(targetElement);
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);
@@ -62,6 +63,8 @@ const handleReference = (simwindowRef, resizableTemplate) => {
     });    
 }
 
+
+
 // Attach handleReference to the component
 BasicProperties.handleReference = handleReference;
 
@@ -76,6 +79,12 @@ function applyResizeAndDrag(resizable, target) {
             // All code below is of RESIZE (below resize is drag)
             const handles = resizable.querySelectorAll('.handle');
             let offsetX, offsetY, isResizing = false;
+            if (widthRef.current) {
+              widthRef.current.addEventListener("change", () => {
+                resizable.style.width = widthInput;
+              });
+            }
+        
 
             handles.forEach(handle => {
                 handle.addEventListener('mousedown', function(e) {
@@ -151,7 +160,6 @@ function applyResizeAndDrag(resizable, target) {
                     window.removeEventListener('mousemove', resize);
                     window.removeEventListener('mouseup', stopResize);
                     isResizing = false;
-                    
                 }
             }
 
@@ -160,6 +168,9 @@ function applyResizeAndDrag(resizable, target) {
               target.style.height = resizable.offsetHeight + 'px';
               target.style.top = resizable.offsetTop + 'px';
               target.style.left = resizable.offsetLeft + 'px';
+
+              setWidthInput(Number(target.style.width.slice(0, -2)));
+              setHeightInput(Number(targetElement.style.height.slice(0, -2)));
             }
 
             // All code below is For DRAG
@@ -202,6 +213,9 @@ function applyResizeAndDrag(resizable, target) {
 
   const [borderOpacity, setBorderOpacity] = useState(1)
   const [widthInput, setWidthInput] = useState(0);
+  const [heightInput, setHeightInput] = useState(0);
+
+  const widthRef = useRef(null);
   
   // let targetElement = window.targetElement;
   //console.log(targetElement);
@@ -262,7 +276,7 @@ function applyResizeAndDrag(resizable, target) {
                 W 
               </div>
               <div className="div-w-dim-input">
-                <input type="number" className="w-dim-input" value={widthInput} onChange={(e)=>{setWidthInput(e.target.value)}}/>
+                <input type="number" className="w-dim-input" ref={widthRef} value={widthInput} onChange={(e)=>{setWidthInput(e.target.value); }}/>
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -271,7 +285,7 @@ function applyResizeAndDrag(resizable, target) {
                 H 
               </div> 
               <div className="div-h-dim-input">
-                <input type="number" className="h-dim-input" />
+                <input type="number" className="h-dim-input" value={heightInput} onChange={(e)=>{setHeightInput(e.target.value)}}/>
                 <div className="div-px-text">px*</div>
               </div>
             </div>
