@@ -5,10 +5,7 @@ import {useState, useEffect, useRef} from "react"
 
 function BasicProperties() {
 
-
-
-let mainDiv = document.querySelector('.div-main');
-
+  
 let resizable, targetElement;
 let simwindow, simwindowRect;
 
@@ -45,13 +42,14 @@ const handleReference = (simwindowRef, resizableTemplate) => {
             resizable.style.left = e.target.offsetLeft + 'px';
 
             simwindow.appendChild(resizable);
+            console.log(resizable);
 
             // Apply the resize and drag functionality to the new resizable element
             applyResizeAndDrag(resizable, e.target);
             // Make simwindow focusable and set focus to it
         }
     });
-
+    
     simwindow.addEventListener('mousedown', (e) => {
       if (
           resizable 
@@ -63,7 +61,7 @@ const handleReference = (simwindowRef, resizableTemplate) => {
     });    
 }
 
-
+console.log(resizable);
 
 // Attach handleReference to the component
 BasicProperties.handleReference = handleReference;
@@ -81,7 +79,8 @@ function applyResizeAndDrag(resizable, target) {
             let offsetX, offsetY, isResizing = false;
             if (widthRef.current) {
               widthRef.current.addEventListener("change", () => {
-                resizable.style.width = widthInput;
+                resizable.style.width = `${widthInput}px`;
+                target.style.width = resizable.offsetWidth + 'px';
               });
             }
         
