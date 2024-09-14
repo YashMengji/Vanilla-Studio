@@ -1,14 +1,50 @@
 import React from 'react'
-import {useState, useEffect} from "react"
+import {useState, useEffect, useContext} from "react"
+import { ResizeContext } from './ResizeContext';
 // import {targetElement} from './javascripts/dragResize.js'
+
 
 function BasicProperties() {
 
+
+  const { width, setWidth, height, setHeight, elementRef, resizableTemplateRef } = useContext(ResizeContext);
   const [borderOpacity, setBorderOpacity] = useState(1)
-  const [widthInput, setWidthInput] = useState(0);
+  // const [width, setWidth] = useState(0);
+  // const [height, setHeight] = useState(0);
   // let targetElement = window.targetElement;
   //console.log(targetElement);
   
+  // Callback to receive updates from dragResize.js
+  // const handleResizeUpdate = (newWidth, newHeight) => {
+  //   setWidth(newWidth);
+  //   setHeight(newHeight);
+  // };
+
+  const handleWidthChange = (e) => {
+    const newWidth = e.target.value;
+    setWidth(newWidth);
+    updateElementDimensions(newWidth, height); // Update the element's width
+  };
+
+  const handleHeightChange = (e) => {
+    const newHeight = e.target.value;
+    setHeight(newHeight);
+    updateElementDimensions(width, newHeight); // Update the element's height
+  };
+
+  // Function to update element dimensions
+  const updateElementDimensions = (newWidth, newHeight) => {
+    if (elementRef.current && resizableTemplateRef) {
+      elementRef.current.style.width = `${newWidth}px`;
+      elementRef.current.style.height = `${newHeight}px`;
+      resizableTemplateRef.current.style.width = `${newWidth}px`;
+      resizableTemplateRef.current.style.height = `${newHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    updateElementDimensions(width, height); // Initialize with current values
+  }, [width, height]);
 
   
   return (
@@ -64,8 +100,13 @@ function BasicProperties() {
               <div className="div-w-dim-text">
                 W 
               </div>
-              <div className="div-w-dim-input">
-                <input type="number" className="w-dim-input" />
+              <div className="div-w-dim-input" >
+                <input 
+                type="number" 
+                className="w-dim-input" 
+                onChange={(e) => handleWidthChange(e)}
+                value={width}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -74,7 +115,12 @@ function BasicProperties() {
                 H 
               </div> 
               <div className="div-h-dim-input">
-                <input type="number" className="h-dim-input" />
+                <input 
+                type="number" 
+                className="h-dim-input" 
+                onChange={(e) => handleHeightChange(e)}
+                value={height}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>

@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import {Navbar, ElementsPanel, SimWindow, PropertiesPanel} from './components/DesignSection/Design.js'
 import SectionElements from './components/DesignSection/SectionElements.jsx'
+import { ResizeProvider } from './components/DesignSection/ResizeContext.jsx'
 
 function App() {
   
@@ -13,8 +14,11 @@ function App() {
       <Navbar />
       <div className="div-main">
         <ElementsPanel />
+      <ResizeProvider>
         <SimWindow />
         <PropertiesPanel />
+      </ResizeProvider>
+
       </div>
     </> 
   )

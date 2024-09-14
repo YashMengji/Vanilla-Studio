@@ -1,13 +1,18 @@
+import { useContext } from 'react';
+import { ResizeContext } from '../ResizeContext';
 let mainDiv = document.querySelector('.div-main');
 
+let dimensionCallback;
 let resizable, targetElement;
 let simwindow, simwindowRect;
 
-export function handleReference(simwindowRef, resizableTemplate) {
 
+
+export function handleReference(simwindowRef,width, height, setWidth, setHeight, setElementRef, resizableTemplateRef) {
+    // const { setWidth, setHeight } = useContext(ResizeContext); 
     simwindow = simwindowRef.current;
     simwindowRect = simwindow.getBoundingClientRect();
-    let resizableTemplateElement = resizableTemplate.current;
+    let resizableTemplateElement = resizableTemplateRef.current;
 
     simwindow.addEventListener('click', (e) => {
         if(
@@ -32,13 +37,21 @@ export function handleReference(simwindowRef, resizableTemplate) {
             resizable.style.left = e.target.offsetLeft + 'px';
 
             simwindow.appendChild(resizable);
+            setWidth(resizable.offsetWidth);
+            setHeight(resizable.offsetHeight);
+            setElementRef.current = targetElement;
 
+            // setWidth = resizable.offsetWidth;
+            // setHeight = resizable.offsetHeight;
             // Apply the resize and drag functionality to the new resizable element
-            applyResizeAndDrag(resizable, e.target);
+            applyResizeAndDrag(resizable, e.target,width, height, setWidth, setHeight, resizableTemplateRef);
             // Make simwindow focusable and set focus to it
     
+            
         }
     });
+
+    
 
     simwindow.addEventListener('mousedown', (e) => {
       if (
@@ -51,6 +64,7 @@ export function handleReference(simwindowRef, resizableTemplate) {
     });    
 }
 
+
 window.addEventListener('keydown', (e) => {
   if(e.key == 'Delete') {
       resizable.remove();
@@ -58,7 +72,7 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-function applyResizeAndDrag(resizable, target) {
+function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeight, resizableTemplateRef) {
             // All code below is of RESIZE (below resize is drag)
             const handles = resizable.querySelectorAll('.handle');
             let offsetX, offsetY, isResizing = false;
@@ -146,6 +160,15 @@ function applyResizeAndDrag(resizable, target) {
               target.style.height = resizable.offsetHeight + 'px';
               target.style.top = resizable.offsetTop + 'px';
               target.style.left = resizable.offsetLeft + 'px';
+
+                // Update context values
+                setWidth(resizable.offsetWidth);
+                setHeight(resizable.offsetHeight);
+
+                // resizableTemplateRef.current.style.width = `${width}px`;
+                // resizableTemplateRef.current.style.height = `${height}px`;
+                // resizable.style.width = `${width}px`;
+                // resizable.style.height = `${height}px`;
             }
 
             // All code below is For DRAG
