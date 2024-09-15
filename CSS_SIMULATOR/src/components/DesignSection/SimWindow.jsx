@@ -1,16 +1,17 @@
 import { useEffect, useRef , useContext} from 'react';
 import './Css/SimWindow.css';
-import { ResizeContext } from './ResizeContext';
+import {useResizeContext} from './ResizeContext';
 import { allowDrop, handleDrop , getReference} from './javascripts/iframeLogic';
 import { handleReference } from './javascripts/dragResize';
 
 function SimWindow() {
 
-  const {width, setWidth, height, setHeight , elementRef, resizableTemplateRef} = useContext(ResizeContext);
-  const iframeRef = useRef(null);
+  const {width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate} = useResizeContext()
+
   const simwindowRef = useRef(null);
+
   useEffect(() => {
-    handleReference(simwindowRef,width, height, setWidth, setHeight, elementRef, resizableTemplateRef);
+    handleReference(simwindowRef,width, height, setWidth, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate);
     getReference(simwindowRef);
   }, []);
 

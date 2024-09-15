@@ -1,50 +1,60 @@
 import React from 'react'
 import {useState, useEffect, useContext} from "react"
-import { ResizeContext } from './ResizeContext';
-// import {targetElement} from './javascripts/dragResize.js'
+import {useResizeContext} from './ResizeContext';
 
 
 function BasicProperties() {
 
 
-  const { width, setWidth, height, setHeight, elementRef, resizableTemplateRef } = useContext(ResizeContext);
+  const { width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate } = useResizeContext();
   const [borderOpacity, setBorderOpacity] = useState(1)
-  // const [width, setWidth] = useState(0);
-  // const [height, setHeight] = useState(0);
-  // let targetElement = window.targetElement;
-  //console.log(targetElement);
-  
-  // Callback to receive updates from dragResize.js
-  // const handleResizeUpdate = (newWidth, newHeight) => {
-  //   setWidth(newWidth);
-  //   setHeight(newHeight);
-  // };
 
-  const handleWidthChange = (e) => {
+  const handleXPosition = (e) => { // used in onChange of input 
+    const newXPosition = e.target.value;
+    setXPosition(newXPosition);
+    updatePosition(newXPosition, yposition); // Update the element's left
+  };
+
+  const handleYPosition = (e) => { // used in onChange of input 
+    const newYPosition = e.target.value;
+    setYPosition(newYPosition);
+    updatePosition(xposition, newYPosition); // Update the element's top
+  };
+
+  const handleWidthChange = (e) => { // used in onChange of input 
     const newWidth = e.target.value;
     setWidth(newWidth);
     updateElementDimensions(newWidth, height); // Update the element's width
   };
 
-  const handleHeightChange = (e) => {
-    const newHeight = e.target.value;
+  const handleHeightChange = (e) => { // used in onChange of input 
+    const newHeight = e.target.value; 
     setHeight(newHeight);
     updateElementDimensions(width, newHeight); // Update the element's height
   };
 
   // Function to update element dimensions
   const updateElementDimensions = (newWidth, newHeight) => {
-    if (elementRef.current && resizableTemplateRef) {
+    if (elementRef.current && resizeTemplate) {
       elementRef.current.style.width = `${newWidth}px`;
       elementRef.current.style.height = `${newHeight}px`;
-      resizableTemplateRef.current.style.width = `${newWidth}px`;
-      resizableTemplateRef.current.style.height = `${newHeight}px`;
+      resizeTemplate.current.style.width = `${newWidth}px`;
+      resizeTemplate.current.style.height = `${newHeight}px`;
+    }
+  };
+  const updatePosition = (newXPosition, newYPosition) => {
+    if (elementRef.current && resizeTemplate) {
+      elementRef.current.style.left = `${newXPosition}px`;
+      elementRef.current.style.top = `${newYPosition}px`;
+      resizeTemplate.current.style.left = `${newXPosition}px`;
+      resizeTemplate.current.style.top = `${newYPosition}px`;
     }
   };
 
   useEffect(() => {
     updateElementDimensions(width, height); // Initialize with current values
-  }, [width, height]);
+    updatePosition(xposition, yposition);
+  }, [width, height, xposition, yposition]);
 
   
   return (
@@ -81,7 +91,12 @@ function BasicProperties() {
                 X 
               </div>
               <div className="div-x-dim-input">
-                <input type="number" className="x-dim-input" />
+                <input 
+                type="number" 
+                className="x-dim-input" 
+                onChange={(e) => handleXPosition(e)}
+                value={xposition}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -90,7 +105,12 @@ function BasicProperties() {
                 Y 
               </div> 
               <div className="div-y-dim-input">
-                <input type="number" className="y-dim-input" />
+                <input 
+                type="number" 
+                className="y-dim-input" 
+                onChange={(e) => handleYPosition(e)}
+                value={yposition}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
