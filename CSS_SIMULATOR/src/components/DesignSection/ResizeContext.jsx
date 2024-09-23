@@ -12,14 +12,30 @@ export const ResizeProvider = ({ children }) => {
   const [height, setHeight] = useState(0);
   const [xposition, setXPosition] = useState(0);
   const [yposition, setYPosition] = useState(0);
+  const [borderWidth, setBorderWidth] = useState(0);
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
   const resizeTemplate = useRef(null);
-                     
+     
+  const propertiesValue = {
+    width,
+    setWidth,
+    height,
+    setHeight,
+    elementRef,
+    resizableTemplateRef,
+    xposition,
+    yposition,
+    setXPosition,
+    setYPosition,
+    resizeTemplate,
+    borderWidth,
+    setBorderWidth,
+  };
 
   return (
-    <ResizeContext.Provider value={{ width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate }}>
+    <ResizeContext.Provider value={{...propertiesValue}}>
       {children}
     </ResizeContext.Provider>
   );
