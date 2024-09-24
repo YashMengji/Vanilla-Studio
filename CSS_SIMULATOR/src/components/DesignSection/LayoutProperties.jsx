@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Css/LayoutProperties.css'
+import { handleClick } from './javascripts/layoutLogic';
 
 function LayoutProperties() {
 
@@ -13,16 +14,80 @@ function LayoutProperties() {
       </div>
       <div className="div-choose-layout">
         <p>Choose Layout</p>
-        <div className="div-layout-options-grid">
-          <div className="div-layout-option">1</div>
-          <div className="div-layout-option">2</div>
-          <div className="div-layout-option">3</div>
-          <div className="div-layout-option">4</div>
-          <div className="div-layout-option">5</div>
-          <div className="div-layout-option">6</div>
-          <div className="div-layout-option">7</div>
-          <div className="div-layout-option">8</div>
-          <div className="div-layout-option">9</div>
+        <div className="div-layout-options-grid"> 
+          {/* 1 */}
+          <div className="div-layout-option layout-1" onClick={handleClick}>
+            <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+              <line x1="30" y1="60" x2="30" y2="0" stroke="black" strokeWidth="2"/>
+            </svg>
+
+          </div>
+          <div className="div-layout-option layout-2" onClick={handleClick}> 
+            {/* 2 */}
+            <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+              <line x1="20" y1="60" x2="20" y2="0" stroke="black" strokeWidth="2"/>
+              <line x1="40" y1="60" x2="40" y2="0" stroke="black" strokeWidth="2"/>
+            </svg>
+          </div>
+          <div className="div-layout-option layout-3" onClick={handleClick}>
+            {/* 3 */}
+            <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+              <line x1="0" y1="30" x2="60" y2="30" stroke="black" strokeWidth="2"/>
+            </svg>
+          </div>
+          <div className="div-layout-option layout-4" onClick={handleClick}>
+            {/* 4 */}
+          <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+            <line x1="0" y1="20" x2="60" y2="20" stroke="black" strokeWidth="2"/>
+            <line x1="0" y1="40" x2="60" y2="40" stroke="black" strokeWidth="2"/>
+
+          </svg>
+          </div>
+          <div className="div-layout-option layout-5" onClick={handleClick}>
+            {/* 5 */}
+          <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+            <line x1="30" y1="60" x2="30" y2="0" stroke="black" strokeWidth="2"/>
+            <line x1="30" y1="30" x2="60" y2="30" stroke="black" strokeWidth="2"/>
+          </svg>
+          </div>
+          <div className="div-layout-option layout-6" onClick={handleClick}>
+            {/* 6 */}
+          <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+            <line x1="30" y1="60" x2="30" y2="0" stroke="black" strokeWidth="2"/>
+            <line x1="0" y1="30" x2="30" y2="30" stroke="black" strokeWidth="2"/>
+
+          </svg>
+          </div>
+          <div className="div-layout-option layout-7" onClick={handleClick}>
+            {/* 7 */}
+            <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+              <line x1="0" y1="30" x2="60" y2="30" stroke="black" strokeWidth="2"/>
+              <line x1="30" y1="30" x2="30" y2="60" stroke="black" strokeWidth="2"/>
+            </svg>
+          </div>
+          <div className="div-layout-option layout-8" onClick={handleClick}>
+            {/* 8 */}
+            <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+                <line x1="0" y1="30" x2="60" y2="30" stroke="black" strokeWidth="2"/>
+                <line x1="30" y1="30" x2="30" y2="0" stroke="black" strokeWidth="2"/>
+            </svg>
+          </div>
+          <div className="div-layout-option layout-9" onClick={handleClick}>
+            {/* 9 */}
+          <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="60" height="60" stroke="black" fill="none" strokeWidth="3"/>
+              <line x1="0" y1="30" x2="60" y2="30" stroke="black" strokeWidth="2"/>
+              <line x1="30" y1="60" x2="30" y2="0" stroke="black" strokeWidth="2"/>
+          </svg>
+          </div>
         </div>
       </div>
       <div className="div-layout-details">

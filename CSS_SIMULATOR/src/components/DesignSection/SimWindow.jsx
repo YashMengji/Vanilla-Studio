@@ -3,6 +3,7 @@ import './Css/SimWindow.css';
 import {useResizeContext} from './ResizeContext';
 import { allowDrop, handleDrop , getReference} from './javascripts/iframeLogic';
 import { handleReference } from './javascripts/dragResize';
+import { getReferenceForLayout } from './javascripts/layoutLogic';
 
 function SimWindow() {
 
@@ -12,6 +13,7 @@ function SimWindow() {
 
   useEffect(() => {
     handleReference(simwindowRef,width, height, setWidth, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate);
+    getReferenceForLayout(simwindowRef);
     getReference(simwindowRef);
   }, []);
 
