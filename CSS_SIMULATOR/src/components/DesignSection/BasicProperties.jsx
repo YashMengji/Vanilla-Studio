@@ -6,9 +6,10 @@ import {useResizeContext} from './ResizeContext';
 function BasicProperties() {
 
 
-  const { width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth } = useResizeContext();
+  const {simwindowRef, width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth } = useResizeContext();
   const [borderOpacity, setBorderOpacity] = useState(1)
   const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
+  const [horizontalPos, setHorizontalPos] = useState("");
 
   const handleXPosition = (e) => { // used in onChange of input 
     const newXPosition = e.target.value;
@@ -75,6 +76,30 @@ function BasicProperties() {
     }
   };
 
+  // Functions to change alignment of elements
+  function changeHorizontalPos(position) {
+    setHorizontalPos(position);
+    if (elementRef.current && resizeTemplate) {
+      if (position === "flex-start") {
+        elementRef.current.style.left = 0;
+        elementRef.current.style.right = "auto"; // Reset right to auto
+        resizeTemplate.current.style.left = 0;
+        resizeTemplate.current.style.right = "auto"; // Reset right to auto
+      } else if (position === "flex-end") {
+        elementRef.current.style.right = 0;
+        elementRef.current.style.left = "auto"; // Reset left to auto
+        resizeTemplate.current.style.right = 0;
+        resizeTemplate.current.style.left = "auto"; // Reset left to auto
+      } else if (position === "center") {
+        elementRef.current.style.left = Number(simwindowRef.current.style.width)/2; 
+        console.log(simwindowRef.current.style)
+        elementRef.current.style.top = Number(simwindowRef.current.style.height)/2; 
+        resizeTemplate.current.style.left = Number(simwindowRef.current.style.width)/2;
+        resizeTemplate.current.style.top = Number(simwindowRef.current.style.height)/2
+      }
+    }
+  }
+
   useEffect(() => {
     updateElementDimensions(width, height); // Initialize with current values
     updatePosition(xposition, yposition);
@@ -84,13 +109,13 @@ function BasicProperties() {
   return (
     <div className="div-basic-properties-panel">
       <div className="div-alignment-section">
-        <span className="alignment-icons material-symbols-outlined" >
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("flex-start")}}  >
           align_justify_flex_start
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("center")}}  >
           align_justify_center
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("flex-end")}}  >
         align_justify_flex_end
         </span>
         <span className="alignment-icons material-symbols-outlined">

@@ -1,4 +1,4 @@
-import React, { createContext, useRef, useState, useContext } from 'react';
+import React, { createContext, useRef, useState, useContext, useEffect } from 'react';
 
 // Create a context for the resizable element's dimensions
 const ResizeContext = createContext();
@@ -17,6 +17,7 @@ export const ResizeProvider = ({ children }) => {
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
   const resizeTemplate = useRef(null);
+  const simwindowRef = useRef(null);
      
   const propertiesValue = {
     width,
@@ -32,6 +33,7 @@ export const ResizeProvider = ({ children }) => {
     resizeTemplate,
     borderWidth,
     setBorderWidth,
+    simwindowRef,
   };
 
   return (

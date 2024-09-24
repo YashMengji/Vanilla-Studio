@@ -6,12 +6,12 @@ import { handleReference } from './javascripts/dragResize';
 
 function SimWindow() {
 
-  const {width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth} = useResizeContext()
+  const {simwindowRef, width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth} = useResizeContext()
 
-  const simwindowRef = useRef(null);
+  
 
   useEffect(() => {
-    handleReference(simwindowRef,width, height, setWidth, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth);
+    handleReference(simwindowRef, width, height, setWidth, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth);
     getReference(simwindowRef);
   }, []);
 
