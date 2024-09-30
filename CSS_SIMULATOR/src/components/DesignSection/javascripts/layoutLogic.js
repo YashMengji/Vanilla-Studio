@@ -10,7 +10,7 @@ function createTemplate(childrenCount) {
 
 function handleClick(e) {
     
-    let layoutType = e.target.classList[1];
+    let layoutType = e.target.classList[0];
     console.log(layoutType);
     switch(layoutType) {
         case "layout-1" : 
