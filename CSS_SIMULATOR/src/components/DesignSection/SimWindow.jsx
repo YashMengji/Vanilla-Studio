@@ -7,7 +7,7 @@ import { getReferenceForLayout } from './javascripts/layoutLogic';
 
 function SimWindow() {
 
-  const {width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate} = useResizeContext()
+  const {width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth} = useResizeContext()
 
   const simwindowRef = useRef(null);
 

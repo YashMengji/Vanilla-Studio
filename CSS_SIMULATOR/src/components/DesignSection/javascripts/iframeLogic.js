@@ -72,14 +72,17 @@ function handleDrop(e, simwindowRef) {
     // Create a video element at the drop location
     const container = document.createElement('div');
     container.className = 'container-field';
-    container.src = "/videos/sample_video.mp4"; // Set the source of your video
     container.style.position = 'absolute';
-    container.style.display = 'block';
+    container.style.display = 'flex';
+    container.style.justifyContent = 'flex-start';
     container.style.backgroundColor = 'rgb(255, 242, 231)';
     container.style.width = "320px"; // Adjust width as needed
     container.style.height = "240px"; // Adjust height as needed
     container.style.left = dropX + 'px';
     container.style.top = dropY + 'px';
+    container.style.border = '1px solid black';
+    container.style.borderOpacity = '1';
+    container.style.boxSizing = 'border-box';
     simwindow.appendChild(container);
   }
   else if (selectedElement === "link-img") {

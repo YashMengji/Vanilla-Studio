@@ -6,32 +6,45 @@ import {useResizeContext} from './ResizeContext';
 function BasicProperties() {
 
 
-  const { width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate } = useResizeContext();
+  const { width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth } = useResizeContext();
   const [borderOpacity, setBorderOpacity] = useState(1)
+  const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
 
   const handleXPosition = (e) => { // used in onChange of input 
     const newXPosition = e.target.value;
     setXPosition(newXPosition);
     updatePosition(newXPosition, yposition); // Update the element's left
   };
-
   const handleYPosition = (e) => { // used in onChange of input 
     const newYPosition = e.target.value;
     setYPosition(newYPosition);
     updatePosition(xposition, newYPosition); // Update the element's top
   };
-
   const handleWidthChange = (e) => { // used in onChange of input 
     const newWidth = e.target.value;
     setWidth(newWidth);
     updateElementDimensions(newWidth, height); // Update the element's width
   };
-
   const handleHeightChange = (e) => { // used in onChange of input 
     const newHeight = e.target.value; 
     setHeight(newHeight);
     updateElementDimensions(width, newHeight); // Update the element's height
   };
+  const handleBroderWidthChange = (e) => { // used in onChange of input
+    const newBorderWidth = e.target.value;
+    setBorderWidth(newBorderWidth);
+    updateElementProperty("borderWidth", borderWidth); // Update the element's border width
+  };
+  const handleBorderOpacityChange = (e) => { // used in onChange of input
+    const newBorderOpacity = e.target.value;
+    setBorderOpacity(newBorderOpacity);
+    // updateElementProperty("borderOpacity", borderOpacity); // Update the element's border opacity
+  };
+  const handleBorderColorChange = (e) => { // used in onChange of input
+    const newBorderColor = e.target.value;
+    setBorderColor(newBorderColor);
+    updateElementProperty("borderColor", borderColor); // Update the element's border color
+  }
 
   // Function to update element dimensions
   const updateElementDimensions = (newWidth, newHeight) => {
@@ -50,6 +63,17 @@ function BasicProperties() {
       resizeTemplate.current.style.top = `${newYPosition}px`;
     }
   };
+  const updateElementProperty = (property, value) => {
+    if (elementRef.current && resizeTemplate) {
+      if(property === "borderWidth") {
+        elementRef.current.style[property] = `${value}px`;
+      }
+      else if(property === "borderColor") {
+        elementRef.current.style[property] = `${value}`;
+      }
+      // console.log(elementRef.current.style.property);
+    }
+  };
 
   useEffect(() => {
     updateElementDimensions(width, height); // Initialize with current values
@@ -60,7 +84,7 @@ function BasicProperties() {
   return (
     <div className="div-basic-properties-panel">
       <div className="div-alignment-section">
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" >
           align_justify_flex_start
         </span>
         <span className="alignment-icons material-symbols-outlined">
@@ -157,8 +181,8 @@ function BasicProperties() {
             Opacity & color
           </div>
           <div className="div-border-color-edit">
-            <input type="color" className='border-color-input-color' />
-            <input type="range" min="0" max="1" step="0.01" className='border-color-range' defaultValue="1" />
+            <input type="color" className='border-color-input-color' value={borderColor} onChange={handleBorderColorChange} />
+            <input type="range" min="0" max="1" step="0.01"  onChange={handleBorderOpacityChange} className='border-color-range' defaultValue="1" />
             <div className="div-border-color-input">
               <input type="number" className='border-color-input'/>
               <div className="div-percent-text">
@@ -172,9 +196,9 @@ function BasicProperties() {
             Width(px)
           </div>
           <div className="div-border-width-edit">
-            <input type="range" min="0" max="14" step="1" defaultValue="0" className="border-width-range"/>
+            <input type="range" min="0" max="14" step="1" value={borderWidth} onChange={handleBroderWidthChange} className="border-width-range"/>
             <div className="div-border-width-input">
-              <input type="number" className='border-width-input' />
+              <input type="number" className='border-width-input' min="0" max="14" step="1" value={borderWidth} onChange={handleBroderWidthChange} />
               <div className="div-px-text">
                 px
               </div>

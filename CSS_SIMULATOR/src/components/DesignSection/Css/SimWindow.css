@@ -1,5 +1,6 @@
 
 .div-simwindow{
+  display: flex;
   width: var(--sim-width);
   height: 81vh;
   margin: auto;
