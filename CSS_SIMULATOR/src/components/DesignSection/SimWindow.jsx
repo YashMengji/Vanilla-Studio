@@ -10,7 +10,7 @@ function SimWindow() {
   const simwindowRef = useRef(null);
 
   useEffect(() => {
-    handleReference(simwindowRef,resizableTemplateRef);
+    handleReference(simwindowRef, resizableTemplateRef);
     getReferenceForLayout(simwindowRef);
     getReference(simwindowRef);
   }, []);

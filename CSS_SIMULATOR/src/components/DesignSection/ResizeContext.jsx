@@ -17,7 +17,6 @@ export const ResizeProvider = ({ children }) => {
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
   const resizeTemplate = useRef(null);
-  const simwindowRef = useRef(null);
      
   const propertiesValue = {
     handleReference,
@@ -34,7 +33,6 @@ export const ResizeProvider = ({ children }) => {
     resizeTemplate,
     borderWidth,
     setBorderWidth,
-    simwindowRef,
   };
 
 
@@ -82,9 +80,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             // setHeight = resizable.offsetHeight;
             // Apply the resize and drag functionality to the new resizable element
             applyResizeAndDrag(resizable, e.target,width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition);
-            // Make simwindow focusable and set focus to it
-    
-            
+            // Make simwindow focusable and set focus to it 
         }
     });
 
