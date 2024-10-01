@@ -7,14 +7,17 @@ export function getReference(simwindowRef) {
 function handleDrop(e, simwindowRef) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
-
+  console.log(e.target); // access the element on which the dragged element is dropped
   const selectedElement = e.dataTransfer.getData('source');
   console.log(selectedElement)
 
   //get the (x,y) position of the cursor to place element at that position when it is dropped
-  const rect = simwindow.getBoundingClientRect();
+  const rect = e.target.getBoundingClientRect();
   const dropX = e.clientX - rect.left;
+  // const dropX = e.clientX ;
+  // const dropY = e.clientY ;
   const dropY = e.clientY - rect.top;
+
 
   if (selectedElement === "title-img") {
     // Create a title element (e.g., h1 for main title) at the drop location
@@ -39,7 +42,7 @@ function handleDrop(e, simwindowRef) {
     image.style.height = "100px";
     image.style.left = dropX + 'px';
     image.style.top = dropY + 'px';
-    simwindow.appendChild(image);
+    e.target.appendChild(image);
   }
   else if (selectedElement === "para-img") {
     // Create a paragraph at the drop location

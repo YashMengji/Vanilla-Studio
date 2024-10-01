@@ -69,6 +69,8 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             resizable.style.height = e.target.offsetHeight + 'px';
             resizable.style.top = e.target.offsetTop + 'px';
             resizable.style.left = e.target.offsetLeft + 'px';
+            // resizable.style.top = e.target.top + 'px';
+            // resizable.style.left = e.target.left + 'px';
 
             simwindow.appendChild(resizable);
             setWidth(resizable.offsetWidth);
@@ -76,6 +78,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             setXPosition(resizable.offsetLeft);
             setYPosition(resizable.offsetTop);
             elementRef.current = targetElement;
+            
             resizeTemplate.current = resizable;
 
             // setWidth = resizable.offsetWidth;

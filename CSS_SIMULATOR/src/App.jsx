@@ -5,6 +5,7 @@ import './App.css'
 import {Navbar, ElementsPanel, SimWindow, PropertiesPanel} from './components/DesignSection/Design.js'
 import SectionElements from './components/DesignSection/SectionElements.jsx'
 import { ResizeProvider } from './components/DesignSection/ResizeContext.jsx'
+import LayoutProperties from './components/DesignSection/LayoutProperties.jsx'
 
 function App() {
   

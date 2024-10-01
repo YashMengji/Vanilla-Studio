@@ -11,7 +11,7 @@ function SimWindow() {
 
   useEffect(() => {
     handleReference(simwindowRef,resizableTemplateRef);
-    getReferenceForLayout(simwindowRef);
+    getReferenceForLayout(simwindowRef, elementRef);
     getReference(simwindowRef);
   }, []);
 
