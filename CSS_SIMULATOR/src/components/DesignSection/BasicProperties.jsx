@@ -6,10 +6,9 @@ import {useResizeContext} from './ResizeContext';
 function BasicProperties() {
 
 
-  const {simwindowRef, width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth } = useResizeContext();
+  const {width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth } = useResizeContext();
   const [borderOpacity, setBorderOpacity] = useState(1)
   const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
-  const [horizontalPos, setHorizontalPos] = useState("");
 
   const handleXPosition = (e) => { // used in onChange of input 
     const newXPosition = e.target.value;
@@ -78,25 +77,48 @@ function BasicProperties() {
 
   // Functions to change alignment of elements
   function changeHorizontalPos(position) {
-    setHorizontalPos(position);
     if (elementRef.current && resizeTemplate) {
       if (position === "flex-start") {
         elementRef.current.style.left = 0;
-        elementRef.current.style.right = "auto"; // Reset right to auto
+        elementRef.current.style.right = "auto";
         resizeTemplate.current.style.left = 0;
-        resizeTemplate.current.style.right = "auto"; // Reset right to auto
+        resizeTemplate.current.style.right = "auto";
       } else if (position === "flex-end") {
         elementRef.current.style.right = 0;
-        elementRef.current.style.left = "auto"; // Reset left to auto
+        elementRef.current.style.left = "auto";
         resizeTemplate.current.style.right = 0;
-        resizeTemplate.current.style.left = "auto"; // Reset left to auto
+        resizeTemplate.current.style.left = "auto";
       } else if (position === "center") {
-        elementRef.current.style.left = Number(simwindowRef.current.style.width)/2; 
-        console.log(simwindowRef.current.style)
-        elementRef.current.style.top = Number(simwindowRef.current.style.height)/2; 
-        resizeTemplate.current.style.left = Number(simwindowRef.current.style.width)/2;
-        resizeTemplate.current.style.top = Number(simwindowRef.current.style.height)/2
+        const parentWidth = elementRef.current.parentElement.offsetWidth;
+        const elementWidth = elementRef.current.offsetWidth;
+        const centerPosition = (parentWidth - elementWidth) / 2;
+        elementRef.current.style.left = `${centerPosition}px`;
+        resizeTemplate.current.style.left = `${centerPosition}px`;
       }
+      setXPosition(Number(resizeTemplate.current.style.left.slice(0, -2)));
+      console.log(resizeTemplate.current.style.left); 
+    }
+  }
+  function changeVerticalPos(position) {
+    if (elementRef.current && resizeTemplate) {
+      if (position === "flex-start") {
+        elementRef.current.style.top = 0;
+        elementRef.current.style.bottom = "auto";
+        resizeTemplate.current.style.top = 0;
+        resizeTemplate.current.style.bottom = "auto";
+      } else if (position === "flex-end") {
+        elementRef.current.style.bottom = 0;
+        elementRef.current.style.top = "auto";
+        resizeTemplate.current.style.bottom = 0;
+        resizeTemplate.current.style.top = "auto";
+      } else if (position === "center") {
+        const parentHeight = elementRef.current.parentElement.offsetHeight;
+        const elementHeight = elementRef.current.offsetHeight;
+        const centerPosition = (parentHeight - elementHeight) / 2;
+        elementRef.current.style.top = `${centerPosition}px`;
+        resizeTemplate.current.style.top = `${centerPosition}px`;
+      }
+      setYPosition(Number(resizeTemplate.current.style.top.slice(0, -2)));
     }
   }
 
@@ -118,13 +140,13 @@ function BasicProperties() {
         <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("flex-end")}}  >
         align_justify_flex_end
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeVerticalPos("flex-start")}} >
         align_flex_start
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeVerticalPos("center")}} >
         align_flex_center
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeVerticalPos("flex-end")}} >
         align_flex_end
         </span>
       </div>
