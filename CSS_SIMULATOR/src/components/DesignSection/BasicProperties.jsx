@@ -6,7 +6,26 @@ import {useResizeContext} from './ResizeContext';
 function BasicProperties() {
 
 
-  const {width, setWidth, height, setHeight, elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth } = useResizeContext();
+  const {
+    width,
+    setWidth,
+    height,
+    setHeight,
+    elementRef,
+    resizableTemplateRef,
+    xposition,
+    yposition,
+    setXPosition,
+    setYPosition,
+    resizeTemplate,
+    borderWidth,
+    setBorderWidth,
+    borderRadius,
+    setBorderRadius,
+    isTextElement,
+    setIsTextElement,
+  } = useResizeContext();
+
   const [borderOpacity, setBorderOpacity] = useState(1)
   const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
 
@@ -35,10 +54,10 @@ function BasicProperties() {
     setBorderWidth(newBorderWidth);
     updateElementProperty("borderWidth", borderWidth); // Update the element's border width
   };
-  const handleBorderOpacityChange = (e) => { // used in onChange of input
-    const newBorderOpacity = e.target.value;
-    setBorderOpacity(newBorderOpacity);
-    // updateElementProperty("borderOpacity", borderOpacity); // Update the element's border opacity
+  const handleBorderRadiusChange = (e) => { // used in onChange of input
+    const newBorderRadius = e.target.value;
+    setBorderRadius(newBorderRadius);
+    updateElementProperty("borderRadius", borderRadius); // Update the element's border radius
   };
   const handleBorderColorChange = (e) => { // used in onChange of input
     const newBorderColor = e.target.value;
@@ -71,6 +90,9 @@ function BasicProperties() {
       else if(property === "borderColor") {
         elementRef.current.style[property] = `${value}`;
       }
+      else if(property === "borderRadius") {
+        elementRef.current.style[property] = `${value}px`;
+      }
       // console.log(elementRef.current.style.property);
     }
   };
@@ -95,7 +117,9 @@ function BasicProperties() {
         elementRef.current.style.left = `${centerPosition}px`;
         resizeTemplate.current.style.left = `${centerPosition}px`;
       }
-      setXPosition(Number(resizeTemplate.current.style.left.slice(0, -2)));
+      // if(resizeTemplate.current.style.left==="auto") {
+      //   setXPosition(0);
+      setXPosition(Number(resizeTemplate.current.offsetLeft));
       console.log(resizeTemplate.current.style.left); 
     }
   }
@@ -118,7 +142,7 @@ function BasicProperties() {
         elementRef.current.style.top = `${centerPosition}px`;
         resizeTemplate.current.style.top = `${centerPosition}px`;
       }
-      setYPosition(Number(resizeTemplate.current.style.top.slice(0, -2)));
+      setYPosition(Number(resizeTemplate.current.offsetTop));
     }
   }
 
@@ -229,11 +253,11 @@ function BasicProperties() {
           </div>
           <div className="div-border-color-edit">
             <input type="color" className='border-color-input-color' value={borderColor} onChange={handleBorderColorChange} />
-            <input type="range" min="0" max="1" step="0.01"  onChange={handleBorderOpacityChange} className='border-color-range' defaultValue="1" />
+            <input type="range" min="0" step="1" onChange={handleBorderRadiusChange} className='border-radius-range' value={borderRadius} />
             <div className="div-border-color-input">
-              <input type="number" className='border-color-input'/>
-              <div className="div-percent-text">
-                %
+              <input type="number" className='border-color-input' min="0" step="1" value={borderRadius} onChange={handleBorderRadiusChange} />
+              <div className="div-px-text">
+                px
               </div>
             </div>
           </div>
@@ -253,63 +277,65 @@ function BasicProperties() {
           </div>
         </div>
       </div>
-      <div className="div-typography-section">
-        <span>Text Properties</span><br /><br />
-        <div className="div-select-text-type">
-            <select name="" id="font-type">
-              <option value="null">Text type</option>
-              <option value="h1">h1</option>
-              <option value="h2">h2</option>
-              <option value="h3">h3</option>
-              <option value="h4">h4</option>
-              <option value="h5">h5</option>
-              <option value="h6">h6</option>
-              <option value="p">paragraph</option>
-            </select>
-        </div>
-        <div className="div-select-font-family">
-          <select name="" id="font-family">
-            <option value="null">Font family</option> {/*here use an api to fetch font family and handle the api using asynchronous javascipt !*/}
-          </select>
-        </div>
-        <div className="div-font-size">
-          <span>Size</span>
-          <div className="font-size">
-            <input type="text" defaultValue={16}/>
-            <select name="" id="unit-selector">
-              <option value="px">px</option>
-              <option value="pt">pt</option>
-              <option value="pc">pc</option>
-              <option value="em">em</option>
-              <option value="rem">rem</option>
+      {isTextElement && (
+        <div className="div-typography-section">
+          <span>Text Properties</span><br /><br />
+          <div className="div-select-text-type">
+              <select name="" id="font-type">
+                <option value="null">Text type</option>
+                <option value="h1">h1</option>
+                <option value="h2">h2</option>
+                <option value="h3">h3</option>
+                <option value="h4">h4</option>
+                <option value="h5">h5</option>
+                <option value="h6">h6</option>
+                <option value="p">paragraph</option>
+              </select>
+          </div>
+          <div className="div-select-font-family">
+            <select name="" id="font-family">
+              <option value="null">Font family</option> {/*here use an api to fetch font family and handle the api using asynchronous javascipt !*/}
             </select>
           </div>
-        </div>
-        <div className="div-font-style">
-            <p>Font Style</p>
-            <div id="font-style">
-              <p><b>B</b></p>
-              <p><i>I</i></p>
-              <p><u>U</u></p>
-              <p><strike>S</strike></p>
+          <div className="div-font-size">
+            <span>Size</span>
+            <div className="font-size">
+              <input type="text" defaultValue={16}/>
+              <select name="" id="unit-selector">
+                <option value="px">px</option>
+                <option value="pt">pt</option>
+                <option value="pc">pc</option>
+                <option value="em">em</option>
+                <option value="rem">rem</option>
+              </select>
             </div>
+          </div>
+          <div className="div-font-style">
+              <p>Font Style</p>
+              <div id="font-style">
+                <p><b>B</b></p>
+                <p><i>I</i></p>
+                <p><u>U</u></p>
+                <p><strike>S</strike></p>
+              </div>
+          </div>
+          <div className="div-font-alignment">
+              <p>Text Alignment</p>
+              <span className="material-symbols-outlined">
+                format_align_left
+              </span>
+              <span className="material-symbols-outlined">
+                format_align_center
+              </span>
+              <span className="material-symbols-outlined">
+                format_align_right
+              </span>
+              <span className="material-symbols-outlined">
+                format_align_justify
+              </span>
+          </div>
         </div>
-        <div className="div-font-alignment">
-            <p>Text Alignment</p>
-            <span className="material-symbols-outlined">
-              format_align_left
-            </span>
-            <span className="material-symbols-outlined">
-              format_align_center
-            </span>
-            <span className="material-symbols-outlined">
-              format_align_right
-            </span>
-            <span className="material-symbols-outlined">
-              format_align_justify
-            </span>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

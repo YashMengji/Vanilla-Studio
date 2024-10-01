@@ -13,6 +13,8 @@ export const ResizeProvider = ({ children }) => {
   const [xposition, setXPosition] = useState(0);
   const [yposition, setYPosition] = useState(0);
   const [borderWidth, setBorderWidth] = useState(0);
+  const [borderRadius, setBorderRadius] = useState(0);
+	const [isTextElement, setIsTextElement] = useState(false);
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
@@ -33,6 +35,10 @@ export const ResizeProvider = ({ children }) => {
     resizeTemplate,
     borderWidth,
     setBorderWidth,
+    borderRadius,
+    setBorderRadius,
+    isTextElement,
+    setIsTextElement,
   };
 
 
@@ -57,6 +63,8 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             }
 
             targetElement = e.target;
+            targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
+
             console.log(targetElement);
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);

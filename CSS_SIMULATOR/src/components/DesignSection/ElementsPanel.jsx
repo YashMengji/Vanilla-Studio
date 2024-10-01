@@ -7,7 +7,7 @@ import PageContent from './PageContent'
 import PageStatus from './PageStatus'
 
 function ElementsPanel() {
-  const [showRightElementsPanel, setShowRightElementsPanel] = useState(false);
+  const [showRightElementsPanel, setShowRightElementsPanel] = useState(true);
   const [showSectionElementsPanel, setShowSectionElementsPanel] = useState(false);
   const [showPageContentPanel, setShowPageContentPanel] = useState(false);
   const [showPageStatusPanel, setShowPageStatusPanel] = useState(false);
