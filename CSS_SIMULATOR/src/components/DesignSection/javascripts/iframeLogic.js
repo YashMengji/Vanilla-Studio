@@ -29,7 +29,7 @@ function handleDrop(e, simwindowRef) {
     title.style.fontWeight = 'block';
     title.style.left = dropX + 'px';
     title.style.top = dropY + 'px';
-    simwindow.appendChild(title);
+    e.target.appendChild(title);
   }
   else if (selectedElement === "image-img") {
     // Create an button at the drop location
@@ -55,7 +55,7 @@ function handleDrop(e, simwindowRef) {
     paragraph.style.minHeight = "100px"; // Adjust height as needed
     paragraph.style.left = dropX + 'px';
     paragraph.style.top = dropY + 'px';
-    simwindow.appendChild(paragraph);
+    e.target.appendChild(paragraph);
   }
   else if (selectedElement === "video-img") {
     // Create a video element at the drop location
@@ -69,7 +69,7 @@ function handleDrop(e, simwindowRef) {
     video.controls = true; // Show video controls like play, pause, etc.
     video.style.left = dropX + 'px';
     video.style.top = dropY + 'px';
-    simwindow.appendChild(video);
+    e.target.appendChild(video);
   }
   else if (selectedElement === "container-img") {
     // Create a video element at the drop location
@@ -86,7 +86,7 @@ function handleDrop(e, simwindowRef) {
     container.style.border = '1px solid black';
     container.style.borderOpacity = '1';
     container.style.boxSizing = 'border-box';
-    simwindow.appendChild(container);
+    e.target.appendChild(container);
   }
   else if (selectedElement === "link-img") {
     // Create a link element at the drop location
@@ -98,7 +98,7 @@ function handleDrop(e, simwindowRef) {
     link.style.display = 'block';
     link.style.left = dropX + 'px';
     link.style.top = dropY + 'px';
-    simwindow.appendChild(link);
+    e.target.appendChild(link);
   }
 
 }

@@ -43,13 +43,13 @@ export const ResizeProvider = ({ children }) => {
 
 
   let dimensionCallback;
-let resizable, targetElement;
-let simwindow, simwindowRect;
+let resizable, targetElement, targetElementParent;
+let simwindow, simwindowRect, currentParentRect;
 
 function handleReference(simwindowRef, resizableTemplateRef) {
     // const { setWidth, setHeight } = useContext(ResizeContext); 
     simwindow = simwindowRef.current;
-    simwindowRect = simwindow.getBoundingClientRect();
+    // simwindowRect = simwindow.getBoundingClientRect();
     let resizableTemplateElement = resizableTemplateRef.current;
 
     simwindow.addEventListener('click', (e) => {
@@ -68,7 +68,6 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             console.log(targetElement);
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);
-            // resizable = resizableTemplateElement;
             resizable.style.display = 'block';
             resizable.style.position = 'absolute';
             resizable.style.width = e.target.offsetWidth + 'px';
@@ -78,7 +77,14 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             // resizable.style.top = e.target.top + 'px';
             // resizable.style.left = e.target.left + 'px';
 
-            simwindow.appendChild(resizable);
+            // getting nearest parent of selected element 
+            targetElementParent = targetElement.parentElement; 
+            // getting dimentions of that parent for future use(ex: while dragging)
+            currentParentRect = targetElementParent.getBoundingClientRect();
+            // pushing the resizable template element inside the parent of selected element
+            targetElementParent.appendChild(resizable);
+
+            // simwindow.appendChild(resizable);  
             setWidth(resizable.offsetWidth);
             setHeight(resizable.offsetHeight);
             setXPosition(resizable.offsetLeft);
@@ -237,8 +243,10 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
             function onMouseMove(e) {
                 if (isResizing) return;
                 document.body.style.cursor = 'move';
-                const newX = e.clientX - simwindowRect.left - dragOffsetX;
-                const newY = e.clientY - simwindowRect.top - dragOffsetY;
+                // const newX = e.clientX - simwindowRect.left - dragOffsetX;
+                // const newY = e.clientY - simwindowRect.top - dragOffsetY;
+                const newX = e.clientX - currentParentRect.left - dragOffsetX;
+                const newY = e.clientY - currentParentRect.top - dragOffsetY;
                 resizable.style.left = `${newX}px`;
                 resizable.style.top = `${newY}px`;
 
