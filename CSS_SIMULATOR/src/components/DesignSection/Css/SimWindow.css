@@ -1,16 +1,18 @@
 
 .div-simwindow{
+  display: flex;
   width: var(--sim-width);
   height: 81vh;
   margin: auto;
   position: absolute;
   top: 5vh;
-  /* background-color: lightcoral; */
-  background-color: rgb(255, 137, 137);
+  background-color: lightcoral;
+  /* background-color: white; */
   box-shadow: var(--shadow-gray) 0px 0px 29px 0px;
   border-radius: 6px;
   overflow: auto;
   scrollbar-width: thin;
+  /* padding: 10px; */
 }
 
 /*----------------------------resizableTemplate style------------------------------*/

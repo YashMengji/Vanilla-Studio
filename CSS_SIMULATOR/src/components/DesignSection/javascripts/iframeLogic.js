@@ -7,14 +7,17 @@ export function getReference(simwindowRef) {
 function handleDrop(e, simwindowRef) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
-
+  console.log(e.target); // access the element on which the dragged element is dropped
   const selectedElement = e.dataTransfer.getData('source');
   console.log(selectedElement)
 
   //get the (x,y) position of the cursor to place element at that position when it is dropped
-  const rect = simwindow.getBoundingClientRect();
+  const rect = e.target.getBoundingClientRect();
   const dropX = e.clientX - rect.left;
+  // const dropX = e.clientX ;
+  // const dropY = e.clientY ;
   const dropY = e.clientY - rect.top;
+
 
   if (selectedElement === "title-img") {
     // Create a title element (e.g., h1 for main title) at the drop location
@@ -26,7 +29,7 @@ function handleDrop(e, simwindowRef) {
     title.style.fontWeight = 'block';
     title.style.left = dropX + 'px';
     title.style.top = dropY + 'px';
-    simwindow.appendChild(title);
+    e.target.appendChild(title);
   }
   else if (selectedElement === "image-img") {
     // Create an button at the drop location
@@ -39,7 +42,7 @@ function handleDrop(e, simwindowRef) {
     image.style.height = "100px";
     image.style.left = dropX + 'px';
     image.style.top = dropY + 'px';
-    simwindow.appendChild(image);
+    e.target.appendChild(image);
   }
   else if (selectedElement === "para-img") {
     // Create a paragraph at the drop location
@@ -52,7 +55,7 @@ function handleDrop(e, simwindowRef) {
     paragraph.style.minHeight = "100px"; // Adjust height as needed
     paragraph.style.left = dropX + 'px';
     paragraph.style.top = dropY + 'px';
-    simwindow.appendChild(paragraph);
+    e.target.appendChild(paragraph);
   }
   else if (selectedElement === "video-img") {
     // Create a video element at the drop location
@@ -66,21 +69,24 @@ function handleDrop(e, simwindowRef) {
     video.controls = true; // Show video controls like play, pause, etc.
     video.style.left = dropX + 'px';
     video.style.top = dropY + 'px';
-    simwindow.appendChild(video);
+    e.target.appendChild(video);
   }
   else if (selectedElement === "container-img") {
     // Create a video element at the drop location
     const container = document.createElement('div');
     container.className = 'container-field';
-    container.src = "/videos/sample_video.mp4"; // Set the source of your video
     container.style.position = 'absolute';
-    container.style.display = 'block';
+    container.style.display = 'flex';
+    container.style.justifyContent = 'flex-start';
     container.style.backgroundColor = 'rgb(255, 242, 231)';
     container.style.width = "320px"; // Adjust width as needed
     container.style.height = "240px"; // Adjust height as needed
     container.style.left = dropX + 'px';
     container.style.top = dropY + 'px';
-    simwindow.appendChild(container);
+    container.style.border = '1px solid black';
+    container.style.borderOpacity = '1';
+    container.style.boxSizing = 'border-box';
+    e.target.appendChild(container);
   }
   else if (selectedElement === "link-img") {
     // Create a link element at the drop location
@@ -92,7 +98,7 @@ function handleDrop(e, simwindowRef) {
     link.style.display = 'block';
     link.style.left = dropX + 'px';
     link.style.top = dropY + 'px';
-    simwindow.appendChild(link);
+    e.target.appendChild(link);
   }
 
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import BasicProperties from './BasicProperties'
 import LayoutProperties from './LayoutProperties'
 import AnimationProperties from './AnimationProperties'
+import { ResizeProvider } from './ResizeContext'
 
 function EditPropertiesPanel() {
   return (

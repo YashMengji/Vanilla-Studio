@@ -1,245 +1,176 @@
 import React from 'react'
-import {useState, useEffect, useRef} from "react"
+import {useState, useEffect, useContext} from "react"
+import {useResizeContext} from './ResizeContext';
 
-// import {targetElement} from './javascripts/dragResize.js'
 
 function BasicProperties() {
 
-  
-let resizable, targetElement;
-let simwindow, simwindowRect;
 
-
-
-const handleReference = (simwindowRef, resizableTemplate) => {
-
-    simwindow = simwindowRef.current;
-    simwindowRect = simwindow.getBoundingClientRect();
-    let resizableTemplateElement = resizableTemplate.current;
-
-    simwindow.addEventListener('click', (e) => {
-        if(
-            e.target.classList[0] != 'div-simwindow' 
-            && e.target.id != 'resizableTemplate' 
-            && e.target.classList[0] != 'handle'
-        ) { 
-            if (resizable) {
-                resizable.remove();
-            }
-
-            targetElement = e.target;
-            setWidthInput(Number(targetElement.style.width.slice(0, -2)));
-            setHeightInput(Number(targetElement.style.height.slice(0, -2)));
-            console.log(targetElement);
-            // Clone the template and attach it to the dropped element
-            resizable = resizableTemplateElement.cloneNode(true);
-            // resizable = resizableTemplateElement;
-            resizable.style.display = 'block';
-            resizable.style.position = 'absolute';
-            resizable.style.width = e.target.offsetWidth + 'px';
-            resizable.style.height = e.target.offsetHeight + 'px';
-            resizable.style.top = e.target.offsetTop + 'px';
-            resizable.style.left = e.target.offsetLeft + 'px';
-
-            simwindow.appendChild(resizable);
-            console.log(resizable);
-
-            // Apply the resize and drag functionality to the new resizable element
-            applyResizeAndDrag(resizable, e.target);
-            // Make simwindow focusable and set focus to it
-        }
-    });
-    
-    simwindow.addEventListener('mousedown', (e) => {
-      if (
-          resizable 
-          && e.target.id != 'resizableTemplate'
-          && e.target.classList[0] != 'handle'
-      ) {
-          resizable.remove();
-      }
-    });    
-}
-
-console.log(resizable);
-
-// Attach handleReference to the component
-BasicProperties.handleReference = handleReference;
-
-window.addEventListener('keydown', (e) => {
-  if(e.key == 'Delete') {
-      resizable.remove();
-      targetElement.remove();
-  }
-});
-
-function applyResizeAndDrag(resizable, target) {
-            // All code below is of RESIZE (below resize is drag)
-            const handles = resizable.querySelectorAll('.handle');
-            let offsetX, offsetY, isResizing = false;
-            if (widthRef.current) {
-              widthRef.current.addEventListener("change", () => {
-                resizable.style.width = `${widthInput}px`;
-                target.style.width = resizable.offsetWidth + 'px';
-              });
-            }
-        
-
-            handles.forEach(handle => {
-                handle.addEventListener('mousedown', function(e) {
-                    isResizing = true;
-                    initResize(e, handle.classList[1]);
-                });
-            });
-
-            function initResize(e, handleType) {
-                function getCursorType(handleType) {
-                    switch(handleType) {
-                        case 'top-left': return 'nw-resize';
-                        case 'top-center': return 'n-resize';
-                        case 'top-right': return 'ne-resize';
-                        case 'right-center': return 'e-resize';
-                        case 'bottom-right': return 'se-resize';
-                        case 'bottom-center': return 's-resize';
-                        case 'bottom-left': return 'sw-resize';
-                        case 'left-center': return 'w-resize';
-                        default: return 'default';
-                    }
-                }
-
-                document.body.style.cursor = getCursorType(handleType);
-
-                window.addEventListener('mousemove', resize);
-                window.addEventListener('mouseup', stopResize);
-
-                function resize(event) {
-                    const rect = resizable.getBoundingClientRect();
-
-                    switch(handleType) {
-                        case 'top-left':
-                            resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - simwindowRect.top  + 'px';
-                            resizable.style.left = event.clientX - simwindowRect.left  + 'px';
-                            break;
-                        case 'top-center':
-                            resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - simwindowRect.top + 'px';
-                            break;
-                        case 'top-right':
-                            resizable.style.width = event.clientX - rect.left + 'px';
-                            resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - simwindowRect.top + 'px';
-                            break;
-                        case 'right-center':
-                            resizable.style.width = event.clientX - rect.left + 'px';
-                            break;
-                        case 'bottom-right':
-                            resizable.style.width = event.clientX - rect.left + 'px';
-                            resizable.style.height = event.clientY - rect.top + 'px';
-                            break;
-                        case 'bottom-center':
-                            resizable.style.height = event.clientY - rect.top+ 'px';
-                            break;
-                        case 'bottom-left':
-                            resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.height = event.clientY - rect.top + 'px';
-                            resizable.style.left = event.clientX- simwindowRect.left  + 'px';
-                            break;
-                        case 'left-center':
-                            resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.left = event.clientX - simwindowRect.left + 'px';
-                            break;
-                    }
-                    updateTargetSize();
-                }
-
-                function stopResize() {
-                    document.body.style.cursor = 'default';
-                    window.removeEventListener('mousemove', resize);
-                    window.removeEventListener('mouseup', stopResize);
-                    isResizing = false;
-                }
-            }
-
-            function updateTargetSize() {
-              target.style.width = resizable.offsetWidth + 'px';
-              target.style.height = resizable.offsetHeight + 'px';
-              target.style.top = resizable.offsetTop + 'px';
-              target.style.left = resizable.offsetLeft + 'px';
-
-              setWidthInput(Number(target.style.width.slice(0, -2)));
-              setHeightInput(Number(targetElement.style.height.slice(0, -2)));
-            }
-
-            // All code below is For DRAG
-            let dragOffsetX;
-            let dragOffsetY;
-            resizable.addEventListener('mousedown', (e) => {
-                if (isResizing) return;
-                e.preventDefault();
-                //rect -> dimensions of resizable template div
-                let rect = resizable.getBoundingClientRect()
-
-                dragOffsetX = e.clientX - rect.left;
-                dragOffsetY = e.clientY - rect.top;
-
-                document.addEventListener('mousemove', onMouseMove);
-                document.addEventListener('mouseup', onMouseUp);
-                      
-            });
-
-            function onMouseMove(e) {
-                if (isResizing) return;
-                document.body.style.cursor = 'move';
-                const newX = e.clientX - simwindowRect.left - dragOffsetX;
-                const newY = e.clientY - simwindowRect.top - dragOffsetY;
-                resizable.style.left = `${newX}px`;
-                resizable.style.top = `${newY}px`;
-
-                updateTargetSize();
-            }
-
-            function onMouseUp() {
-                document.body.style.cursor = 'default';
-                document.removeEventListener('mousemove', onMouseMove);
-                document.removeEventListener('mouseup', onMouseUp);
-            }
-
-                     
-}
-
+  const {
+    width,
+    setWidth,
+    height,
+    setHeight,
+    elementRef,
+    resizableTemplateRef,
+    xposition,
+    yposition,
+    setXPosition,
+    setYPosition,
+    resizeTemplate,
+    borderWidth,
+    setBorderWidth,
+    borderRadius,
+    setBorderRadius,
+    isTextElement,
+    setIsTextElement,
+  } = useResizeContext();
 
   const [borderOpacity, setBorderOpacity] = useState(1)
-  const [widthInput, setWidthInput] = useState(0);
-  const [heightInput, setHeightInput] = useState(0);
+  const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
 
-  const widthRef = useRef(null);
-  
-  // let targetElement = window.targetElement;
-  //console.log(targetElement);
-  
+  const handleXPosition = (e) => { // used in onChange of input 
+    const newXPosition = e.target.value;
+    setXPosition(newXPosition);
+    updatePosition(newXPosition, yposition); // Update the element's left
+  };
+  const handleYPosition = (e) => { // used in onChange of input 
+    const newYPosition = e.target.value;
+    setYPosition(newYPosition);
+    updatePosition(xposition, newYPosition); // Update the element's top
+  };
+  const handleWidthChange = (e) => { // used in onChange of input 
+    const newWidth = e.target.value;
+    setWidth(newWidth);
+    updateElementDimensions(newWidth, height); // Update the element's width
+  };
+  const handleHeightChange = (e) => { // used in onChange of input 
+    const newHeight = e.target.value; 
+    setHeight(newHeight);
+    updateElementDimensions(width, newHeight); // Update the element's height
+  };
+  const handleBroderWidthChange = (e) => { // used in onChange of input
+    const newBorderWidth = e.target.value;
+    setBorderWidth(newBorderWidth);
+    updateElementProperty("borderWidth", borderWidth); // Update the element's border width
+  };
+  const handleBorderRadiusChange = (e) => { // used in onChange of input
+    const newBorderRadius = e.target.value;
+    setBorderRadius(newBorderRadius);
+    updateElementProperty("borderRadius", borderRadius); // Update the element's border radius
+  };
+  const handleBorderColorChange = (e) => { // used in onChange of input
+    const newBorderColor = e.target.value;
+    setBorderColor(newBorderColor);
+    updateElementProperty("borderColor", borderColor); // Update the element's border color
+  }
+
+  // Function to update element dimensions
+  const updateElementDimensions = (newWidth, newHeight) => {
+    if (elementRef.current && resizeTemplate) {
+      elementRef.current.style.width = `${newWidth}px`;
+      elementRef.current.style.height = `${newHeight}px`;
+      resizeTemplate.current.style.width = `${newWidth}px`;
+      resizeTemplate.current.style.height = `${newHeight}px`;
+    }
+  };
+  const updatePosition = (newXPosition, newYPosition) => {
+    if (elementRef.current && resizeTemplate) {
+      elementRef.current.style.left = `${newXPosition}px`;
+      elementRef.current.style.top = `${newYPosition}px`;
+      resizeTemplate.current.style.left = `${newXPosition}px`;
+      resizeTemplate.current.style.top = `${newYPosition}px`;
+    }
+  };
+  const updateElementProperty = (property, value) => {
+    if (elementRef.current && resizeTemplate) {
+      if(property === "borderWidth") {
+        elementRef.current.style[property] = `${value}px`;
+      }
+      else if(property === "borderColor") {
+        elementRef.current.style[property] = `${value}`;
+      }
+      else if(property === "borderRadius") {
+        elementRef.current.style[property] = `${value}px`;
+      }
+      // console.log(elementRef.current.style.property);
+    }
+  };
+
+  // Functions to change alignment of elements
+  function changeHorizontalPos(position) {
+    if (elementRef.current && resizeTemplate) {
+      if (position === "flex-start") {
+        elementRef.current.style.left = 0;
+        elementRef.current.style.right = "auto";
+        resizeTemplate.current.style.left = 0;
+        resizeTemplate.current.style.right = "auto";
+      } else if (position === "flex-end") {
+        elementRef.current.style.right = 0;
+        elementRef.current.style.left = "auto";
+        resizeTemplate.current.style.right = 0;
+        resizeTemplate.current.style.left = "auto";
+      } else if (position === "center") {
+        const parentWidth = elementRef.current.parentElement.offsetWidth;
+        const elementWidth = elementRef.current.offsetWidth;
+        const centerPosition = (parentWidth - elementWidth) / 2;
+        elementRef.current.style.left = `${centerPosition}px`;
+        resizeTemplate.current.style.left = `${centerPosition}px`;
+      }
+      // if(resizeTemplate.current.style.left==="auto") {
+      //   setXPosition(0);
+      setXPosition(Number(resizeTemplate.current.offsetLeft));
+      console.log(resizeTemplate.current.style.left); 
+    }
+  }
+  function changeVerticalPos(position) {
+    if (elementRef.current && resizeTemplate) {
+      if (position === "flex-start") {
+        elementRef.current.style.top = 0;
+        elementRef.current.style.bottom = "auto";
+        resizeTemplate.current.style.top = 0;
+        resizeTemplate.current.style.bottom = "auto";
+      } else if (position === "flex-end") {
+        elementRef.current.style.bottom = 0;
+        elementRef.current.style.top = "auto";
+        resizeTemplate.current.style.bottom = 0;
+        resizeTemplate.current.style.top = "auto";
+      } else if (position === "center") {
+        const parentHeight = elementRef.current.parentElement.offsetHeight;
+        const elementHeight = elementRef.current.offsetHeight;
+        const centerPosition = (parentHeight - elementHeight) / 2;
+        elementRef.current.style.top = `${centerPosition}px`;
+        resizeTemplate.current.style.top = `${centerPosition}px`;
+      }
+      setYPosition(Number(resizeTemplate.current.offsetTop));
+    }
+  }
+
+  useEffect(() => {
+    updateElementDimensions(width, height); // Initialize with current values
+    updatePosition(xposition, yposition);
+  }, [width, height, xposition, yposition]);
 
   
   return (
     <div className="div-basic-properties-panel">
       <div className="div-alignment-section">
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("flex-start")}}  >
           align_justify_flex_start
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("center")}}  >
           align_justify_center
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeHorizontalPos("flex-end")}}  >
         align_justify_flex_end
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeVerticalPos("flex-start")}} >
         align_flex_start
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeVerticalPos("center")}} >
         align_flex_center
         </span>
-        <span className="alignment-icons material-symbols-outlined">
+        <span className="alignment-icons material-symbols-outlined" onClick={() => {changeVerticalPos("flex-end")}} >
         align_flex_end
         </span>
       </div>
@@ -255,7 +186,12 @@ function applyResizeAndDrag(resizable, target) {
                 X 
               </div>
               <div className="div-x-dim-input">
-                <input type="number" className="x-dim-input" />
+                <input 
+                type="number" 
+                className="x-dim-input" 
+                onChange={(e) => handleXPosition(e)}
+                value={xposition}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -264,7 +200,12 @@ function applyResizeAndDrag(resizable, target) {
                 Y 
               </div> 
               <div className="div-y-dim-input">
-                <input type="number" className="y-dim-input" />
+                <input 
+                type="number" 
+                className="y-dim-input" 
+                onChange={(e) => handleYPosition(e)}
+                value={yposition}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -274,8 +215,13 @@ function applyResizeAndDrag(resizable, target) {
               <div className="div-w-dim-text" onClick={()=>{console.log(widthInput)}}>
                 W 
               </div>
-              <div className="div-w-dim-input">
-                <input type="number" className="w-dim-input" ref={widthRef} value={widthInput} onChange={(e)=>{setWidthInput(e.target.value); }}/>
+              <div className="div-w-dim-input" >
+                <input 
+                type="number" 
+                className="w-dim-input" 
+                onChange={(e) => handleWidthChange(e)}
+                value={width}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -284,7 +230,12 @@ function applyResizeAndDrag(resizable, target) {
                 H 
               </div> 
               <div className="div-h-dim-input">
-                <input type="number" className="h-dim-input" value={heightInput} onChange={(e)=>{setHeightInput(e.target.value)}}/>
+                <input 
+                type="number" 
+                className="h-dim-input" 
+                onChange={(e) => handleHeightChange(e)}
+                value={height}
+                />
                 <div className="div-px-text">px*</div>
               </div>
             </div>
@@ -301,12 +252,12 @@ function applyResizeAndDrag(resizable, target) {
             Opacity & color
           </div>
           <div className="div-border-color-edit">
-            <input type="color" className='border-color-input-color' />
-            <input type="range" min="0" max="1" step="0.01" className='border-color-range' defaultValue="1" />
+            <input type="color" className='border-color-input-color' value={borderColor} onChange={handleBorderColorChange} />
+            <input type="range" min="0" step="1" onChange={handleBorderRadiusChange} className='border-radius-range' value={borderRadius} />
             <div className="div-border-color-input">
-              <input type="number" className='border-color-input'/>
-              <div className="div-percent-text">
-                %
+              <input type="number" className='border-color-input' min="0" step="1" value={borderRadius} onChange={handleBorderRadiusChange} />
+              <div className="div-px-text">
+                px
               </div>
             </div>
           </div>
@@ -316,9 +267,9 @@ function applyResizeAndDrag(resizable, target) {
             Width(px)
           </div>
           <div className="div-border-width-edit">
-            <input type="range" min="0" max="14" step="1" defaultValue="0" className="border-width-range"/>
+            <input type="range" min="0" max="14" step="1" value={borderWidth} onChange={handleBroderWidthChange} className="border-width-range"/>
             <div className="div-border-width-input">
-              <input type="number" className='border-width-input' />
+              <input type="number" className='border-width-input' min="0" max="14" step="1" value={borderWidth} onChange={handleBroderWidthChange} />
               <div className="div-px-text">
                 px
               </div>
@@ -326,63 +277,65 @@ function applyResizeAndDrag(resizable, target) {
           </div>
         </div>
       </div>
-      <div className="div-typography-section">
-        <span>Text Properties</span><br /><br />
-        <div className="div-select-text-type">
-            <select name="" id="font-type">
-              <option value="null">Text type</option>
-              <option value="h1">h1</option>
-              <option value="h2">h2</option>
-              <option value="h3">h3</option>
-              <option value="h4">h4</option>
-              <option value="h5">h5</option>
-              <option value="h6">h6</option>
-              <option value="p">paragraph</option>
-            </select>
-        </div>
-        <div className="div-select-font-family">
-          <select name="" id="font-family">
-            <option value="null">Font family</option> {/*here use an api to fetch font family and handle the api using asynchronous javascipt !*/}
-          </select>
-        </div>
-        <div className="div-font-size">
-          <span>Size</span>
-          <div className="font-size">
-            <input type="text" defaultValue={16}/>
-            <select name="" id="unit-selector">
-              <option value="px">px</option>
-              <option value="pt">pt</option>
-              <option value="pc">pc</option>
-              <option value="em">em</option>
-              <option value="rem">rem</option>
+      {isTextElement && (
+        <div className="div-typography-section">
+          <span>Text Properties</span><br /><br />
+          <div className="div-select-text-type">
+              <select name="" id="font-type">
+                <option value="null">Text type</option>
+                <option value="h1">h1</option>
+                <option value="h2">h2</option>
+                <option value="h3">h3</option>
+                <option value="h4">h4</option>
+                <option value="h5">h5</option>
+                <option value="h6">h6</option>
+                <option value="p">paragraph</option>
+              </select>
+          </div>
+          <div className="div-select-font-family">
+            <select name="" id="font-family">
+              <option value="null">Font family</option> {/*here use an api to fetch font family and handle the api using asynchronous javascipt !*/}
             </select>
           </div>
-        </div>
-        <div className="div-font-style">
-            <p>Font Style</p>
-            <div id="font-style">
-              <p><b>B</b></p>
-              <p><i>I</i></p>
-              <p><u>U</u></p>
-              <p><strike>S</strike></p>
+          <div className="div-font-size">
+            <span>Size</span>
+            <div className="font-size">
+              <input type="text" defaultValue={16}/>
+              <select name="" id="unit-selector">
+                <option value="px">px</option>
+                <option value="pt">pt</option>
+                <option value="pc">pc</option>
+                <option value="em">em</option>
+                <option value="rem">rem</option>
+              </select>
             </div>
+          </div>
+          <div className="div-font-style">
+              <p>Font Style</p>
+              <div id="font-style">
+                <p><b>B</b></p>
+                <p><i>I</i></p>
+                <p><u>U</u></p>
+                <p><strike>S</strike></p>
+              </div>
+          </div>
+          <div className="div-font-alignment">
+              <p>Text Alignment</p>
+              <span className="material-symbols-outlined">
+                format_align_left
+              </span>
+              <span className="material-symbols-outlined">
+                format_align_center
+              </span>
+              <span className="material-symbols-outlined">
+                format_align_right
+              </span>
+              <span className="material-symbols-outlined">
+                format_align_justify
+              </span>
+          </div>
         </div>
-        <div className="div-font-alignment">
-            <p>Text Alignment</p>
-            <span className="material-symbols-outlined">
-              format_align_left
-            </span>
-            <span className="material-symbols-outlined">
-              format_align_center
-            </span>
-            <span className="material-symbols-outlined">
-              format_align_right
-            </span>
-            <span className="material-symbols-outlined">
-              format_align_justify
-            </span>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

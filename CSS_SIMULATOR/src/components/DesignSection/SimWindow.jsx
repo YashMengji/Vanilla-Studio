@@ -1,18 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef , useContext} from 'react';
 import './Css/SimWindow.css';
+import {useResizeContext} from './ResizeContext';
 import { allowDrop, handleDrop , getReference} from './javascripts/iframeLogic';
-import BasicProperties from "./BasicProperties"
+import { getReferenceForLayout } from './javascripts/layoutLogic';
 
 function SimWindow() {
-  const iframeRef = useRef(null);
+
+  const {handleReference, width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth} = useResizeContext()
   const simwindowRef = useRef(null);
-  const resizableTemplateRef = useRef(null);
-  
-  
+
   useEffect(() => {
-    BasicProperties.handleReference(simwindowRef, resizableTemplateRef);
+    handleReference(simwindowRef,resizableTemplateRef);
+    getReferenceForLayout(simwindowRef, elementRef);
     getReference(simwindowRef);
   }, []);
+
 
   return (
     <>
