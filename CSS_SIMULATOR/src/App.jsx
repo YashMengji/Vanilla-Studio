@@ -6,6 +6,7 @@ import {Navbar, ElementsPanel, SimWindow, PropertiesPanel} from './components/De
 import SectionElements from './components/DesignSection/SectionElements.jsx'
 import { ResizeProvider } from './components/DesignSection/ResizeContext.jsx'
 import LayoutProperties from './components/DesignSection/LayoutProperties.jsx'
+import CodeEditor from './components/DesignSection/CodeEditor.jsx'
 
 function App() {
   
@@ -14,12 +15,12 @@ function App() {
     <>
       <Navbar />
       <div className="div-main">
-        <ElementsPanel />
-      <ResizeProvider>
-        <SimWindow />
-        <PropertiesPanel />
-      </ResizeProvider>
-
+        <ResizeProvider>
+          <ElementsPanel />
+          <SimWindow />
+          <PropertiesPanel />
+          <CodeEditor />
+        </ResizeProvider>
       </div>
     </> 
   )

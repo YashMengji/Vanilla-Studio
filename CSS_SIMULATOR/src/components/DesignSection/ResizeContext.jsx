@@ -15,6 +15,8 @@ export const ResizeProvider = ({ children }) => {
   const [borderWidth, setBorderWidth] = useState(0);
   const [borderRadius, setBorderRadius] = useState(0);
 	const [isTextElement, setIsTextElement] = useState(false);
+  const [showCodeEditor, setShowCodeEditor] = useState(true);
+  const [editorHtml, setEditorHtml] = useState('');
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
@@ -39,6 +41,9 @@ export const ResizeProvider = ({ children }) => {
     setBorderRadius,
     isTextElement,
     setIsTextElement,
+    showCodeEditor,
+    setShowCodeEditor,
+    editorHtml,
   };
 
 
@@ -63,9 +68,10 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             }
 
             targetElement = e.target;
+            console.log(targetElement.outerHTML);
+            setEditorHtml(targetElement.outerHTML); 
             targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
 
-            console.log(targetElement);
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);
             resizable.style.display = 'block';
@@ -101,8 +107,6 @@ function handleReference(simwindowRef, resizableTemplateRef) {
         }
     });
 
-    
-
     simwindow.addEventListener('mousedown', (e) => {
       if (
           resizable 
@@ -111,7 +115,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
       ) {
           resizable.remove();
       }
-    });    
+    });
 }
 
 
