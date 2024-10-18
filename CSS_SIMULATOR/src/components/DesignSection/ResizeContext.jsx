@@ -162,17 +162,17 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
                         case 'top-left':
                             resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - simwindowRect.top  + 'px';
-                            resizable.style.left = event.clientX - simwindowRect.left  + 'px';
+                            resizable.style.top = event.clientY - currentParentRect.top  + 'px';
+                            resizable.style.left = event.clientX - currentParentRect.left  + 'px';
                             break;
                         case 'top-center':
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - simwindowRect.top + 'px';
+                            resizable.style.top = event.clientY - currentParentRect.top + 'px';
                             break;
                         case 'top-right':
                             resizable.style.width = event.clientX - rect.left + 'px';
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - simwindowRect.top + 'px';
+                            resizable.style.top = event.clientY - currentParentRect.top + 'px';
                             break;
                         case 'right-center':
                             resizable.style.width = event.clientX - rect.left + 'px';
@@ -187,11 +187,11 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
                         case 'bottom-left':
                             resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.height = event.clientY - rect.top + 'px';
-                            resizable.style.left = event.clientX- simwindowRect.left  + 'px';
+                            resizable.style.left = event.clientX - currentParentRect.left  + 'px';
                             break;
                         case 'left-center':
                             resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.left = event.clientX - simwindowRect.left + 'px';
+                            resizable.style.left = event.clientX - currentParentRect.left + 'px';
                             break;
                     }
                     updateTargetSize();
