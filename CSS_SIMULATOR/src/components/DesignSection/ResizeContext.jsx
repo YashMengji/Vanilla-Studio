@@ -68,8 +68,9 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             }
 
             targetElement = e.target;
-            console.log(targetElement.outerHTML);
-            setEditorHtml(targetElement.outerHTML); 
+            
+            const editorHtmlString = targetElement.outerHTML.replace(/\s*style="[^"]*"/g, '');
+            setEditorHtml(editorHtmlString); 
             targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
 
             // Clone the template and attach it to the dropped element
