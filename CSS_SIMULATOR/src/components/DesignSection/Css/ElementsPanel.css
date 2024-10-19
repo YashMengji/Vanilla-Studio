@@ -21,7 +21,7 @@
 /*-------------------left element panel style------------------------*/
 .div-left-elements{
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: 3.5vw;
   height: 92vh;
   background-color: var(--shadow-color);

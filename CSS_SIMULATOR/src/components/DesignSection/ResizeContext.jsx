@@ -14,7 +14,10 @@ export const ResizeProvider = ({ children }) => {
   const [yposition, setYPosition] = useState(0);
   const [borderWidth, setBorderWidth] = useState(0);
   const [borderRadius, setBorderRadius] = useState(0);
-    const [isTextElement, setIsTextElement] = useState(true);
+	const [isTextElement, setIsTextElement] = useState(false);
+  const [showCodeEditor, setShowCodeEditor] = useState(false);
+  const [editorHtml, setEditorHtml] = useState('');
+  const [editorCss, setEditorCss] = useState('');
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
@@ -39,6 +42,12 @@ export const ResizeProvider = ({ children }) => {
     setBorderRadius,
     isTextElement,
     setIsTextElement,
+    showCodeEditor,
+    setShowCodeEditor,
+    editorHtml,
+    setEditorHtml,
+    editorCss,
+    setEditorCss
   };
 
 
@@ -63,9 +72,10 @@ function handleReference(simwindowRef, resizableTemplateRef) {
                 resizable.remove();
             }
             targetElement = e.target;
+            
+            // Render text related properties only for text elements
             targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
 
-            // console.log(targetElement);
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);
             resizable.style.display = 'block';
@@ -101,8 +111,6 @@ function handleReference(simwindowRef, resizableTemplateRef) {
         }
     });
 
-    
-
     simwindow.addEventListener('mousedown', (e) => {
       if (
           resizable 
@@ -112,7 +120,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
           resizable.remove();
         //   targetElement.contentEditable = 'false';
       }
-    });    
+    });
 }
 
 
