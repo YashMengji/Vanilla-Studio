@@ -324,19 +324,49 @@ input[type="number"]::-webkit-outer-spin-button {
   gap: 10px;
 }
 
+.font-size {
+  position: relative;
+}
+.font-size:hover{
+  outline: 1px solid var(--secondary-color);
+}
 .font-size > input {
-  width: 3vw;
+  /* width: 3vw;
   padding: 1vh 1vw;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  border: none;
+  border: none; */
+  width: 60px;
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
 }
 
 .font-size > select {
-  border: none;
+  /* border: none;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  padding: 1vh 0;
+  padding: 1vh 0; */
+  position: absolute;
+    z-index: 2;
+    right: 0;
+    height: 100%;
+    outline: none;
+    border: none;
+    padding: 0 4px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    appearance: none;
+}
+.font-size select:hover{
+  background-color: var(--shadow-color);
+  outline: 1px solid var(--secondary-color);
+}
+
+.div-font-color , .div-font-size, .div-font-style, .div-font-alignment{
+  margin: 10px 0 8px 0;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 #font-style{
