@@ -6,23 +6,29 @@ import { getReferenceForLayout } from './javascripts/layoutLogic';
 
 function SimWindow() {
 
-  const {handleReference, width, setWidth, height, setHeight , elementRef, resizableTemplateRef, xposition, yposition, setXPosition, setYPosition, resizeTemplate, borderWidth, setBorderWidth} = useResizeContext()
+  const {handleReference, elementRef, resizableTemplateRef, editorHtml, setEditorHtml, showCodeEditor} = useResizeContext()
   const simwindowRef = useRef(null);
 
   useEffect(() => {
     handleReference(simwindowRef,resizableTemplateRef);
     getReferenceForLayout(simwindowRef, elementRef);
     getReference(simwindowRef);
+    console.log(simwindowRef.current.outerHTML.replace(/<div class="resizable" id="resizableTemplate" style="display: none;"><div class="handle top-left"><\/div><div class="handle top-center"><\/div><div class="handle top-right"><\/div><div class="handle right-center"><\/div><div class="handle bottom-right"><\/div><div class="handle bottom-center"><\/div><div class="handle bottom-left"><\/div><div class="handle left-center"><\/div><\/div>/g, '').replace(/<div class="div-simwindow">/, '').replace(/<\/div>$/, ''));
   }, []);
 
+  useEffect(() => {
+    if(showCodeEditor) {
+      setEditorHtml(simwindowRef.current.outerHTML)
+    }
+  }, [showCodeEditor])
 
   return (
     <>
       <div 
-      className='div-simwindow' 
-      ref={simwindowRef} 
-      onDragOver={(e, simwindowRef) => {allowDrop(e, simwindowRef)}} 
-      onDrop={(e, simwindowRef) => {handleDrop(e, simwindowRef)}}
+        className='div-simwindow' 
+        ref={simwindowRef} 
+        onDragOver={(e, simwindowRef) => {allowDrop(e, simwindowRef)}} 
+        onDrop={(e, simwindowRef) => {handleDrop(e, simwindowRef)}}
       >
         <div 
         className="resizable" 

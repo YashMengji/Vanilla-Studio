@@ -15,8 +15,9 @@ export const ResizeProvider = ({ children }) => {
   const [borderWidth, setBorderWidth] = useState(0);
   const [borderRadius, setBorderRadius] = useState(0);
 	const [isTextElement, setIsTextElement] = useState(false);
-  const [showCodeEditor, setShowCodeEditor] = useState(true);
+  const [showCodeEditor, setShowCodeEditor] = useState(false);
   const [editorHtml, setEditorHtml] = useState('');
+  const [editorCss, setEditorCss] = useState('');
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
@@ -44,6 +45,9 @@ export const ResizeProvider = ({ children }) => {
     showCodeEditor,
     setShowCodeEditor,
     editorHtml,
+    setEditorHtml,
+    editorCss,
+    setEditorCss
   };
 
 
@@ -66,11 +70,9 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             if (resizable) {
                 resizable.remove();
             }
-
             targetElement = e.target;
             
-            const editorHtmlString = targetElement.outerHTML.replace(/\s*style="[^"]*"/g, '');
-            setEditorHtml(editorHtmlString); 
+            // Render text related properties only for text elements
             targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
 
             // Clone the template and attach it to the dropped element
