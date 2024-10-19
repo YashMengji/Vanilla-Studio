@@ -1,6 +1,12 @@
 import React, {useState} from 'react'
 import './Css/LayoutProperties.css'
 import { useResizeContext } from './ResizeContext';
+
+let simwindow;
+export function getReferenceForLayout(simwindowRef) {
+  simwindow = simwindowRef.current;
+}   
+
 function LayoutProperties() {
 
   const [iscolumnDrop, setIsColumnDrop] = useState(false);
@@ -9,10 +15,19 @@ function LayoutProperties() {
 
   let child1, child2, child3, child4;
   let currentElement = elementRef.current;
+  
   function createTemplate(typeOfLayout, children) {
     console.log(currentElement);
     let template = document.createElement('div');
-    let childStyle = `outline: 2px solid blue`;
+
+    function checkElement(element) {
+      if(currentElement == null) {
+        simwindow.appendChild(template);
+      } else {
+        currentElement.appendChild(template);
+      }
+    }
+
     if(children == 2) {
         child1 = document.createElement('div');
         child2 = document.createElement('div');
@@ -42,7 +57,8 @@ function LayoutProperties() {
             `;
             template.appendChild(child1);
             template.appendChild(child2);
-            currentElement.appendChild(template);
+            checkElement(currentElement);
+            
     }else if(typeOfLayout == 'layout-2') {
         child1.style = `outline: 2px solid blue`;
             child2.style = `outline: 2px solid blue`;
@@ -58,7 +74,7 @@ function LayoutProperties() {
             template.appendChild(child1);
             template.appendChild(child2);
             template.appendChild(child3);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-3') {
         child1.style = `outline: 2px solid blue`;
             child2.style = `outline: 2px solid blue`;
@@ -72,7 +88,7 @@ function LayoutProperties() {
             `
             template.appendChild(child1);
             template.appendChild(child2);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-4') {
         child1.style = `outline: 2px solid blue`;
             child2.style = `outline: 2px solid blue`;
@@ -88,7 +104,7 @@ function LayoutProperties() {
             template.appendChild(child1);
             template.appendChild(child2);
             template.appendChild(child3);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-5') {
         child1.style = `outline: 2px solid blue; grid-row: 1 / span 2;`;
             child2.style = `outline: 2px solid blue;`;
@@ -106,7 +122,7 @@ function LayoutProperties() {
             template.appendChild(child1);
             template.appendChild(child2);
             template.appendChild(child3);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-6') {
         child1.style = `outline: 2px solid blue; `;
             child2.style = `outline: 2px solid blue; `;
@@ -124,7 +140,7 @@ function LayoutProperties() {
             template.appendChild(child1);
             template.appendChild(child2);
             template.appendChild(child3);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-7') {
         child1.style = `outline: 2px solid blue; grid-column: 1 / span 2`;
             child2.style = `outline: 2px solid blue; `;
@@ -142,7 +158,7 @@ function LayoutProperties() {
             template.appendChild(child1);
             template.appendChild(child2);
             template.appendChild(child3);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-8') {
         child1.style = `outline: 2px solid blue; `;
             child2.style = `outline: 2px solid blue; `;
@@ -160,7 +176,7 @@ function LayoutProperties() {
             template.appendChild(child1);
             template.appendChild(child2);
             template.appendChild(child3);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     } else if(typeOfLayout == 'layout-9') {
         child1.style = `outline: 2px solid blue; `;
             child2.style = `outline: 2px solid blue; `;
@@ -180,7 +196,7 @@ function LayoutProperties() {
             template.appendChild(child2);
             template.appendChild(child3);
             template.appendChild(child4);
-            simwindow.appendChild(template);
+            checkElement(currentElement);
     }
 
 }

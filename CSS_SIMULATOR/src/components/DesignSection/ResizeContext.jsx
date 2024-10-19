@@ -14,7 +14,7 @@ export const ResizeProvider = ({ children }) => {
   const [yposition, setYPosition] = useState(0);
   const [borderWidth, setBorderWidth] = useState(0);
   const [borderRadius, setBorderRadius] = useState(0);
-	const [isTextElement, setIsTextElement] = useState(false);
+	const [isTextElement, setIsTextElement] = useState(true);
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
@@ -51,6 +51,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
     simwindow = simwindowRef.current;
     // simwindowRect = simwindow.getBoundingClientRect();
     let resizableTemplateElement = resizableTemplateRef.current;
+    // elementRef.current = simwindow;
 
     simwindow.addEventListener('click', (e) => {
         if(
@@ -61,11 +62,10 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             if (resizable) {
                 resizable.remove();
             }
-
             targetElement = e.target;
             targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
 
-            console.log(targetElement);
+            // console.log(targetElement);
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);
             resizable.style.display = 'block';
@@ -74,15 +74,15 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             resizable.style.height = e.target.offsetHeight + 'px';
             resizable.style.top = e.target.offsetTop + 'px';
             resizable.style.left = e.target.offsetLeft + 'px';
-            // resizable.style.top = e.target.top + 'px';
-            // resizable.style.left = e.target.left + 'px';
 
             // getting nearest parent of selected element 
-            targetElementParent = targetElement.parentElement; 
+            targetElementParent = targetElement.parentElement;
             // getting dimentions of that parent for future use(ex: while dragging)
             currentParentRect = targetElementParent.getBoundingClientRect();
             // pushing the resizable template element inside the parent of selected element
             targetElementParent.appendChild(resizable);
+
+            console.log(resizable.getBoundingClientRect());
 
             // simwindow.appendChild(resizable);  
             setWidth(resizable.offsetWidth);
@@ -110,6 +110,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
           && e.target.classList[0] != 'handle'
       ) {
           resizable.remove();
+        //   targetElement.contentEditable = 'false';
       }
     });    
 }
@@ -120,7 +121,18 @@ window.addEventListener('keydown', (e) => {
       resizable.remove();
       targetElement.remove();
   }
+  if(e.key == 'e'){
+        targetElement.contentEditable = 'true';
+    }
+    if(e.key == 'Enter') {
+        targetElement.contentEditable = 'false';
+    }
 });
+
+
+window.addEventListener('keydown', (e) => {
+    
+})
 
 
 function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition) {
@@ -162,10 +174,20 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
                         case 'top-left':
                             resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - currentParentRect.top  + 'px';
-                            resizable.style.left = event.clientX - currentParentRect.left  + 'px';
+                            resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                            resizable.style.left = event.clientX - currentParentRect.left + 'px';
                             break;
                         case 'top-center':
+                            // const newHeight = rect.bottom - event.clientY;
+
+                            // // If the calculated height is less than 2, set it to 2px, otherwise use the calculated height
+                            // if (newHeight >= 2) {
+                            //     resizable.style.height = newHeight + 'px';
+                            //     resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                            // } else {
+                            //     resizable.style.height = '2px';
+                            //     resizable.style.top += 0;
+                            // }
                             resizable.style.height = rect.bottom - event.clientY + 'px';
                             resizable.style.top = event.clientY - currentParentRect.top + 'px';
                             break;
@@ -182,18 +204,76 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
                             resizable.style.height = event.clientY - rect.top + 'px';
                             break;
                         case 'bottom-center':
-                            resizable.style.height = event.clientY - rect.top+ 'px';
+                            resizable.style.height = event.clientY - rect.top + 'px';
                             break;
                         case 'bottom-left':
                             resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.height = event.clientY - rect.top + 'px';
-                            resizable.style.left = event.clientX - currentParentRect.left  + 'px';
-                            break;
-                        case 'left-center':
-                            resizable.style.width = rect.right - event.clientX + 'px';
                             resizable.style.left = event.clientX - currentParentRect.left + 'px';
                             break;
+                        case 'left-center':
+                            // Only update width if the new width is positive
+                            const newWidth = rect.right - event.clientX;
+                            // Adjust for nested parent elements
+                            const adjustedLeft = event.clientX - currentParentRect.left;
+                            
+                            
+                            if (newWidth >= 2) {  // Prevent shrinking too small
+                                resizable.style.width = newWidth + 'px';
+                                resizable.style.left = adjustedLeft + 'px';
+                            } else {
+                                resizable.style.width = '2px';  // Minimum width
+                            }
+                            break;
                     }
+
+                    // switch(handleType) {
+                    //     case 'top-left':
+                    //         resizable.style.width = rect.right - event.clientX + 'px';
+                    //         resizable.style.height = rect.bottom - event.clientY + 'px';
+                    //         resizable.style.top = event.clientY - currentParentRect.top  + 'px';
+                    //         resizable.style.left = event.clientX - currentParentRect.left  + 'px';
+                    //         break;
+                    //     case 'top-center':
+                    //         // const newHeight = rect.bottom - event.clientY;
+
+                    //         // If the calculated height is less than 2, set it to 2px, otherwise use the calculated height
+                    //         // if (newHeight >= 2) {
+                    //         //     resizable.style.height = newHeight + 'px';
+                    //         //     resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                    //         // } else {
+                    //         //     resizable.style.height = '2px';
+                    //         //     resizable.style.top += 0;
+                    //         // }
+                            
+                    //         resizable.style.height = rect.bottom - event.clientY + 'px';
+                    //         resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                    //         break;
+                    //     case 'top-right':
+                    //         resizable.style.width = event.clientX - rect.left + 'px';
+                    //         resizable.style.height = rect.bottom - event.clientY + 'px';
+                    //         resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                    //         break;
+                    //     case 'right-center':
+                    //         resizable.style.width = event.clientX - rect.left + 'px';
+                    //         break;
+                    //     case 'bottom-right':
+                    //         resizable.style.width = event.clientX - rect.left + 'px';
+                    //         resizable.style.height = event.clientY - rect.top + 'px';
+                    //         break;
+                    //     case 'bottom-center':
+                    //         resizable.style.height = event.clientY - rect.top+ 'px';
+                    //         break;
+                    //     case 'bottom-left':
+                    //         resizable.style.width = rect.right - event.clientX + 'px';
+                    //         resizable.style.height = event.clientY - rect.top + 'px';
+                    //         resizable.style.left = event.clientX - currentParentRect.left  + 'px';
+                    //         break;
+                    //     case 'left-center':
+                    //         resizable.style.width = rect.right - event.clientX + 'px';
+                    //         resizable.style.left = event.clientX - currentParentRect.left + 'px';
+                    //         break;
+                    // }
                     updateTargetSize();
                 }
 

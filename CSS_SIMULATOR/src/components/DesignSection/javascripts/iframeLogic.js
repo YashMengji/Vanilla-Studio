@@ -76,8 +76,8 @@ function handleDrop(e, simwindowRef) {
     const container = document.createElement('div');
     container.className = 'container-field';
     container.style.position = 'absolute';
-    container.style.display = 'flex';
-    container.style.justifyContent = 'flex-start';
+    // container.style.display = 'flex';
+    // container.style.justifyContent = 'flex-start';
     container.style.backgroundColor = 'rgb(255, 242, 231)';
     container.style.width = "320px"; // Adjust width as needed
     container.style.height = "240px"; // Adjust height as needed
