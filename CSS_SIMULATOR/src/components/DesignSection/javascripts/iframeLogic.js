@@ -25,7 +25,7 @@ function handleDrop(e, simwindowRef) {
     // Create a title element (e.g., h1 for main title) at the drop location
     const title = document.createElement('h1'); // Use 'h1' for main titles
     title.className = 'title-field';
-    title.id = elementId++; // Generate a unique id for the title
+    title.id = `element${elementId++}`; // Generate a unique id for the title
     title.textContent = "Your Title Here"; // Set the title text
     title.style.position = 'absolute';
     title.style.display = 'block';
@@ -39,7 +39,7 @@ function handleDrop(e, simwindowRef) {
     // Create an button at the drop location
     const image = document.createElement('img');
     image.className = 'image-field';
-    image.id = elementId++; // Generate a unique id for the image  
+    image.id = `element${elementId++}`; // Generate a unique id for the image  
     image.src = "/images/sample_img.jpg";
     image.style.position = 'absolute';
     image.style.display = 'block';
@@ -53,7 +53,7 @@ function handleDrop(e, simwindowRef) {
     // Create a paragraph at the drop location
     const paragraph = document.createElement('p');
     paragraph.className = 'paragraph-field';
-    paragraph.id = elementId++; // Generate a unique id for the paragraph
+    paragraph.id = `element${elementId++}`; // Generate a unique id for the paragraph
     paragraph.textContent = "Your default text here"; // Set default text for the paragraph
     paragraph.style.position = 'absolute';
     paragraph.style.display = 'block';
@@ -68,7 +68,7 @@ function handleDrop(e, simwindowRef) {
     // Create a video element at the drop location
     const video = document.createElement('video');
     video.className = 'video-field';
-    video.id = elementId++; // Generate a unique id for the video
+    video.id = `element${elementId++}`; // Generate a unique id for the video
     video.src = "/videos/sample_video.mp4"; // Set the source of your video
     video.style.position = 'absolute';
     video.style.display = 'block';
@@ -83,7 +83,7 @@ function handleDrop(e, simwindowRef) {
     // Create a video element at the drop location
     const container = document.createElement('div');
     container.className = 'container-field';
-    container.id = elementId++; // Generate a unique id for the container
+    container.id = `element${elementId++}`; // Generate a unique id for the container
     container.style.position = 'absolute';
     // container.style.display = 'flex';
     // container.style.justifyContent = 'flex-start';
@@ -101,7 +101,7 @@ function handleDrop(e, simwindowRef) {
     // Create a link element at the drop location
     const link = document.createElement('a');
     link.className = 'link-field';
-    link.id = elementId++; // Generate a unique id for the link
+    link.id = `element${elementId++}`; // Generate a unique id for the link
     link.href = "#"; // Set the URL for the link
     link.textContent = "Visit Example"; // Set the display text for the link
     link.style.position = 'absolute';
