@@ -43,17 +43,16 @@ function LayoutProperties() {
     }
 
     if(typeOfLayout == 'layout-1') {
-        child1.style = `outline: 2px solid blue; position: relative;`;
-            child2.style = `outline: 2px solid blue; position: relative;`;
+        child1.style = `outline: 2px solid blue;`;
+            child2.style = `outline: 2px solid blue;`;
 
             template.style = `
-            outline: 2px solid red;
             display:grid;
             gap: 5px;
             grid-template-columns: repeat(2, 1fr);
             width: 100%;
             height: 100%;
-            position: absolute;
+            margin-bottom: 10px;
             `;
             template.appendChild(child1);
             template.appendChild(child2);

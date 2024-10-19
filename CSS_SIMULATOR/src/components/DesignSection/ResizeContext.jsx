@@ -14,7 +14,7 @@ export const ResizeProvider = ({ children }) => {
   const [yposition, setYPosition] = useState(0);
   const [borderWidth, setBorderWidth] = useState(0);
   const [borderRadius, setBorderRadius] = useState(0);
-	const [isTextElement, setIsTextElement] = useState(true);
+    const [isTextElement, setIsTextElement] = useState(true);
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);

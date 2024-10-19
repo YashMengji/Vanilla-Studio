@@ -29,6 +29,7 @@ function handleDrop(e, simwindowRef) {
     title.style.fontWeight = 'block';
     title.style.left = dropX + 'px';
     title.style.top = dropY + 'px';
+    title.contentEditable = 'true';
     e.target.appendChild(title);
   }
   else if (selectedElement === "image-img") {
@@ -51,10 +52,11 @@ function handleDrop(e, simwindowRef) {
     paragraph.textContent = "Your default text here"; // Set default text for the paragraph
     paragraph.style.position = 'absolute';
     paragraph.style.display = 'block';
-    paragraph.style.width = "200px"; // Adjust width as needed
-    paragraph.style.minHeight = "100px"; // Adjust height as needed
+    paragraph.style.width = "fit-content"; // Adjust width as needed
+    paragraph.style.height = "fit-content"; // Adjust height as needed
     paragraph.style.left = dropX + 'px';
     paragraph.style.top = dropY + 'px';
+    paragraph.contentEditable = 'true';
     e.target.appendChild(paragraph);
   }
   else if (selectedElement === "video-img") {
@@ -78,7 +80,7 @@ function handleDrop(e, simwindowRef) {
     container.style.position = 'absolute';
     // container.style.display = 'flex';
     // container.style.justifyContent = 'flex-start';
-    container.style.backgroundColor = 'rgb(255, 242, 231)';
+    container.style.backgroundColor = '#f0f8ff';
     container.style.width = "320px"; // Adjust width as needed
     container.style.height = "240px"; // Adjust height as needed
     container.style.left = dropX + 'px';

@@ -28,6 +28,8 @@ function BasicProperties() {
 
   const [borderOpacity, setBorderOpacity] = useState(1)
   const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
+  const [backgroundColor, setBackgroundColor] = useState('#f0f8ff');
+  const [fontColor, setFontColor] = useState('#000000');
 
   const handleXPosition = (e) => { // used in onChange of input 
     const newXPosition = e.target.value;
@@ -64,6 +66,16 @@ function BasicProperties() {
     setBorderColor(newBorderColor);
     updateElementProperty("borderColor", borderColor); // Update the element's border color
   }
+  const handleBackgroundColorChange = (e) => {
+    const newBackgroundColor = e.target.value;
+    setBackgroundColor(newBackgroundColor);
+    updateElementProperty("backgroundColor", backgroundColor); 
+  }
+  const handleFontColorChange = (e) => {
+    const newFontColor = e.target.value;
+    setFontColor(newFontColor);
+    updateElementProperty("color", fontColor);
+  }
 
   // Function to update element dimensions
   const updateElementDimensions = (newWidth, newHeight) => {
@@ -92,6 +104,12 @@ function BasicProperties() {
       }
       else if(property === "borderRadius") {
         elementRef.current.style[property] = `${value}px`;
+      }
+      else if(property === "backgroundColor") {
+        elementRef.current.style[property] = `${value}`;
+      }
+      else if(property === "color") {
+        elementRef.current.style[property] = `${value}`;
       }
       // console.log(elementRef.current.style.property);
     }
@@ -249,7 +267,7 @@ function BasicProperties() {
         </div>
         <div className="div-border-color">
           <div className="div-border-color-heading">
-            Opacity & color
+            Color and Radius
           </div>
           <div className="div-border-color-edit">
             <input type="color" className='border-color-input-color' value={borderColor} onChange={handleBorderColorChange} />
@@ -276,7 +294,13 @@ function BasicProperties() {
             </div>
           </div>
         </div>
-      </div>
+        <div className="div-background-color-edit">
+          <div className="div-background-color-heading">
+            Background Color
+          </div>
+          <input type="color" className='background-color-input' value={backgroundColor} onChange={handleBackgroundColorChange} />
+        </div>
+      </div><hr />
       {isTextElement && (
         <div className="div-typography-section">
           <span>Text Properties</span><br /><br />
@@ -296,6 +320,12 @@ function BasicProperties() {
             <select name="" id="font-family">
               <option value="null">Font family</option> {/*here use an api to fetch font family and handle the api using asynchronous javascipt !*/}
             </select>
+          </div>
+          <div className="div-font-color">
+            <div className="div-font-color-heading">
+              Font color
+            </div>
+            <input type="color" value = {fontColor} onChange= {handleFontColorChange} />
           </div>
           <div className="div-font-size">
             <span>Size</span>

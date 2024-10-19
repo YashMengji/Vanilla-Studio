@@ -219,13 +219,20 @@ input[type="number"]::-webkit-outer-spin-button {
 .div-border-section{
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 .div-border-color{
   display: flex;
   flex-direction: column;
 }
+.div-border-color-heading, .div-border-width-heading, .div-background-color-heading {
+  color: rgba(0, 0, 0, 0.8);
+  margin: 10px 0 8px 0;
+}
 .div-border-color-edit{
   display: flex;
+  justify-content: space-between;
+  gap: 5px;
 }
 .div-border-color-input{
   display: flex;
@@ -235,6 +242,10 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
   cursor: pointer;
+}
+.border-color-input-color {
+  border: none;
+  background-color: transparent;
 }
 .border-color-input{
   border: none;
@@ -259,7 +270,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .div-border-width-edit{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .div-border-width-input{
   display: flex;
