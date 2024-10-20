@@ -20,6 +20,7 @@ function CodeEditor() {
         .replace(/<div class="resizable" id="resizableTemplate"><div class="handle top-left"><\/div><div class="handle top-center"><\/div><div class="handle top-right"><\/div><div class="handle right-center"><\/div><div class="handle bottom-right"><\/div><div class="handle bottom-center"><\/div><div class="handle bottom-left"><\/div><div class="handle left-center"><\/div><\/div>/g, '') //Remove the resizable div from the HTML
         .replace(/<div class="div-simwindow">/, '') //Remove the div-simwindow from the HTML
         .replace(/<\/div>$/, '') //Remove the closing div tag from the HTML
+        .replace(/contenteditable="true"/g, "") //Remove the content-editable attribute from the HTML
     },
     "style.css": {
       name: "style.css",
@@ -72,7 +73,7 @@ function CodeEditor() {
 
   // Function to convert the extracted styles to CSS code
   function generateCSS(styles) {
-    let css = '';
+    let css = '* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n';
     for (const selector in styles) {
       if(selector !== '#resizableTemplate') {
         css += `${selector} {\n  ${styles[selector].replace(/;\s*/g, ';\n  ').replace(/\n\s*$/, '')}\n}\n`;

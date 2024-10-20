@@ -102,7 +102,7 @@ function handleDrop(e, simwindowRef) {
     container.style.height = "240px"; // Adjust height as needed
     container.style.left = dropX + 'px';
     container.style.top = dropY + 'px';
-    container.style.border = '1px solid black';
+    container.style.border = '0px solid black';
     container.style.borderOpacity = '1';
     container.style.boxSizing = 'border-box';
     checkForResizeTemplate(e.target, container);

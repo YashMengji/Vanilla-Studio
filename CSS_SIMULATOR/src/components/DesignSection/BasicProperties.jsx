@@ -331,7 +331,9 @@ function BasicProperties() {
       <div className="div-break-between "></div>
       {isTextElement && (
         <div className="div-typography-section">
-          <span>Text Properties</span><br /><br />
+          <div className="div-typography-heading">
+            Text Properties
+          </div>
           <div className="div-select-text-type">
               <select name="" id="font-type">
                 <option value="null">Text type</option>
@@ -353,12 +355,14 @@ function BasicProperties() {
             <div className="div-font-color-heading">
               Font color
             </div>
-            <input type="color" value={fontColor} onChange={handleFontColorChange} />
+            <input className='font-color-input' type="color" value={fontColor} onChange={handleFontColorChange} />
           </div>
           <div className="div-font-size">
-            <span>Size</span>
+            <div className="div-font-size-heading">
+              Font Size
+            </div>
             <div className="font-size">
-              <input type="number" min={5} value={fontSize} onChange={handleFontSizeChange} />
+              <input type="number" min="5" value={fontSize} onChange={handleFontSizeChange} />
               <select name="" id="unit-selector">
                 <option value="px">px</option>
                 <option value="pt">pt</option>
@@ -369,28 +373,34 @@ function BasicProperties() {
             </div>
           </div>
           <div className="div-font-style">
-              <p>Font Style</p>
+              <div className="div-font-style-heading">
+                Font Style
+              </div>
               <div id="font-style">
-                <p><b>B</b></p>
-                <p><i>I</i></p>
-                <p><u>U</u></p>
-                <p><strike>S</strike></p>
+                <p><b className='B-text'>B</b></p>
+                <p><i className='I-text'>I</i></p>
+                <p><u className='U-text'>U</u></p>
+                <p><strike className='S-text'>S</strike></p>
               </div>
           </div>
-          <div className="div-font-alignment">
-              <p>Text Alignment</p>
-              <span className="material-symbols-outlined">
+          <div className="div-text-alignment">
+            <div className="div-text-alignment-heading">
+              Text Alignment
+            </div>
+            <div className="div-text-alignment-content">
+              <div className="material-symbols-outlined">
                 format_align_left
-              </span>
-              <span className="material-symbols-outlined">
+              </div>
+              <div className="material-symbols-outlined">
                 format_align_center
-              </span>
-              <span className="material-symbols-outlined">
+              </div>
+              <div className="material-symbols-outlined">
                 format_align_right
-              </span>
-              <span className="material-symbols-outlined">
+              </div>
+              <div className="material-symbols-outlined">
                 format_align_justify
-              </span>
+              </div>
+            </div>
           </div>
         </div>
       )}

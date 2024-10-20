@@ -343,8 +343,14 @@ input[type="number"]::-webkit-outer-spin-button {
   
 
 .div-typography-section{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   background-color: var(--base-color);
-  padding: 20px;
+  padding: 15px;
+}
+.div-typography-heading{
+  font-size: 14px;
 }
 
 #font-type, #font-family{
@@ -352,7 +358,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border: none;
   width: 100%;
   background-color: var(--shadow-color);
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 #font-type:focus, #font-family:focus{
@@ -365,8 +371,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .div-font-size{
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .font-size {
@@ -409,26 +416,39 @@ input[type="number"]::-webkit-outer-spin-button {
   outline: 1px solid var(--secondary-color);
 }
 
-.div-font-color , .div-font-size, .div-font-style, .div-font-alignment{
-  margin: 10px 0 8px 0;
+
+.div-font-style{
   color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.div-font-color{
+  color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
 }
 
 #font-style{
   display: flex;
+  width: 100%;
+  gap: 10px;
 }
 
 #font-style > p{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2.5vw;
-  height: 5vh;
-  font-size: 28px;
-  border-radius: 5px;
+  font-size: 24px;
   margin-right: 10px;
-  background-color: var(--shadow-color);
   cursor: pointer;
+}
+.B-text,
+.I-text,
+.U-text,
+.S-text{
+
 }
 
 .div-font-alignment > span{
@@ -438,6 +458,34 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: var(--shadow-color);
   cursor: pointer;
 }
+
+.div-font-color-heading, .div-font-size-heading, .div-font-style-heading, .div-text-alignment-heading{
+  color: rgb(96, 96, 96);
+  font-size: 13px;
+  /* margin: 10px 0 8px 0; */
+}
+.font-color-input{
+  background-color: transparent;
+  width: 33px;
+  height: 43px;
+  border: none;
+  border-radius: 15px;
+}
+
+.div-text-alignment{
+  color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.div-text-alignment-content{
+  display: flex;
+  gap: 10px;
+}
+.div-text-alignment-contet > div{
+  width: 25px;
+}
+
 
 /*-------------------------- ANIMATION PROPERTIES -----------------------*/
 
