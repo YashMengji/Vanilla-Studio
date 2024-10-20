@@ -5,7 +5,6 @@ import {useResizeContext} from './ResizeContext';
 
 function BasicProperties() {
 
-
   const {
     width,
     setWidth,
@@ -24,6 +23,8 @@ function BasicProperties() {
     setBorderRadius,
     isTextElement,
     setIsTextElement,
+    backgroundOpacity,
+    setBackgroundOpacity,
   } = useResizeContext();
 
   const [borderOpacity, setBorderOpacity] = useState(1)
@@ -76,6 +77,11 @@ function BasicProperties() {
     setFontColor(newFontColor);
     updateElementProperty("color", fontColor);
   }
+  const handleBackgroundOpacityChange = (e) => {
+    const newBackgroundOpacity = e.target.value;
+    setBackgroundOpacity(newBackgroundOpacity);
+    updateElementProperty("opacity", backgroundOpacity);
+  }
 
   // Function to update element dimensions
   const updateElementDimensions = (newWidth, newHeight) => {
@@ -109,6 +115,9 @@ function BasicProperties() {
         elementRef.current.style[property] = `${value}`;
       }
       else if(property === "color") {
+        elementRef.current.style[property] = `${value}`;
+      }
+      else if(property === "opacity") {
         elementRef.current.style[property] = `${value}`;
       }
       // console.log(elementRef.current.style.property);
@@ -267,7 +276,7 @@ function BasicProperties() {
         </div>
         <div className="div-border-color">
           <div className="div-border-color-heading">
-            Color and Radius
+            Border Color & Radius
           </div>
           <div className="div-border-color-edit">
             <input type="color" className='border-color-input-color' value={borderColor} onChange={handleBorderColorChange} />
@@ -282,7 +291,7 @@ function BasicProperties() {
         </div>
         <div className="div-border-width">
           <div className="div-border-width-heading">
-            Width(px)
+            Border Width
           </div>
           <div className="div-border-width-edit">
             <input type="range" min="0" max="14" step="1" value={borderWidth} onChange={handleBroderWidthChange} className="border-width-range"/>
@@ -294,13 +303,23 @@ function BasicProperties() {
             </div>
           </div>
         </div>
-        <div className="div-background-color-edit">
-          <div className="div-background-color-heading">
-            Background Color
+        <div className="div-background-edit">
+          <div className="div-background-heading">
+            Background Color & Opacity
           </div>
-          <input type="color" className='background-color-input' value={backgroundColor} onChange={handleBackgroundColorChange} />
+          <div className="div-background-color-opacity-input">
+            <input type="color" className='background-color-input' value={backgroundColor} onChange={handleBackgroundColorChange} />
+            <input type="range" min="0" max="1" step="0.1" className='background-opacity-range' value={backgroundOpacity} onChange={handleBackgroundOpacityChange} />
+            <div className="div-background-opacity-input">
+              <input type="number" min="0" max="1" step="0.1" className='background-opacity-input'  value={backgroundOpacity} onChange={handleBackgroundOpacityChange} />
+              <div className="div-px-text">
+                %
+              </div>
+            </div>
+          </div>
         </div>
-      </div><hr />
+      </div>
+      <div className="div-break-between "></div>
       {isTextElement && (
         <div className="div-typography-section">
           <span>Text Properties</span><br /><br />
@@ -325,7 +344,7 @@ function BasicProperties() {
             <div className="div-font-color-heading">
               Font color
             </div>
-            <input type="color" value = {fontColor} onChange= {handleFontColorChange} />
+            <input type="color" value={fontColor} onChange={handleFontColorChange} />
           </div>
           <div className="div-font-size">
             <span>Size</span>

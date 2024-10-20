@@ -18,6 +18,7 @@ export const ResizeProvider = ({ children }) => {
   const [showCodeEditor, setShowCodeEditor] = useState(false);
   const [editorHtml, setEditorHtml] = useState('');
   const [editorCss, setEditorCss] = useState('');
+  const [backgroundOpacity, setBackgroundOpacity] = useState(1);
 
   const elementRef = useRef(null);
   const resizableTemplateRef = useRef(null);
@@ -47,7 +48,9 @@ export const ResizeProvider = ({ children }) => {
     editorHtml,
     setEditorHtml,
     editorCss,
-    setEditorCss
+    setEditorCss,
+    backgroundOpacity,
+    setBackgroundOpacity,
   };
 
 

@@ -120,7 +120,7 @@
   height: max-content;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 8px;
+  margin-top: 15px;
 }
 .alignment-icons {
   font-variation-settings:
@@ -138,7 +138,7 @@
 } */
 .div-break-between{
   width: 100%;
-  border-top: 1px solid rgb(211, 211, 211);
+  border-top: 1px solid rgb(206 206 206);
   margin-top: 8px;
 }
 /*-------------------------- Dimension section-----------------------*/
@@ -152,7 +152,7 @@
 .div-dimension-heading{
   color: rgb(96, 96, 96);
   font-size: 13px;
-  padding-left: 20px;
+  padding-left: 15px;
 }
 .div-edit-dimension{
   display: flex;
@@ -219,35 +219,44 @@ input[type="number"]::-webkit-outer-spin-button {
 .div-border-section{
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 15px;
+}
+.div-border-heading{
+  font-size: 14px;
 }
 .div-border-color{
   display: flex;
   flex-direction: column;
 }
-.div-border-color-heading, .div-border-width-heading, .div-background-color-heading {
-  color: rgba(0, 0, 0, 0.8);
+.div-border-color-heading, .div-border-width-heading, .div-background-heading {
+  color: rgb(96, 96, 96);
+  font-size: 13px;
   margin: 10px 0 8px 0;
 }
-.div-border-color-edit{
+.div-border-color-edit, .div-background-color-opacity-input{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 5px;
 }
-.div-border-color-input{
+.div-border-color-input, .div-background-opacity-input{
   display: flex;
   align-items: center;
-  width: 67px;
+  width: 85px;
   height: 31px;
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
   cursor: pointer;
+  /* padding-right: 4px; */
 }
-.border-color-input-color {
+.border-color-input-color, .background-color-input {
   border: none;
+  width: 60px;
   background-color: transparent;
+  height: 40px;
+  border-radius: 15px;
 }
-.border-color-input{
+.border-color-input, .background-opacity-input{
   border: none;
   background-color: var(--base-color);
   width: 60px;
@@ -267,10 +276,16 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
-
-.div-border-width-edit{
+.div-background-color-opacity-input{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.div-border-width-edit, .div-background-opacity{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 .div-border-width-input{
   display: flex;
@@ -294,6 +309,36 @@ input[type="number"]::-webkit-outer-spin-button {
 .border-width-input:focus{
   outline: none;
   cursor: auto;
+} 
+.border-radius-range, .border-width-range, .background-opacity-range {
+  -webkit-appearance: none; 
+  width: 100%; 
+  height: 4px; 
+  background: linear-gradient(to right, rgb(199, 199, 199), rgb(149, 149, 149), rgb(0, 0, 0));; 
+  outline: none; 
+  opacity: 0.7; 
+  transition: opacity 0.2s; 
+  border-radius: 5px;
+  /* Handle styling */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none;
+    width: 11px; /* Slim handle */
+    height: 11px; /* Slim handle */
+    background: #000; /* Black color */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 50%; /* Rounded handle */
+  }
+  &::-moz-range-thumb {
+    width: 12px; /* Slim handle */
+    height: 12px; /* Slim handle */
+    background: #000; /* Black color */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 50%; /* Rounded handle */
+  }
+}
+.border-width-range:hover {
+  opacity: 1; /* Fully opaque on hover */
 }
   
 
