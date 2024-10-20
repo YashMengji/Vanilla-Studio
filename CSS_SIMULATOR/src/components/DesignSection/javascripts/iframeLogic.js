@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-let simwindow;
+let simwindow, resizableTemplate;
 let elementId = 1;
 
 export function getReference(simwindowRef) {
@@ -9,7 +9,7 @@ export function getReference(simwindowRef) {
 function handleDrop(e, simwindowRef) {
   
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
-  console.log(e.target); // access the element on which the dragged element is dropped
+  // console.log(e.target); 
   const selectedElement = e.dataTransfer.getData('source');
   console.log(selectedElement)
 
@@ -20,6 +20,16 @@ function handleDrop(e, simwindowRef) {
   // const dropY = e.clientY ;
   const dropY = e.clientY - rect.top;
 
+  // takes an element over which dragged element is to be dropped and the dragged element. it checks if e.target is resizable template or not
+  function checkForResizeTemplate(element, child) {
+    if(element.classList[0] == "resizable") {
+      alert("First unselect the element and then try nesting !");
+      elementId--;
+    } else {
+      console.log(element);
+      element.appendChild(child);
+    }
+  }
 
   if (selectedElement === "title-img") {
     // Create a title element (e.g., h1 for main title) at the drop location
@@ -33,7 +43,7 @@ function handleDrop(e, simwindowRef) {
     title.style.left = dropX + 'px';
     title.style.top = dropY + 'px';
     title.contentEditable = 'true';
-    e.target.appendChild(title);
+    checkForResizeTemplate(e.target, title);
   }
   else if (selectedElement === "image-img") {
     // Create an button at the drop location
@@ -47,7 +57,7 @@ function handleDrop(e, simwindowRef) {
     image.style.height = "100px";
     image.style.left = dropX + 'px';
     image.style.top = dropY + 'px';
-    e.target.appendChild(image);
+    checkForResizeTemplate(e.target, image);
   }
   else if (selectedElement === "para-img") {
     // Create a paragraph at the drop location
@@ -62,7 +72,7 @@ function handleDrop(e, simwindowRef) {
     paragraph.style.left = dropX + 'px';
     paragraph.style.top = dropY + 'px';
     paragraph.contentEditable = 'true';
-    e.target.appendChild(paragraph);
+    checkForResizeTemplate(e.target, paragraph);
   }
   else if (selectedElement === "video-img") {
     // Create a video element at the drop location
@@ -77,7 +87,7 @@ function handleDrop(e, simwindowRef) {
     video.controls = true; // Show video controls like play, pause, etc.
     video.style.left = dropX + 'px';
     video.style.top = dropY + 'px';
-    e.target.appendChild(video);
+    checkForResizeTemplate(e.target, video);
   }
   else if (selectedElement === "container-img") {
     // Create a video element at the drop location
@@ -95,7 +105,7 @@ function handleDrop(e, simwindowRef) {
     container.style.border = '1px solid black';
     container.style.borderOpacity = '1';
     container.style.boxSizing = 'border-box';
-    e.target.appendChild(container);
+    checkForResizeTemplate(e.target, container);
   }
   else if (selectedElement === "link-img") {
     // Create a link element at the drop location
@@ -108,7 +118,7 @@ function handleDrop(e, simwindowRef) {
     link.style.display = 'block';
     link.style.left = dropX + 'px';
     link.style.top = dropY + 'px';
-    e.target.appendChild(link);
+    checkForResizeTemplate(e.target, link);
   }
   
 }
