@@ -31,6 +31,7 @@ function BasicProperties() {
   const [borderColor, setBorderColor] = useState("#000000") // Set default color to black
   const [backgroundColor, setBackgroundColor] = useState('#f0f8ff');
   const [fontColor, setFontColor] = useState('#000000');
+  const [fontSize, setFontSize] = useState('16');
 
   const handleXPosition = (e) => { // used in onChange of input 
     const newXPosition = e.target.value;
@@ -82,6 +83,11 @@ function BasicProperties() {
     setBackgroundOpacity(newBackgroundOpacity);
     updateElementProperty("opacity", backgroundOpacity);
   }
+  const handleFontSizeChange = (e) => {
+    const newFontSize = e.target.value;
+    setFontSize(newFontSize);
+    updateElementProperty("fontSize", fontSize);
+  }
 
   // Function to update element dimensions
   const updateElementDimensions = (newWidth, newHeight) => {
@@ -119,6 +125,9 @@ function BasicProperties() {
       }
       else if(property === "opacity") {
         elementRef.current.style[property] = `${value}`;
+      }
+      else if(property === "fontSize") {
+        elementRef.current.style[property] = `${value}px`;
       }
       // console.log(elementRef.current.style.property);
     }
@@ -349,7 +358,7 @@ function BasicProperties() {
           <div className="div-font-size">
             <span>Size</span>
             <div className="font-size">
-              <input type="text" defaultValue={16}/>
+              <input type="number" min={5} value={fontSize} onChange={handleFontSizeChange} />
               <select name="" id="unit-selector">
                 <option value="px">px</option>
                 <option value="pt">pt</option>
