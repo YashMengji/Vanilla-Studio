@@ -23,7 +23,7 @@ function RightElementsPanel({ clickEvent , status }){
         <ElementBtn setDataProp = {(e) => {e.dataTransfer.setData('source', 'title-img');}}  onClick = {()=> console.log('hi')} image={"title"} text={"Title"} />
         <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'image-img');}} image={"image"} text={"Image"}/>
         <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'para-img');}}   image={"segment"} text={"Paragraph"}/>
-        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'video-img');}}  image={"videocam"} text={"Video"}/>
+        <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'button-img');}}  image={"switches"} text={"Button"}/>
         <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'link-img');}}   image={"link"} text={"Links"}/>
         <ElementBtn setDataProp={(e) => {e.dataTransfer.setData('source', 'container-img');}}  image={"box"} text={"Container"}/>
       </div>

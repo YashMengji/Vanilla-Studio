@@ -74,20 +74,23 @@ function handleDrop(e, simwindowRef) {
     paragraph.contentEditable = 'true';
     checkForResizeTemplate(e.target, paragraph);
   }
-  else if (selectedElement === "video-img") {
+  else if (selectedElement === "button-img") {
     // Create a video element at the drop location
-    const video = document.createElement('video');
-    video.className = 'video-field';
-    video.id = `element${elementId++}`; // Generate a unique id for the video
-    video.src = "/videos/sample_video.mp4"; // Set the source of your video
-    video.style.position = 'absolute';
-    video.style.display = 'block';
-    video.style.width = "320px"; // Adjust width as needed
-    video.style.height = "240px"; // Adjust height as needed
-    video.controls = true; // Show video controls like play, pause, etc.
-    video.style.left = dropX + 'px';
-    video.style.top = dropY + 'px';
-    checkForResizeTemplate(e.target, video);
+    const button = document.createElement('button');
+    button.className = 'button-field';
+    button.id = `element${elementId++}`; // Generate a unique id
+    // button.src = "/videos/sample_video.mp4"; 
+    button.innerText = "Button";
+    button.style.border = "0px solid white";
+    button.style.height = "50px";
+    button.style.width = "100px";
+    button.style.position = 'absolute';
+    button.style.display = 'block';
+    button.style.backgroundColor = 'black';
+    button.style.color = 'white';
+    button.style.left = dropX + 'px';
+    button.style.top = dropY + 'px';
+    checkForResizeTemplate(e.target, button);
   }
   else if (selectedElement === "container-img") {
     // Create a video element at the drop location

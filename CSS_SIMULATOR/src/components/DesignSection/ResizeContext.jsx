@@ -77,7 +77,7 @@ function handleReference(simwindowRef, resizableTemplateRef) {
             targetElement = e.target;
             
             // Render text related properties only for text elements
-            targetElement.tagName == 'P' || targetElement.tagName == "H1" ? setIsTextElement(true) : setIsTextElement(false);
+            targetElement.tagName == 'P' || targetElement.tagName == "H1" || targetElement.tagName == 'BUTTON' ? setIsTextElement(true) : setIsTextElement(false);
 
             // Clone the template and attach it to the dropped element
             resizable = resizableTemplateElement.cloneNode(true);
