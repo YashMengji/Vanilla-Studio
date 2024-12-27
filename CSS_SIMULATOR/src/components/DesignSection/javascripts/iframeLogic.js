@@ -88,6 +88,7 @@ function handleDrop(e, simwindowRef) {
     button.style.display = 'block';
     button.style.backgroundColor = 'black';
     button.style.color = 'white';
+    button.contentEditable = 'true';
     button.style.left = dropX + 'px';
     button.style.top = dropY + 'px';
     checkForResizeTemplate(e.target, button);
