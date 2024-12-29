@@ -8,15 +8,19 @@ export function initSections() {
     // create header and append
     let header = document.createElement('header');
     header.id = `element${incElementCounter()}`;
+    header.classList.add('section');
     let logoDiv = document.createElement('div');
     logoDiv.id = `element${incElementCounter()}`;
+    logoDiv.classList.add('section')
     let nav = document.createElement('nav');
     nav.id = `element${incElementCounter()}`;
+    nav.classList.add('section');
 
     logoDiv.textContent = "VanillaStudio";
     for(let i = 0; i < 3 ; i++) {
         let link = document.createElement('a');
         link.id = `element${incElementCounter()}`;
+        link.classList.add('section');
         if(i == 0) {
             link.textContent = "Home";
         }else if(i == 1) {
@@ -36,19 +40,21 @@ export function initSections() {
     justify-content: space-between;
     padding: 2rem 5rem;`
 
-    console.log(header);
     simwindow.appendChild(header);
 
     // create main and append 
     let main = document.createElement('main');
     main.id = `element${incElementCounter()}`;
+    main.classList.add('section');
     main.style = `background-color: lightblue; height: 100vh`;
     simwindow.appendChild(main);
     
     let footer = document.createElement("footer");
     footer.id = `element${incElementCounter()}`;
+    footer.classList.add('section');
     let footerDiv = document.createElement("div");
     footerDiv.id = `element${incElementCounter()}`;
+    footerDiv.classList.add('section');
     footerDiv.textContent = "Made with Vanilla Studio";
     footer.appendChild(footerDiv);
     footer.style = `

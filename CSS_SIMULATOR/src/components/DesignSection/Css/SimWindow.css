@@ -9,14 +9,20 @@
   /* background-color: lightcoral; */
   background-color: white;
   box-shadow: var(--shadow-gray) 0px 0px 29px 0px;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   overflow: auto;
   scrollbar-width: thin;
+  box-sizing: content-box;
   /* padding: 10px; */
 }
 
 /*----------------------------resizableTemplate style------------------------------*/
 
+.selected {
+  outline-offset: -2px;
+  outline: 2px solid rgb(0, 94, 255);
+  /* border: 2px solid rgb(0, 94, 255); */
+}
 .resizable {
   outline: 2px solid rgb(0, 200, 255);
   width: 200px;

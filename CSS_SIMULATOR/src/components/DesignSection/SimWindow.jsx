@@ -16,7 +16,7 @@ function SimWindow() {
     getReference(simwindowRef);
     getReferenceInitSections(simwindowRef);
     initSections();
-    console.log(simwindowRef.current.outerHTML.replace(/<div class="resizable" id="resizableTemplate" style="display: none;"><div class="handle top-left"><\/div><div class="handle top-center"><\/div><div class="handle top-right"><\/div><div class="handle right-center"><\/div><div class="handle bottom-right"><\/div><div class="handle bottom-center"><\/div><div class="handle bottom-left"><\/div><div class="handle left-center"><\/div><\/div>/g, '').replace(/<div class="div-simwindow">/, '').replace(/<\/div>$/, ''));
+    // console.log(simwindowRef.current.outerHTML.replace(/<div class="resizable" id="resizableTemplate" style="display: none;"><div class="handle top-left"><\/div><div class="handle top-center"><\/div><div class="handle top-right"><\/div><div class="handle right-center"><\/div><div class="handle bottom-right"><\/div><div class="handle bottom-center"><\/div><div class="handle bottom-left"><\/div><div class="handle left-center"><\/div><\/div>/g, '').replace(/<div class="div-simwindow">/, '').replace(/<\/div>$/, ''));
   }, []);
 
   useEffect(() => {

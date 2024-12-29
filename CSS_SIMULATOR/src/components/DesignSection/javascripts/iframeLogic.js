@@ -47,16 +47,21 @@ function handleDrop(e, simwindowRef) {
   else if (selectedElement === "image-img") {
     // Create an button at the drop location
     const image = document.createElement('img');
+    const imgDiv = document.createElement('div');
+    imgDiv.style.width = "100px";
+    imgDiv.style.height = "100px";
+    imgDiv.style.position = 'relative';
+
     image.className = 'image-field';
     image.id = `element${incElementCounter()}`; // Generate a unique id for the image  
     image.src = "/images/sample_img.jpg";
-    image.style.position = 'absolute';
     image.style.display = 'block';
     image.style.width = "100px";
     image.style.height = "100px";
-    image.style.left = dropX + 'px';
-    image.style.top = dropY + 'px';
-    checkForResizeTemplate(e.target, image);
+    // image.style.left = dropX + 'px';
+    // image.style.top = dropY + 'px';
+    imgDiv.appendChild(image);
+    checkForResizeTemplate(e.target, imgDiv);
   }
   else if (selectedElement === "para-img") {
     // Create a paragraph at the drop location
@@ -97,14 +102,15 @@ function handleDrop(e, simwindowRef) {
     const container = document.createElement('div');
     container.className = 'container-field';
     container.id = `element${incElementCounter()}`; // Generate a unique id for the container
-    container.style.position = 'absolute';
+    container.style.position = 'relative';
+    container.style.zIndex="0";
     // container.style.display = 'flex';
     // container.style.justifyContent = 'flex-start';
     container.style.backgroundColor = '#f0f8ff';
     container.style.width = "320px"; // Adjust width as needed
     container.style.height = "240px"; // Adjust height as needed
-    container.style.left = dropX + 'px';
-    container.style.top = dropY + 'px';
+    // container.style.left = dropX + 'px';
+    // container.style.top = dropY + 'px';
     container.style.border = '0px solid black';
     container.style.borderOpacity = '1';
     container.style.boxSizing = 'border-box';

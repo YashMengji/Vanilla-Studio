@@ -61,56 +61,99 @@ let simwindow, simwindowRect, currentParentRect;
 function handleReference(simwindowRef, resizableTemplateRef) {
     // const { setWidth, setHeight } = useContext(ResizeContext); 
     simwindow = simwindowRef.current;
+    
     // simwindowRect = simwindow.getBoundingClientRect();
     let resizableTemplateElement = resizableTemplateRef.current;
     // elementRef.current = simwindow;
 
     simwindow.addEventListener('click', (e) => {
+        // this is condition for click event
         if(
             e.target.classList[0] != 'div-simwindow' 
             && e.target.id != 'resizableTemplate' 
             && e.target.classList[0] != 'handle'
         ) { 
+            
             if (resizable) {
                 resizable.remove();
             }
-            targetElement = e.target;
             
+            targetElement = e.target;
+            console.log(targetElement)
             // Render text related properties only for text elements
             targetElement.tagName == 'P' || targetElement.tagName == "H1" || targetElement.tagName == 'BUTTON' ? setIsTextElement(true) : setIsTextElement(false);
 
-            // Clone the template and attach it to the dropped element
-            resizable = resizableTemplateElement.cloneNode(true);
-            resizable.style.display = 'block';
-            resizable.style.position = 'absolute';
-            resizable.style.width = e.target.offsetWidth + 'px';
-            resizable.style.height = e.target.offsetHeight + 'px';
-            resizable.style.top = e.target.offsetTop + 'px';
-            resizable.style.left = e.target.offsetLeft + 'px';
+            // specific behavior for simwindow sections 
+            if(targetElement.classList[0] == "section") {
+                let controllers = simwindow.querySelectorAll(".handle");
+                if(controllers) {
+                    controllers.forEach((controller) => {
+                        controller.remove();
+                    })
+                }
+                // getting all section elements for further click event
+                let sections = simwindow.querySelectorAll(".section");
+                sections.forEach((section) => {
+                    if(section.classList[1] == "selected"){
+                        section.classList.remove("selected");
+                    } 
+                })
+                targetElement.classList.add("selected");
 
-            // getting nearest parent of selected element 
-            targetElementParent = targetElement.parentElement;
-            // getting dimentions of that parent for future use(ex: while dragging)
-            currentParentRect = targetElementParent.getBoundingClientRect();
-            // pushing the resizable template element inside the parent of selected element
-            targetElementParent.appendChild(resizable);
+            } else {
+                
+                let sections = simwindow.querySelectorAll(".section");
+                sections.forEach((section) => {
+                    if(section.classList[1] == "selected"){
+                        section.classList.remove("selected");
+                    } 
+                })
+                // apply resize controllers on the targetElement
+                for(let i = 0; i < 3; i++) {
+                    let controller = document.createElement('div');
+                    controller.classList.add("handle");
+                    switch(i) {
+                        case 0: controller.classList.add("right-center");
+                                break;
+                        case 1: controller.classList.add("bottom-right");
+                                break;
+                        case 2: controller.classList.add("bottom-center");
+                                break;
+                    }  
+                    if(targetElement.classList[0] == "image-field") {
+                        targetElement.parentElement.appendChild(controller);
+                    } else {
+                        targetElement.appendChild(controller);
+                    }
+                    
+                }
 
-            console.log(resizable.getBoundingClientRect());
+                // getting nearest parent of selected element 
+                targetElementParent = targetElement.parentElement;
+                // getting dimentions of that parent for future use(ex: while dragging)
+                currentParentRect = targetElementParent.getBoundingClientRect();
+                // pushing the resizable template element inside the parent of selected element
+                // targetElementParent.appendChild(resizable);
 
-            // simwindow.appendChild(resizable);  
-            setWidth(resizable.offsetWidth);
-            setHeight(resizable.offsetHeight);
-            setXPosition(resizable.offsetLeft);
-            setYPosition(resizable.offsetTop);
-            elementRef.current = targetElement;
+                // console.log(resizable.getBoundingClientRect());
+
+                // simwindow.appendChild(resizable);  
+                // setWidth(resizable.offsetWidth);
+                // setHeight(resizable.offsetHeight);
+                // setXPosition(resizable.offsetLeft);
+                // setYPosition(resizable.offsetTop);
+                elementRef.current = targetElement;
+                
+                // resizeTemplate.current = resizable;
+
+                // setWidth = resizable.offsetWidth;
+                // setHeight = resizable.offsetHeight;
+                // Apply the resize and drag functionality to the new resizable element
+                applyResizeAndDrag(resizable, e.target,width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition);
+                // Make simwindow focusable and set focus to it 
+            }
+
             
-            resizeTemplate.current = resizable;
-
-            // setWidth = resizable.offsetWidth;
-            // setHeight = resizable.offsetHeight;
-            // Apply the resize and drag functionality to the new resizable element
-            applyResizeAndDrag(resizable, e.target,width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition);
-            // Make simwindow focusable and set focus to it 
         }
     });
 
@@ -148,7 +191,7 @@ window.addEventListener('keydown', (e) => {
 
 function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition) {
             // All code below is of RESIZE (below resize is drag)
-            const handles = resizable.querySelectorAll('.handle');
+            const handles = target.querySelectorAll('.handle');
             let offsetX, offsetY, isResizing = false;
 
             handles.forEach(handle => {
@@ -179,48 +222,39 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
                 window.addEventListener('mouseup', stopResize);
 
                 function resize(event) {
-                    const rect = resizable.getBoundingClientRect();
+                    const rect = target.getBoundingClientRect();
 
                     switch(handleType) {
                         case 'top-left':
-                            resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - currentParentRect.top + 'px';
-                            resizable.style.left = event.clientX - currentParentRect.left + 'px';
+                            target.style.width = rect.right - event.clientX + 'px';
+                            target.style.height = rect.bottom - event.clientY + 'px';
+                            target.style.top = event.clientY - currentParentRect.top + 'px';
+                            target.style.left = event.clientX - currentParentRect.left + 'px';
                             break;
                         case 'top-center':
-                            // const newHeight = rect.bottom - event.clientY;
-
-                            // // If the calculated height is less than 2, set it to 2px, otherwise use the calculated height
-                            // if (newHeight >= 2) {
-                            //     resizable.style.height = newHeight + 'px';
-                            //     resizable.style.top = event.clientY - currentParentRect.top + 'px';
-                            // } else {
-                            //     resizable.style.height = '2px';
-                            //     resizable.style.top += 0;
-                            // }
-                            resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                            
+                            target.style.height = rect.bottom - event.clientY + 'px';
+                            target.style.top = event.clientY - currentParentRect.top + 'px';
                             break;
                         case 'top-right':
-                            resizable.style.width = event.clientX - rect.left + 'px';
-                            resizable.style.height = rect.bottom - event.clientY + 'px';
-                            resizable.style.top = event.clientY - currentParentRect.top + 'px';
+                            target.style.width = event.clientX - rect.left + 'px';
+                            target.style.height = rect.bottom - event.clientY + 'px';
+                            target.style.top = event.clientY - currentParentRect.top + 'px';
                             break;
                         case 'right-center':
-                            resizable.style.width = event.clientX - rect.left + 'px';
+                            target.style.width = event.clientX - rect.left + 'px';
                             break;
                         case 'bottom-right':
-                            resizable.style.width = event.clientX - rect.left + 'px';
-                            resizable.style.height = event.clientY - rect.top + 'px';
+                            target.style.width = event.clientX - rect.left + 'px';
+                            target.style.height = event.clientY - rect.top + 'px';
                             break;
                         case 'bottom-center':
-                            resizable.style.height = event.clientY - rect.top + 'px';
+                            target.style.height = event.clientY - rect.top + 'px';
                             break;
                         case 'bottom-left':
-                            resizable.style.width = rect.right - event.clientX + 'px';
-                            resizable.style.height = event.clientY - rect.top + 'px';
-                            resizable.style.left = event.clientX - currentParentRect.left + 'px';
+                            target.style.width = rect.right - event.clientX + 'px';
+                            target.style.height = event.clientY - rect.top + 'px';
+                            target.style.left = event.clientX - currentParentRect.left + 'px';
                             break;
                         case 'left-center':
                             // Only update width if the new width is positive
@@ -230,61 +264,15 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
                             
                             
                             if (newWidth >= 2) {  // Prevent shrinking too small
-                                resizable.style.width = newWidth + 'px';
-                                resizable.style.left = adjustedLeft + 'px';
+                                target.style.width = newWidth + 'px';
+                                target.style.left = adjustedLeft + 'px';
                             } else {
-                                resizable.style.width = '2px';  // Minimum width
+                                target.style.width = '2px';  // Minimum width
                             }
                             break;
                     }
 
-                    // switch(handleType) {
-                    //     case 'top-left':
-                    //         resizable.style.width = rect.right - event.clientX + 'px';
-                    //         resizable.style.height = rect.bottom - event.clientY + 'px';
-                    //         resizable.style.top = event.clientY - currentParentRect.top  + 'px';
-                    //         resizable.style.left = event.clientX - currentParentRect.left  + 'px';
-                    //         break;
-                    //     case 'top-center':
-                    //         // const newHeight = rect.bottom - event.clientY;
-
-                    //         // If the calculated height is less than 2, set it to 2px, otherwise use the calculated height
-                    //         // if (newHeight >= 2) {
-                    //         //     resizable.style.height = newHeight + 'px';
-                    //         //     resizable.style.top = event.clientY - currentParentRect.top + 'px';
-                    //         // } else {
-                    //         //     resizable.style.height = '2px';
-                    //         //     resizable.style.top += 0;
-                    //         // }
-                            
-                    //         resizable.style.height = rect.bottom - event.clientY + 'px';
-                    //         resizable.style.top = event.clientY - currentParentRect.top + 'px';
-                    //         break;
-                    //     case 'top-right':
-                    //         resizable.style.width = event.clientX - rect.left + 'px';
-                    //         resizable.style.height = rect.bottom - event.clientY + 'px';
-                    //         resizable.style.top = event.clientY - currentParentRect.top + 'px';
-                    //         break;
-                    //     case 'right-center':
-                    //         resizable.style.width = event.clientX - rect.left + 'px';
-                    //         break;
-                    //     case 'bottom-right':
-                    //         resizable.style.width = event.clientX - rect.left + 'px';
-                    //         resizable.style.height = event.clientY - rect.top + 'px';
-                    //         break;
-                    //     case 'bottom-center':
-                    //         resizable.style.height = event.clientY - rect.top+ 'px';
-                    //         break;
-                    //     case 'bottom-left':
-                    //         resizable.style.width = rect.right - event.clientX + 'px';
-                    //         resizable.style.height = event.clientY - rect.top + 'px';
-                    //         resizable.style.left = event.clientX - currentParentRect.left  + 'px';
-                    //         break;
-                    //     case 'left-center':
-                    //         resizable.style.width = rect.right - event.clientX + 'px';
-                    //         resizable.style.left = event.clientX - currentParentRect.left + 'px';
-                    //         break;
-                    // }
+                    
                     updateTargetSize();
                 }
 
@@ -298,16 +286,16 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
             }
 
             function updateTargetSize() {
-              target.style.width = resizable.offsetWidth + 'px';
-              target.style.height = resizable.offsetHeight + 'px';
-              target.style.top = resizable.offsetTop + 'px';
-              target.style.left = resizable.offsetLeft + 'px';
+            //   target.style.width = resizable.offsetWidth + 'px';
+            //   target.style.height = resizable.offsetHeight + 'px';
+            //   target.style.top = resizable.offsetTop + 'px';
+            //   target.style.left = resizable.offsetLeft + 'px';
 
                 // Update context values
-                setWidth(resizable.offsetWidth);
-                setHeight(resizable.offsetHeight);
-                setXPosition(resizable.offsetLeft);
-                setYPosition(resizable.offsetTop);  
+                setWidth(target.offsetWidth);
+                setHeight(target.offsetHeight);
+                setXPosition(target.offsetLeft);
+                setYPosition(target.offsetTop);  
                 // resizableTemplateRef.current.style.width = `${width}px`;
                 // resizableTemplateRef.current.style.height = `${height}px`;
                 // resizable.style.width = `${width}px`;
@@ -317,38 +305,41 @@ function applyResizeAndDrag(resizable, target, width, height, setWidth, setHeigh
             // All code below is For DRAG
             let dragOffsetX;
             let dragOffsetY;
-            resizable.addEventListener('mousedown', (e) => {
-                if (isResizing) return;
-                e.preventDefault();
-                //rect -> dimensions of resizable template div
-                let rect = resizable.getBoundingClientRect()
+            // target.addEventListener('mousedown', (e) => {
+            //     if (isResizing) return;
+            //     e.preventDefault();
+            //     //rect -> dimensions of resizable template div
+            //     let rect = target.getBoundingClientRect()
 
-                dragOffsetX = e.clientX - rect.left;
-                dragOffsetY = e.clientY - rect.top;
+            //     dragOffsetX = e.clientX - rect.left;
+            //     dragOffsetY = e.clientY - rect.top;
+                
+            //     // dragOffsetX = e.clientX;
+            //     // dragOffsetY = e.clientY;
 
-                document.addEventListener('mousemove', onMouseMove);
-                document.addEventListener('mouseup', onMouseUp);
+            //     document.addEventListener('mousemove', onMouseMove);
+            //     document.addEventListener('mouseup', onMouseUp);
                       
-            });
+            // });
 
-            function onMouseMove(e) {
-                if (isResizing) return;
-                document.body.style.cursor = 'move';
-                // const newX = e.clientX - simwindowRect.left - dragOffsetX;
-                // const newY = e.clientY - simwindowRect.top - dragOffsetY;
-                const newX = e.clientX - currentParentRect.left - dragOffsetX;
-                const newY = e.clientY - currentParentRect.top - dragOffsetY;
-                resizable.style.left = `${newX}px`;
-                resizable.style.top = `${newY}px`;
+            // function onMouseMove(e) {
+            //     if (isResizing) return;
+            //     document.body.style.cursor = 'move';
+            //     // const newX = e.clientX - simwindowRect.left - dragOffsetX;
+            //     // const newY = e.clientY - simwindowRect.top - dragOffsetY;
+            //     const newX = e.clientX - currentParentRect.left - dragOffsetX;
+            //     const newY = e.clientY - currentParentRect.top - dragOffsetY;
+            //     target.style.left = `${newX}px`;
+            //     target.style.top = `${newY}px`;
 
-                updateTargetSize();
-            }
+            //     updateTargetSize();
+            // }
 
-            function onMouseUp() {
-                document.body.style.cursor = 'default';
-                document.removeEventListener('mousemove', onMouseMove);
-                document.removeEventListener('mouseup', onMouseUp);
-            }
+            // function onMouseUp() {
+            //     document.body.style.cursor = 'default';
+            //     document.removeEventListener('mousemove', onMouseMove);
+            //     document.removeEventListener('mouseup', onMouseUp);
+            // }
 }
 
 

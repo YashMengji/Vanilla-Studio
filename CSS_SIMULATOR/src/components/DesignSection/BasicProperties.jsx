@@ -91,19 +91,19 @@ function BasicProperties() {
 
   // Function to update element dimensions
   const updateElementDimensions = (newWidth, newHeight) => {
-    if (elementRef.current && resizeTemplate) {
+    if (elementRef.current) {
       elementRef.current.style.width = `${newWidth}px`;
       elementRef.current.style.height = `${newHeight}px`;
-      resizeTemplate.current.style.width = `${newWidth}px`;
-      resizeTemplate.current.style.height = `${newHeight}px`;
+      // resizeTemplate.current.style.width = `${newWidth}px`;
+      // resizeTemplate.current.style.height = `${newHeight}px`;
     }
   };
   const updatePosition = (newXPosition, newYPosition) => {
-    if (elementRef.current && resizeTemplate) {
+    if (elementRef.current) {
       elementRef.current.style.left = `${newXPosition}px`;
       elementRef.current.style.top = `${newYPosition}px`;
-      resizeTemplate.current.style.left = `${newXPosition}px`;
-      resizeTemplate.current.style.top = `${newYPosition}px`;
+      // resizeTemplate.current.style.left = `${newXPosition}px`;
+      // resizeTemplate.current.style.top = `${newYPosition}px`;
     }
   };
   const updateElementProperty = (property, value) => {
@@ -183,8 +183,8 @@ function BasicProperties() {
   }
 
   useEffect(() => {
-    updateElementDimensions(width, height); // Initialize with current values
-    updatePosition(xposition, yposition);
+    // updateElementDimensions(width, height); // Initialize with current values
+    // updatePosition(xposition, yposition);
   }, [width, height, xposition, yposition]);
 
   
