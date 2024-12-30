@@ -32,6 +32,14 @@ function BasicProperties() {
   const [backgroundColor, setBackgroundColor] = useState('#f0f8ff');
   const [fontColor, setFontColor] = useState('#000000');
   const [fontSize, setFontSize] = useState('16');
+  const [paddingLeft, setPaddingLeft] = useState(0);
+  const [paddingRight, setPaddingRight] = useState(0);
+  const [paddingTop, setPaddingTop] = useState(0);
+  const [paddingBottom, setPaddingBottom] = useState(0);
+  const [marginLeft, setMarginLeft] = useState(0);
+  const [marginRight, setMarginRight] = useState(0);
+  const [marginTop, setMarginTop] = useState(0);
+  const [marginBottom, setMarginBottom] = useState(0);
 
   const handleXPosition = (e) => { // used in onChange of input 
     const newXPosition = e.target.value;
@@ -129,6 +137,13 @@ function BasicProperties() {
       else if(property === "fontSize") {
         elementRef.current.style[property] = `${value}px`;
       }
+      else if(property === "paddingTop" || property === "paddingRight" || property === "paddingBottom" || property === "paddingLeft") {
+        elementRef.current.style[property] = `${value}px`;
+      }
+      else if(property === "marginTop" || property === "marginRight" || property === "marginBottom" || property === "marginLeft") {
+        elementRef.current.style[property] = `${value}px`;
+      }
+
       // console.log(elementRef.current.style.property);
     }
   };
@@ -216,37 +231,7 @@ function BasicProperties() {
           Size
         </div>
         <div className="div-edit-dimension">
-          <div className="div-xy-dim">
-            <div className="div-x-dim">
-              <div className="div-x-dim-text">
-                X 
-              </div>
-              <div className="div-x-dim-input">
-                <input 
-                type="number" 
-                className="x-dim-input" 
-                onChange={(e) => handleXPosition(e)}
-                value={xposition}
-                />
-                <div className="div-px-text">px*</div>
-              </div>
-            </div>
-            <div className="div-y-dim">
-              <div className="div-y-dim-text">
-                Y 
-              </div> 
-              <div className="div-y-dim-input">
-                <input 
-                type="number" 
-                className="y-dim-input" 
-                onChange={(e) => handleYPosition(e)}
-                value={yposition}
-                />
-                <div className="div-px-text">px*</div>
-              </div>
-            </div>
-          </div>
-          <div className="div-wh-dim">
+        <div className="div-wh-dim">
             <div className="div-w-dim">
               <div className="div-w-dim-text" onClick={()=>{console.log(widthInput)}}>
                 W 
@@ -276,6 +261,100 @@ function BasicProperties() {
               </div>
             </div>
           </div>
+          <div className="div-xy-dim">
+            <div className="div-x-dim">
+              <div className="div-x-dim-text">
+                Paddding
+              </div>
+              <div className="div-x-dim-input">
+                <input 
+                type="number" 
+                className="x-dim-input first" 
+                onChange={
+                  (e) => {
+                    setPaddingTop(e.target.value)
+                    updateElementProperty("paddingTop", paddingTop)
+                  }
+                }
+                value={paddingTop}
+                />
+                <input
+                type="number"
+                className="x-dim-input"
+                onChange={(e) => {
+                  setPaddingRight(e.target.value)
+                  updateElementProperty("paddingRight", paddingRight)
+                }}
+                value={paddingRight}
+                />
+                <input
+                type="number"
+                className="x-dim-input"
+                onChange={(e) => {
+                  setPaddingBottom(e.target.value)
+                  updateElementProperty("paddingBottom", paddingBottom)
+                }}
+                value={paddingBottom}
+                />
+                <input
+                type="number"
+                className="x-dim-input last"
+                onChange={(e) => {
+                  setPaddingLeft(e.target.value)
+                  updateElementProperty("paddingLeft", paddingLeft)
+                }}
+                value={paddingLeft}
+                />
+                
+              </div>
+            </div>
+            <div className="div-y-dim">
+              <div className="div-y-dim-text">
+                Margin
+              </div> 
+              <div className="div-y-dim-input">
+                <input 
+                type="number" 
+                className="y-dim-input first" 
+                onChange={
+                  (e) => {
+                    setMarginTop(e.target.value);
+                    updateElementProperty("marginTop", marginTop);
+                  }
+                }
+                value={marginTop}
+                />
+                <input
+                type="number"
+                className="y-dim-input"
+                onChange={(e) => {
+                  setMarginRight(e.target.value);
+                  updateElementProperty("marginRight", marginRight);
+                }}
+                value={marginRight}
+                />
+                <input
+                type="number"
+                className="y-dim-input"
+                onChange={(e) => {
+                  setMarginBottom(e.target.value);
+                  updateElementProperty("marginBottom", marginBottom);
+                }}
+                value={marginBottom}
+                />
+                <input
+                type="number"
+                className="y-dim-input last"
+                onChange={(e) => {
+                  setMarginLeft(e.target.value);
+                  updateElementProperty("marginLeft", marginLeft);
+                }}
+                value={marginLeft}
+                />
+              </div>
+            </div>
+          </div>
+         
         </div>
       </div>
       <div className="div-break-between border"></div>
