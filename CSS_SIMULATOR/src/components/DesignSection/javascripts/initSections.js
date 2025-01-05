@@ -11,16 +11,16 @@ export function initSections() {
     header.classList.add('section');
     let logoDiv = document.createElement('div');
     logoDiv.id = `element${incElementCounter()}`;
-    logoDiv.classList.add('section')
+    // logoDiv.classList.add('section')
     let nav = document.createElement('nav');
     nav.id = `element${incElementCounter()}`;
-    nav.classList.add('section');
+    // nav.classList.add('section');
 
     logoDiv.textContent = "VanillaStudio";
     for(let i = 0; i < 3 ; i++) {
         let link = document.createElement('a');
         link.id = `element${incElementCounter()}`;
-        link.classList.add('section');
+        // link.classList.add('section');
         if(i == 0) {
             link.textContent = "Home";
         }else if(i == 1) {
@@ -28,7 +28,6 @@ export function initSections() {
         }else if(i == 2) {
             link.textContent = "Contact";
         }
-        // links.push(link);
         link.style = `text-decoration:none; color: black;`;
         nav.appendChild(link);
     }
@@ -36,6 +35,7 @@ export function initSections() {
     header.appendChild(logoDiv);
     header.appendChild(nav);
     header.style = `
+    position:relative;
     display:flex; 
     justify-content: space-between;
     padding: 2rem 5rem;`
@@ -46,18 +46,20 @@ export function initSections() {
     let main = document.createElement('main');
     main.id = `element${incElementCounter()}`;
     main.classList.add('section');
-    main.style = `background-color: lightblue; height: 100vh`;
+    main.style = `position: relative; height: 100vh`;
     simwindow.appendChild(main);
     
     let footer = document.createElement("footer");
     footer.id = `element${incElementCounter()}`;
     footer.classList.add('section');
+    footer.classList.add('footerElement');
     let footerDiv = document.createElement("div");
     footerDiv.id = `element${incElementCounter()}`;
-    footerDiv.classList.add('section');
+    // footerDiv.classList.add('section');
     footerDiv.textContent = "Made with Vanilla Studio";
     footer.appendChild(footerDiv);
     footer.style = `
+    position: relative;
     display: flex;
     justify-content: center;
     padding: 2rem 0rem;

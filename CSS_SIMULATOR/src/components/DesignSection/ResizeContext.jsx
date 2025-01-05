@@ -1,5 +1,5 @@
 import React, { createContext, useRef, useState, useContext, useEffect } from 'react';
-
+import { incElementCounter } from './javascripts/elementCounter';
 // Create a context for the resizable element's dimensions
 const ResizeContext = createContext();
 
@@ -58,33 +58,72 @@ export const ResizeProvider = ({ children }) => {
 let resizable, targetElement, targetElementParent;
 let simwindow, simwindowRect, currentParentRect;
 
-function handleReference(simwindowRef, resizableTemplateRef) {
-    // const { setWidth, setHeight } = useContext(ResizeContext); 
+function handleReference(simwindowRef) {
     simwindow = simwindowRef.current;
     
-    // simwindowRect = simwindow.getBoundingClientRect();
-    let resizableTemplateElement = resizableTemplateRef.current;
-    // elementRef.current = simwindow;
+    // create a plus icon for adding new section 
+    let addBtn = document.createElement('div');
+    let plusIcon = document.createElement('span');
+    plusIcon.classList.add("material-symbols-outlined");
+    plusIcon.textContent = "add";
+
+    addBtn.setAttribute('class', 'add-section-btn');
+    
+    addBtn.appendChild(plusIcon);
+    
+    addBtn.addEventListener('click', () => {
+        // console.log(addBtn.parentElement);
+        let section = document.createElement('div');
+        section.style = "position: relative; height: 100vh;";
+        section.classList.add('section');
+        section.id = `element${incElementCounter()}`;
+        addBtn.parentElement.insertAdjacentElement("afterend", section);
+        // simwindow.appendChild(section);
+    })
+    // hover effects 
+    simwindow.addEventListener('mouseover', (e) => {
+        if(e.target.classList[0] != 'div-simwindow') {
+            if(e.target.classList[0] != "add-section-btn" && e.target.classList[0] != "material-symbols-outlined") {
+                e.target.classList.add('element-hover');
+                if(e.target.classList[1] != 'footerElement') {
+                    e.target.appendChild(addBtn);
+                }
+            } 
+        }
+          
+    })
+
+    simwindow.addEventListener('mouseout', (e) => {
+        // Check if mouseout is leaving the section entirely
+        const isLeavingSection = !e.relatedTarget || !e.target.contains(e.relatedTarget);
+    
+        if (isLeavingSection) {
+            e.target.classList.remove('element-hover');
+            if (e.target.classList[0] === "section") {
+                addBtn.remove();
+            }
+        }
+    });
 
     simwindow.addEventListener('click', (e) => {
         // this is condition for click event
         if(
             e.target.classList[0] != 'div-simwindow' 
-            && e.target.id != 'resizableTemplate' 
+            && e.target.classList[0] != 'material-symbols-outlined'
             && e.target.classList[0] != 'handle'
         ) { 
-            
-            if (resizable) {
-                resizable.remove();
-            }
-            
+            addBtn.remove();
             targetElement = e.target;
-            console.log(targetElement)
+            console.log("target element : ",targetElement);
             // Render text related properties only for text elements
             targetElement.tagName == 'P' || targetElement.tagName == "H1" || targetElement.tagName == 'BUTTON' ? setIsTextElement(true) : setIsTextElement(false);
 
             // specific behavior for simwindow sections 
-            if(targetElement.classList[0] == "section") {
+            let sectionElement, isChild = false;
+            if(targetElement.parentElement.classList[0] == "section") {
+                isChild = true;
+            }
+            if(targetElement.classList[0] == "section" || isChild) {
                 let controllers = simwindow.querySelectorAll(".handle");
                 if(controllers) {
                     controllers.forEach((controller) => {
@@ -108,6 +147,12 @@ function handleReference(simwindowRef, resizableTemplateRef) {
                         section.classList.remove("selected");
                     } 
                 })
+                let controllers = simwindow.querySelectorAll(".handle");
+                if(controllers) {
+                    controllers.forEach((controller) => {
+                        controller.remove();
+                    })
+                }
                 // apply resize controllers on the targetElement
                 for(let i = 0; i < 3; i++) {
                     let controller = document.createElement('div');
@@ -128,30 +173,24 @@ function handleReference(simwindowRef, resizableTemplateRef) {
                     
                 }
 
-                // getting nearest parent of selected element 
-                targetElementParent = targetElement.parentElement;
-                // getting dimentions of that parent for future use(ex: while dragging)
-                currentParentRect = targetElementParent.getBoundingClientRect();
-                // pushing the resizable template element inside the parent of selected element
-                // targetElementParent.appendChild(resizable);
-
-                // console.log(resizable.getBoundingClientRect());
-
-                // simwindow.appendChild(resizable);  
-                // setWidth(resizable.offsetWidth);
-                // setHeight(resizable.offsetHeight);
-                // setXPosition(resizable.offsetLeft);
-                // setYPosition(resizable.offsetTop);
-                elementRef.current = targetElement;
                 
-                // resizeTemplate.current = resizable;
-
-                // setWidth = resizable.offsetWidth;
-                // setHeight = resizable.offsetHeight;
-                // Apply the resize and drag functionality to the new resizable element
-                applyResizeAndDrag(resizable, e.target,width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition);
-                // Make simwindow focusable and set focus to it 
             }
+            // getting nearest parent of selected element 
+            targetElementParent = targetElement.parentElement;
+            // getting dimentions of that parent for future use(ex: while dragging)
+            currentParentRect = targetElementParent.getBoundingClientRect();
+            // pushing the resizable template element inside the parent of selected element
+
+            elementRef.current = targetElement;
+            console.log("element reference : ", elementRef.current);
+            
+            // if the selected element is img then do this :
+            if(targetElement.classList[0] == 'image-field') {
+                targetElement = targetElement.parentElement;
+                console.log(targetElement);
+            }
+            // Apply the resize and drag functionality to the new resizable element
+            applyResizeAndDrag(resizable, targetElement,width, height, setWidth, setHeight, resizableTemplateRef, setXPosition, setYPosition);
 
             
         }
