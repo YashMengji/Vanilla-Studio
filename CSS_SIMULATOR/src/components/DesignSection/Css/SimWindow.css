@@ -18,6 +18,30 @@
 
 /*----------------------------resizableTemplate style------------------------------*/
 
+.element-hover {
+  outline-offset: -2px;
+  outline: 2px solid rgb(53, 127, 255);
+  background-color: rgb(199, 219, 255);
+}
+.add-section-btn{
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: 2px solid black;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.add-section-btn:hover {
+  /* outline: 2px solid rgb(0, 94, 255); */
+  background-color: rgb(0, 94, 255);
+  color: white;
+}
+#add-section-btn:hover section {
+  border-bottom: 2px solid rgb(0, 94, 255);
+}
 .selected {
   outline-offset: -2px;
   outline: 2px solid rgb(0, 94, 255);

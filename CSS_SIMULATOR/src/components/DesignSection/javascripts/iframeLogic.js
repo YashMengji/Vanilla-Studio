@@ -36,11 +36,11 @@ function handleDrop(e, simwindowRef) {
     title.className = 'title-field';
     title.id = `element${incElementCounter()}`; // Generate a unique id for the title
     title.textContent = "Your Title Here"; // Set the title text
-    title.style.position = 'absolute';
+    title.style.position = 'relative';
     title.style.display = 'block';
     title.style.fontWeight = 'block';
-    title.style.left = dropX + 'px';
-    title.style.top = dropY + 'px';
+    // title.style.left = dropX + 'px';
+    // title.style.top = dropY + 'px';
     title.contentEditable = 'true';
     checkForResizeTemplate(e.target, title);
   }
@@ -56,8 +56,8 @@ function handleDrop(e, simwindowRef) {
     image.id = `element${incElementCounter()}`; // Generate a unique id for the image  
     image.src = "/images/sample_img.jpg";
     image.style.display = 'block';
-    image.style.width = "100px";
-    image.style.height = "100px";
+    image.style.width = "100%";
+    image.style.height = "100%";
     // image.style.left = dropX + 'px';
     // image.style.top = dropY + 'px';
     imgDiv.appendChild(image);
@@ -69,12 +69,12 @@ function handleDrop(e, simwindowRef) {
     paragraph.className = 'paragraph-field';
     paragraph.id = `element${incElementCounter()}`; // Generate a unique id for the paragraph
     paragraph.textContent = "Your default text here"; // Set default text for the paragraph
-    paragraph.style.position = 'absolute';
+    paragraph.style.position = 'relative';
     paragraph.style.display = 'block';
     paragraph.style.width = "fit-content"; // Adjust width as needed
     paragraph.style.height = "fit-content"; // Adjust height as needed
-    paragraph.style.left = dropX + 'px';
-    paragraph.style.top = dropY + 'px';
+    // paragraph.style.left = dropX + 'px';
+    // paragraph.style.top = dropY + 'px';
     paragraph.contentEditable = 'true';
     checkForResizeTemplate(e.target, paragraph);
   }
@@ -88,13 +88,13 @@ function handleDrop(e, simwindowRef) {
     button.style.border = "0px solid white";
     button.style.height = "50px";
     button.style.width = "100px";
-    button.style.position = 'absolute';
+    button.style.position = 'relative';
     button.style.display = 'block';
     button.style.backgroundColor = 'black';
     button.style.color = 'white';
     button.contentEditable = 'true';
-    button.style.left = dropX + 'px';
-    button.style.top = dropY + 'px';
+    // button.style.left = dropX + 'px';
+    // button.style.top = dropY + 'px';
     checkForResizeTemplate(e.target, button);
   }
   else if (selectedElement === "container-img") {
@@ -123,10 +123,10 @@ function handleDrop(e, simwindowRef) {
     link.id = `element${incElementCounter()}`; // Generate a unique id for the link
     link.href = "#"; // Set the URL for the link
     link.textContent = "Visit Example"; // Set the display text for the link
-    link.style.position = 'absolute';
+    link.style.position = 'relative';
     link.style.display = 'block';
-    link.style.left = dropX + 'px';
-    link.style.top = dropY + 'px';
+    // link.style.left = dropX + 'px';
+    // link.style.top = dropY + 'px';
     checkForResizeTemplate(e.target, link);
   }
   
