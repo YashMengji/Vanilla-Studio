@@ -85,7 +85,7 @@ function handleReference(simwindowRef) {
         if(e.target.classList[0] != 'div-simwindow') {
             if(e.target.classList[0] != "add-section-btn" && e.target.classList[0] != "material-symbols-outlined") {
                 e.target.classList.add('element-hover');
-                if(e.target.classList[1] != 'footerElement') {
+                if(e.target.classList[1] != 'footerElement' && e.target.classList[0] == "section") {
                     e.target.appendChild(addBtn);
                 }
             } 
@@ -123,7 +123,7 @@ function handleReference(simwindowRef) {
             if(targetElement.parentElement.classList[0] == "section") {
                 isChild = true;
             }
-            if(targetElement.classList[0] == "section" || isChild) {
+            if(targetElement.classList[0] == "section" || targetElement.classList[0] == "section-child") {
                 let controllers = simwindow.querySelectorAll(".handle");
                 if(controllers) {
                     controllers.forEach((controller) => {
@@ -132,7 +132,13 @@ function handleReference(simwindowRef) {
                 }
                 // getting all section elements for further click event
                 let sections = simwindow.querySelectorAll(".section");
+                let sectionChildren = simwindow.querySelectorAll(".section-child");
                 sections.forEach((section) => {
+                    if(section.classList[1] == "selected"){
+                        section.classList.remove("selected");
+                    } 
+                })
+                sectionChildren.forEach((section) => {
                     if(section.classList[1] == "selected"){
                         section.classList.remove("selected");
                     } 
@@ -147,6 +153,7 @@ function handleReference(simwindowRef) {
                         section.classList.remove("selected");
                     } 
                 })
+                
                 let controllers = simwindow.querySelectorAll(".handle");
                 if(controllers) {
                     controllers.forEach((controller) => {
@@ -173,7 +180,7 @@ function handleReference(simwindowRef) {
                     
                 }
 
-                
+                targetElement.classList.add("selected");
             }
             // getting nearest parent of selected element 
             targetElementParent = targetElement.parentElement;
