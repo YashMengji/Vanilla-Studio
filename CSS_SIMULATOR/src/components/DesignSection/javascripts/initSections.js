@@ -11,16 +11,16 @@ export function initSections() {
     header.classList.add('section');
     let logoDiv = document.createElement('div');
     logoDiv.id = `element${incElementCounter()}`;
-    // logoDiv.classList.add('section')
+    logoDiv.classList.add('section-child')
     let nav = document.createElement('nav');
     nav.id = `element${incElementCounter()}`;
-    // nav.classList.add('section');
+    nav.classList.add('section-child');
 
     logoDiv.textContent = "VanillaStudio";
     for(let i = 0; i < 3 ; i++) {
         let link = document.createElement('a');
         link.id = `element${incElementCounter()}`;
-        // link.classList.add('section');
+        link.classList.add('section-child');
         if(i == 0) {
             link.textContent = "Home";
         }else if(i == 1) {
@@ -55,7 +55,7 @@ export function initSections() {
     footer.classList.add('footerElement');
     let footerDiv = document.createElement("div");
     footerDiv.id = `element${incElementCounter()}`;
-    // footerDiv.classList.add('section');
+    footerDiv.classList.add('section-child');
     footerDiv.textContent = "Made with Vanilla Studio";
     footer.appendChild(footerDiv);
     footer.style = `
