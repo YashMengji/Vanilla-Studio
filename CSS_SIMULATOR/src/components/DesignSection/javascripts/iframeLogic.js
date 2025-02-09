@@ -1,22 +1,19 @@
 import { incElementCounter, decElementCounter } from "./elementCounter";
-let simwindow, resizableTemplate;
+let simwindow, pageContent, setPageContent;
 
-export function getReference(simwindowRef) {
-  simwindow = simwindowRef.current;
+function getReference(pageContent, setPageContent) {
+  pageContent = pageContent;
+  setPageContent = setPageContent;
 }
 
-function handleDrop(e, simwindowRef) {
-  
+function handleDrop(e) {
   e.preventDefault(); //this code prevents the default drag and drop behaviour of browser
-  // console.log(e.target); 
   const selectedElement = e.dataTransfer.getData('source');
   console.log(selectedElement)
 
   //get the (x,y) position of the cursor to place element at that position when it is dropped
   const rect = e.target.getBoundingClientRect();
   const dropX = e.clientX - rect.left;
-  // const dropX = e.clientX ;
-  // const dropY = e.clientY ;
   const dropY = e.clientY - rect.top;
 
   // takes an element over which dragged element is to be dropped and the dragged element. it checks if e.target is resizable template or not
@@ -136,4 +133,4 @@ function allowDrop(event) {
   event.preventDefault(); // Necessary to allow dropping
 }
 
-export {handleDrop, allowDrop};
+export {handleDrop, allowDrop, getReference};
