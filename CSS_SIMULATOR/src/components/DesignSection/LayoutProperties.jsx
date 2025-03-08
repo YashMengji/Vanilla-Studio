@@ -11,7 +11,16 @@ function LayoutProperties() {
 
   const [iscolumnDrop, setIsColumnDrop] = useState(false);
   const [isrowDrop, setIsrowDrop] = useState(false);
+  const [flexDropDown, setflexDropDown] = useState({
+    flexDirection: false,
+    flexWrap: false,
+    justifyContent: false,
+    alignItems: false,
+  })
+  const [isFlexBox, setIsFlexBox] = useState(false);
   const {elementRef} = useResizeContext();
+
+  
 
   let child1, child2, child3, child4;
   let currentElement = elementRef.current;
@@ -234,12 +243,100 @@ function handleClick(e) {
     } 
 }
 
+  // logic for handling flex layout styling 
+  function updateIsFlexBox(button) {
+    if(button == "on") {
+      setIsFlexBox(true);
+      // set display:flex property to the current selected element 
+      handleFlexLayout("display", "flex"); 
+    } else {
+      setIsFlexBox(false);
+      setflexDropDown({
+          flexDirection: false,
+          flexWrap: false,
+          justifyContent: false,
+          alignItems: false,
+      })
+      handleFlexLayout("display", "block");
+    }
+    
+  }
 
+  function updateFlexDropDown(property) {
+    setflexDropDown({
+        flexDirection: false,
+        flexWrap: false,
+        justifyContent: false,
+        alignItems: false,
+        [property]: true
+    });
+  }
+
+  function handleFlexLayout(propertyName, value) {
+    let styleStr = `${propertyName}: ${value};`;
+    let selectedElement = elementRef.current;
+    if(propertyName == "display") {
+      if(value == "flex")
+        selectedElement.style.display = "flex";
+      else 
+        selectedElement.style.display = "block";
+    }
+
+    if(propertyName && elementRef.current) {
+      elementRef.current.style[propertyName] = value;
+    } 
+     
+    
+  }
 
   return (
     <div className="div-layout-properties-panel">
       <div className="div-layout-heading">
         Layout
+      </div>
+      <div className="div-enable-disable-flex">
+        <div>
+          <div>Flex :</div>
+          <div className="toggle-btns">
+            <div className="div-flex-toggle" onClick={() => updateIsFlexBox("on")}>On</div>
+            <div className="div-flex-toggle" onClick={() => updateIsFlexBox("off")}>Off</div>
+          </div>
+        </div>
+      </div>
+      <div className={`div-flex-layout ${isFlexBox ? "show-flex-property" : "hide-flex-property"}`}>
+        <div className="div-flex-bucket">
+          <div className="flex-property flex-prop-heading-1" onClick={() => updateFlexDropDown("flexDirection")}>flex-direction</div>
+          <div className={`div-flex-property parent-dropdown ${flexDropDown.flexDirection ? "show-flex-property" : "hide-flex-property"}`} id="flex-direction">
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexDirection","row")}>row</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexDirection", "column")}>col</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexDirection", "row-reverse")}>row-reverse</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexDirection", "column-reverse")}>col-reverse</div>
+          </div>
+          <div className="flex-property flex-prop-heading-2" onClick={() => updateFlexDropDown("flexWrap")}>flex-wrap</div>
+          <div className={`div-flex-property parent-dropdown ${flexDropDown.flexWrap ? "show-flex-property" : "hide-flex-property"}`} id="flex-wrap">
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexWrap","nowrap")}>no-wrap</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexWrap","wrap")}>wrap</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("flexWrap","wrap-reverse")}>wrap-reverse</div>
+          </div>
+          <div className="flex-property flex-prop-heading-3" onClick={() => updateFlexDropDown("justifyContent")}>justify-content</div>
+          <div className={`div-flex-property parent-dropdown ${flexDropDown.justifyContent ? "show-flex-property" : "hide-flex-property"}`} id="justify-content">
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("justifyContent","center")}>center</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("justifyContent","flex-start")}>flex-start</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("justifyContent","flex-end")}>flex-end</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("justifyContent","space-around")}>space-around</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("justifyContent","space-between")}>space-between</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("justifyContent","space-evenly")}>space-evenly</div>
+          </div>
+          <div className="flex-property flex-prop-heading-4" onClick={() => updateFlexDropDown("alignItems")}>align-items</div>
+          <div className={`div-flex-property parent-dropdown ${flexDropDown.alignItems ? "show-flex-property" : "hide-flex-property"}`} id="justify-content">
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("alignItems","center")}>center</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("alignItems","flex-start")}>flex-start</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("alignItems","flex-end")}>flex-end</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("alignItems","streach")}>streach</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("alignItems","baseline")}>baseline</div>
+            <div className="div-flex-values child-dropdown" onClick={() => handleFlexLayout("alignItems","normal")}>normal</div>
+          </div>
+        </div>
       </div>
       <div className="div-choose-layout">
         <p>Choose Layout</p>

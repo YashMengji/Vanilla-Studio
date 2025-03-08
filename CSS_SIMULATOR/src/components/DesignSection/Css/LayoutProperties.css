@@ -2,6 +2,71 @@
     padding: 15px 20px;
     background-color: var(--shadow-color);
 }
+
+/*-------------------flex properties style --------------------------*/
+
+.div-enable-disable-flex {
+    width: 100%;
+    padding: 10px 20px;
+}
+.div-enable-disable-flex > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--shadow-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.toggle-btns {
+    /* border: 2px solid black; */
+    background-color: #d5eeef;
+    border-radius: 5px;
+    display: flex;
+    flex: 1;
+}
+.div-flex-toggle {
+    padding: 5px;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.div-flex-layout {
+    padding: 10px 20px;
+}
+.div-flex-layout p {
+    margin-bottom: 10px;
+}
+.div-flex-bucket {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.flex-property {
+    padding: 10px;
+    background-color: var(--shadow-color);
+    cursor: pointer;
+}
+.flex-property:hover {
+    background-color: #abc1c2;
+}
+
+.child-dropdown {
+    padding: 10px;
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+.child-dropdown:hover {
+    background-color: #77bbbe;
+}
+
+.show-flex-property {
+    display: block;
+}
+.hide-flex-property {
+    display: none;
+}
+
 /*-------------------choose layout style --------------------------*/
 .div-choose-layout{
     padding: 10px 20px;
