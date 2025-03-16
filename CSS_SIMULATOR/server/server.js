@@ -9,7 +9,6 @@ const errorHandler = require("./middlewares/errorHandler");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 
-
 const app = express();
 
 connectDB();
@@ -23,7 +22,9 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/auth", authRoutes);
-app.use("/api/u", userRoutes);
+// app.use("/api/u", userRoutes);
+app.use("/api/projects", projectRoutes);
+
 
 app.use(errorHandler);
 
