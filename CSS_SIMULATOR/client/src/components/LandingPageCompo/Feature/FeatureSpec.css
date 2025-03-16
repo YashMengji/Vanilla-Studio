@@ -1,0 +1,17 @@
+.feature-spec {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.spec-title {
+    font-weight: 900;
+    color: var(--primary);
+    font-size: 25px;
+}
+
+.spec-description {
+    font-weight: 500;
+    color: var(--secondary);
+    font-size: 15px;
+}

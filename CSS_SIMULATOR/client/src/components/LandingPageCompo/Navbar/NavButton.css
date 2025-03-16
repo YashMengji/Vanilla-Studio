@@ -1,0 +1,43 @@
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+  
+.buttons .login,
+.buttons .signup {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+  
+.buttons .login {
+    background: none;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+  
+.buttons .login:hover {
+    text-decoration: underline;
+}
+  
+.buttons .signup {
+    padding: 10px 20px;
+    height: 45px;
+    border-radius: 25px;
+    background-color: #d2f567;
+    color: bLACK;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.buttons .signup:hover {
+    background-color: #bff127;
+}
