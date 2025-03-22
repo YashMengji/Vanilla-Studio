@@ -2,11 +2,17 @@ import { useState } from "react";
 import "./LoginSignup.css";
 import {ModalContext} from './Form/ModalProvider';
 import { useContext } from "react";
+import {createUser, login, onLogout} from "../../services/users";
 
 const LoginSignup = () => {
   const [active, setActive] = useState(true); // ✅ Default to Sign-Up page
 
   // const {active, setActive} = useContext(ModalContext);
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <div className="login-signup-wrapper">
