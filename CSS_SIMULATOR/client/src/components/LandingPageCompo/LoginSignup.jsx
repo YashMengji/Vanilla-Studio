@@ -15,16 +15,21 @@ const LoginSignup = () => {
         <div className="form-container sign-up">
           <form>
             <h1>Create Account</h1>
-            <div className="social-icons">
+            {/* <div className="social-icons">
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-google-plus-g"></i></a>
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-facebook-f"></i></a>
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-github"></i></a>
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-linkedin-in"></i></a>
-            </div>
+            </div> */}
             <span>or use your email for registration</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <div className="flex gap-[10px]">
+              <input type="text" placeholder="First Name" name="fname" />
+              <input type="text" placeholder="Last Name" name="lname"/>
+            </div>
+            
+            <input type="text" placeholder="Username" name="username"/>
+            <input type="email" placeholder="Email" name="email"/>
+            <input type="password" placeholder="Password" name="password"/>
             <button type="button">Sign Up</button>
           </form>
         </div>
@@ -33,15 +38,15 @@ const LoginSignup = () => {
         <div className="form-container sign-in">
           <form>
             <h1>Login</h1>
-            <div className="social-icons">
+            {/* <div className="social-icons">
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-google-plus-g"></i></a>
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-facebook-f"></i></a>
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-github"></i></a>
               <a href="javascript:void(0);" className="icon"><i className="fa-brands fa-linkedin-in"></i></a>
-            </div>
+            </div> */}
             <span>or use your email password</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input type="text" placeholder="Username" name="username"/>
+            <input type="password" placeholder="Password" name="password"/>
             <a href="#">Forgot Your Password?</a>
             <button type="button">Login</button>
           </form>
