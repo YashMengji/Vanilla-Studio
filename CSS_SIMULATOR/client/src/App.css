@@ -1,3 +1,12 @@
+:root {
+  --main: #FFFFFF;
+  --primary: #000000;
+  --secondary: #696969;
+  --tertiary: #A8A8A8;
+  --accent: #CCFF33;
+  --accent-hover: #BFFF00;
+}
+
 body{
     background-color: rgb(240, 240, 240);
     /* background-color: black;  */

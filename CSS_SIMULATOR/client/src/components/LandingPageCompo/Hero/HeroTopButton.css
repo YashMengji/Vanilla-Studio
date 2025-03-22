@@ -1,0 +1,22 @@
+.hero-top-button {
+    backdrop-filter: blur(10px);
+    display: inline-block;
+    padding: 10px 20px;
+    background: #f7faed;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    color: var(--primary);
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease;
+}
+  
+.hero-top-button:hover {
+    background: #f1fccf;
+}
+  
+.hero-top-button span {
+    color: var(--accent);
+    font-weight: bold;
+}

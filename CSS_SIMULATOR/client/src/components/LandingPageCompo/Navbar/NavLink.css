@@ -1,0 +1,11 @@
+.nav-link {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.nav-link:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+}
