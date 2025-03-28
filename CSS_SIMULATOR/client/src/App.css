@@ -1,18 +1,19 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  --main: #FFFFFF;
+  --main: #ffffff;
   --primary: #000000;
   --secondary: #696969;
-  --tertiary: #A8A8A8;
-  --accent: #CCFF33;
-  --accent-hover: #BFFF00;
+  --tertiary: #a8a8a8;
+  --accent: #ccff33;
+  --accent-hover: #bfff00;
 }
 
-body{
-    background-color: rgb(240, 240, 240);
-    /* background-color: black;  */
-}
-
-.div-main{
+.div-main {
   display: flex;
   justify-content: center;
   position: relative;
