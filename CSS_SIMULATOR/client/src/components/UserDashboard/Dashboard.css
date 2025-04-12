@@ -67,20 +67,51 @@
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   border-radius: 20px;
-  padding: 10px 0px;
+  padding: 20px;
+  gap: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+.dash-profile {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.dash-project {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.dash-header-btn {
+  height: 5vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #ccff33;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
 .head-detail-title {
   height: fit-content;
   width: 100%;
   font-size: 1.3rem;
   font-weight: 600;
   color: #000;
-  padding: 5px 20px;
+  /* padding: 5px 20px; */
 }
 
 .head-detail-item {
@@ -89,7 +120,7 @@
   display: flex;
   flex-direction: row;
   gap: 15px;
-  padding: 5px 20px;
+  /* padding: 5px 20px; */
 }
 
 .head-detail-item h2 {
@@ -131,20 +162,66 @@
   color: #000;
 }
 
-.dash-toggle-btn {
-  height: 3.5vh;
-  width: 10vh;
+.tab-container {
+  position: relative;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  padding: 2px;
+  background-color: #dadadb;
+  border-radius: 9px;
+}
+
+.indicator {
+  content: "";
+  width: 130px;
+  height: 28px;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 9;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 7px;
+  transition: all 0.2s ease-out;
+}
+
+.tab {
+  width: 130px;
+  height: 28px;
+  position: absolute;
+  z-index: 99;
+  outline: none;
+  opacity: 0;
+}
+
+.tab_label {
+  width: 130px;
+  height: 28px;
+  position: relative;
+  z-index: 999;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background-color: #ccff33;
-  color: #000;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
+  opacity: 0.6;
   cursor: pointer;
 }
+
+.tab--1:checked ~ .indicator {
+  left: 2px;
+}
+
+.tab--2:checked ~ .indicator {
+  left: calc(130px + 2px);
+}
+
+.tab--3:checked ~ .indicator {
+  left: calc(130px * 2 + 2px);
+}
+
 
 .project-listings {
   overflow: auto; /* Enable scrolling */

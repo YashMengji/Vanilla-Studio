@@ -1,14 +1,4 @@
 :root{
-  --sim-width: 70.667vw;
-  --calculated-width: calc((100vw - var(--sim-width)) / 2);
-  --white-color:white;
-  --base-color: #dfebec;
-  --primary-color: #263f40;
-  --secondary-color: #426e70;
-  --accent-color: #76abae;
-  --accent-hover-color: #5e9da1;
-  --shadow-color: #bfd8d9;
-  --shadow-gray: rgba(100, 100, 111, 0.2);
 }
 
 .div-elements-panel {
