@@ -1,24 +1,24 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/users");
+require("dotenv").config();
 
 
 async function register (req, res) {
   try {
     const {fname, lname, username, password, email} = req.body;
     let user = {};
-    
-    if(
-      await userModel.findOne({username})
-    ) {
-      return res.status(400).json({ message: "Username is taken" });
-    } 
-    if(
-      await userModel.findOne({email})
-    ) {
-      console.log("username exists!!")
-      return res.status(400).json({ message: "Email already registered" });``
-    } 
+    // if(
+    //   await userModel.findOne({username})
+    // ) {
+    //   return res.status(400).json({ message: "Username is taken" });
+    // } 
+    // if(
+    //   await userModel.findOne({email})
+    // ) {
+    //   console.log("username exists!!")
+    //   return res.status(400).json({ message: "Email already registered" });``
+    // } 
 
     // Hash the password
     const salt = await bcrypt.genSalt(10); // Generate salt
@@ -31,13 +31,14 @@ async function register (req, res) {
     return res.json(user);
   } catch (error) {
     console.log(error.message);
-    res.status(400).send(error.message);
+    res.status(400).json({message: error.message});
   }
 }
 
 async function login (req, res) {
   try{
     const {username, password} = req.body;
+    console.log(username, password)
     const user = await userModel.findOne({username});
     if(user == null){
       return res.status(400).json({ message: "User not registered" });
@@ -57,7 +58,7 @@ async function login (req, res) {
     });
   }
   catch(error) {
-    return res.status(400).send(error.message);
+    return res.status(400).json({message: error.message});
   }
 }
 
@@ -66,7 +67,7 @@ function logout (req, res)  {
     res.clearCookie("token");
     return res.send(true);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(400).json({message: error.message});
   }
 }
 

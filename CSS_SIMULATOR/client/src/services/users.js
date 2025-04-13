@@ -7,11 +7,11 @@ export function createUser({fname, lname, username, password, email}){
   })
 }
 
-export function login({username, password}){
+export function login({loginUsername: username, loginPassword: password}){
   return makeRequests(`/auth/login`, {
     method: "POST",
     data: {username, password},
-  })
+  });
 }
 
 export function updateUser(formData) {
