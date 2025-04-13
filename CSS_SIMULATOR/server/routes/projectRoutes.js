@@ -1,6 +1,7 @@
 const express = require("express");
 // updateProjectDetails:- Updates only projectTitle, projectDesc, access
 // editProject:- Updates only HTML CSS
+const { isLoggedIn } = require("../middlewares/authMiddlewares");
 const { createProject, getProject, updateProjectDetails, editProject, deleteProject } = require("../controllers/projectControllers");
 
 const router = express.Router();
