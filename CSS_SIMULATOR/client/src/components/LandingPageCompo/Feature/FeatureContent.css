@@ -14,5 +14,5 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 60px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px var(--shadow-gray);
 }

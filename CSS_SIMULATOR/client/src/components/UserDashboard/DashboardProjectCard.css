@@ -8,8 +8,8 @@
   position: relative;
   background-size: cover;
   background-position: center;
-  border: 8px solid #fff;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 8px solid var(--main);
+  box-shadow: var(--shadow-gray) 0px 7px 29px 0px;
 }
 
 .project-card-border {
@@ -17,11 +17,11 @@
   height: 30px;
   width: fit-content;
   max-width: 240px;
-  background: #fff;
+  background: var(--main);
   position: relative;
   padding: 0px 15px;
   transform: skew(-40deg);
-  box-shadow: -10px -10px 0 0 #fff;
+  box-shadow: -10px -10px 0 0 var(--main);
 }
 
 .project-card-border::before {
@@ -33,7 +33,7 @@
   right: -15px;
   background: transparent;
   border-top-left-radius: 10px;
-  box-shadow: -5px -5px 0 2px #fff;
+  box-shadow: -5px -5px 0 2px var(--main);
 }
 
 .project-card::before {
@@ -45,7 +45,7 @@
   height: 15px;
   width: 15px;
   border-top-left-radius: 15px;
-  box-shadow: -5px -5px 0 2px #fff;
+  box-shadow: -5px -5px 0 2px var(--main);
 }
 
 .project-card-icons {
@@ -61,19 +61,19 @@
 
 .project-card-icons i {
   font-size: 20px;
-  color: #000;
+  color: var(--primary);
   transition: color 0.3s ease;
 }
 
 .project-card-icons i:hover {
-  color: #ccff33;
+  color: var(--accent);
 }
 
 .project-card-title {
   display: block;
   font-size: 17px;
   font-weight: bold;
-  color: #000;
+  color: var(--primary);
   text-align: center;
   transform: skew(40deg);
 }
@@ -92,7 +92,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--main);
   padding: 40px;
   border-radius: 25px;
   min-width: 320px;
@@ -121,7 +121,7 @@
   width: 100%;
   padding: 15px;
   margin-top: 5px;
-  background-color: #eee;
+  background-color: var(--shadow-gray);
   border-radius: 5px;
 }
 
@@ -129,15 +129,15 @@
   margin-top: 20px;
   padding: 10px;
   cursor: pointer;
-  color: #000;
+  color: var(--primary);
   border-radius: 10px;
   font-weight: 600;
 }
 
 .btnSubmit {
-  background: #ccff33;
+  background: var(--accent);
 }
 
 .btnClose {
-  background: #ff574a;
+  background: var(--accent-red);
 }

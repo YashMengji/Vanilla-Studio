@@ -1,6 +1,3 @@
-:root{
-}
-
 .div-elements-panel {
   position: absolute;
   left: 0;
@@ -14,8 +11,9 @@
   z-index: 10;
   width: 3.5vw;
   height: 92vh;
-  background-color: var(--shadow-color);
-  box-shadow: var(--shadow-gray) 2px 0px 5px 1px;
+  background-color: var(--main);
+  /* box-shadow: var(--shadow-gray) 2px 0px 5px 1px; */
+  border: 1px solid var(--shadow-gray);
 }
 .left-elements-icons{
     display: flex;
@@ -26,34 +24,43 @@
     font-size: 40px;
     cursor: pointer;
     transition: background-color .3s;
-    color: var(--secondary-color);
+    color: var(--primary);
 }
 
 .left-elements-icons:hover{
-    background-color: var(--accent-color);
+    background-color: var(--accent-light);
     transition: background-color .3s;
+    border: 1px solid var(--accent-hover);
+    /* color: var(--accent-hover); */
 }
 
 /*--------------------right element panel, section elements style--------------------*/
 .div-heading{
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--shadow-color);
   padding: 16px 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   cursor: pointer;
   transition: background-color .3s;
+  font-weight: 600;
+  border-bottom: 1px solid var(--shadow-gray);
+  border-top: 1px solid var(--shadow-gray);
+  /* background-color: var(--shadow-gray); */
+  /* border-right: 1px solid var(--shadow-gray); */
 }
 .div-heading:hover{
-  background-color: var(--accent-color);
+  background-color: var(--accent-light);
+  border: 1px solid var(--accent-hover);
   transition: background-color .3s;
+  /* color: var(--accent-hover); */
 }
 .div-right-elements, .div-section-elements, .div-page-content, .div-page-status{
   position: absolute;
   z-index: 5;
   left: -18vw;
-  background-color: var(--base-color);
+  background-color: var(--main);
   width: 18vw;
   height: 92vh;
   opacity: 0;
@@ -65,13 +72,14 @@
   position: absolute;
   z-index: 5;
   left: 3.5vw;
-  background-color: var(--base-color);
+  background-color: var(--main);
   width: 18vw;
   height: 92vh;
   opacity: 1;
   visibility: visible;
   transition: all .3s;
-  box-shadow: var(--shadow-gray) 5px 0px 10px 1px;
+  border-right: 1px solid var(--shadow-gray);
+  /* box-shadow: var(--shadow-gray) 5px 0px 10px 1px; */
 }
 
 .div-quick-add-elements, .div-section-elements-btns{
@@ -79,8 +87,8 @@
   grid-template-rows: max-content;
   grid-template-columns: repeat(3, 60px);
   justify-content: center;
-  row-gap: 50px;
-  column-gap: 10px;
+  row-gap: 30px;
+  column-gap: 40px;
 }
 /*--------------------------element buttons style-----------------------*/
 .div-element-btn{
@@ -89,20 +97,25 @@
   align-items: center;
   flex-direction: column;
   gap: 5px;
-  /* background-color: aqua; */
-  width: 60px;
-  height: 60px;
-  /* border: 1px solid var(--secondary-color); */
+  width: 70px;
+  height: 70px;
   border-radius: 4px;
   cursor: grab;
-  box-shadow: var(--shadow-gray) 0px 0px 5px 1px;
+  border: 1px solid var(--shadow-gray);
+  color: var(--primary);
+  font-weight: 500;
+  /* background-color: aqua; */
+  /* border: 1px solid var(--secondary-color); */
+  /* box-shadow: var(--shadow-gray) 0px 0px 5px 1px; */
   /* transition: all .2s; */
 }
 
 .div-element-btn:hover{
-  box-shadow: var(--shadow-gray) 0px 0px 5px 2px;
-  transform: scale(1.05);
+  transform: scale(1.02);
   transition: all .05s;
+  border: 1px solid var(--accent-hover);
+  background-color: var(--accent-light);
+  /* box-shadow: var(--shadow-gray) 0px 0px 5px 2px; */
 }
 .div-section-elements > .div-element-btn:nth-child(1) > .div-element-btn-img{
   transform: rotate(180deg);
@@ -119,7 +132,9 @@
 
 .div-page-indicator{
   padding: 20px 10px;
-  background-color: var(--shadow-color);
+  background-color: var(--accent-light);
+  border-top: 1px solid var(--accent-hover);
+  border-bottom: 1px solid var(--accent-hover);
 }
 
 .div-head-page{
@@ -132,8 +147,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #9fc4c6;
-  gap: 3px;
+  /* background-color: var(--accent-light); */
+  gap: 10px;
   padding: 20px 10px;
 }
 
@@ -142,15 +157,21 @@
   padding: 8px;
   border-radius: 5px;
   font-size: 16px;
-  outline: none;
+  outline: 1px solid var(--shadow-gray);
   border: none;
-  background-color: var(--white-color);
+  background-color: var(--shadow-gray);
+}
+
+.page-name-input:focus{
+  outline: 1px solid var(--accent-hover);
+  background-color: var(--accent-light);
+  transition: all .3s;
 }
 
 .create-page-icon{
   height: 100%;
-  padding: 5px;
-  background-color: var(--shadow-color);
+  /* padding: 2px; */
+  background-color: var(--accent);
   cursor: pointer;
   border-radius: 5px;
 }

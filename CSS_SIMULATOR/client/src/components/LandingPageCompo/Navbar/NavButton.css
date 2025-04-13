@@ -15,7 +15,7 @@
 .buttons .login {
     background: none;
     border: none;
-    color: black;
+    color: var(--primary);
     font-weight: bold;
     cursor: pointer;
     font-size: 16px;
@@ -30,8 +30,8 @@
     padding: 10px 20px;
     height: 45px;
     border-radius: 25px;
-    background-color: #d2f567;
-    color: bLACK;
+    background-color: var(--accent);
+    color: var(--primary);
     border: none;
     font-weight: bold;
     cursor: pointer;
@@ -39,5 +39,5 @@
 }
   
 .buttons .signup:hover {
-    background-color: #bff127;
+    background-color: var(--accent-hover);
 }

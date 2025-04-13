@@ -3,7 +3,7 @@
     height: 703px;
     width: 1250px;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: var(--shadow-gray) 0px 3px 8px;
     border-radius: 10px;
 }
 

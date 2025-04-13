@@ -13,7 +13,7 @@
 }
 
 .container {
-    background-color: #fff;
+    background-color: var(--main);
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
@@ -35,7 +35,7 @@
 }
 
 .container a {
-    color: #333;
+    color: var(--secondary);
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
@@ -57,11 +57,11 @@
 
 .container button.hidden {
     background-color: transparent;
-    border-color: #fff;
+    border-color: var(--main);
 }
 
 .container form {
-    background-color: #fff;
+    background-color: var(--main);
     display: flex;
     align-items: center;
     justify-content: center;

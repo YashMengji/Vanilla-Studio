@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 535px;
     height: 600px;
-    background-color: #ffffff;
+    background-color: var(--main);
     border-radius: 10px;
     box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.08),
       -4px -4px 12px rgba(0, 0, 0, 0.08);
@@ -26,7 +26,7 @@
     height: 64%;
     border-radius: 10px;
     overflow: hidden;
-    background-color: rgb(165, 165, 165);
+    background-color: var(--tertiary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +42,7 @@
     margin-bottom: 5px;
     font-size: 20px;
     font-weight: 900;
-    color: #000000;
+    color: var(--primary);
     cursor: pointer;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -59,22 +59,21 @@
     line-clamp: 3;
     margin: 0;
     font-size: 15px;
-    color: #424242;
+    color: var(--secondary);
     cursor: pointer;
   }
 
 .link-container {
   width: 100%;
   height: fit-content;
-  background-color: rgb(238, 238, 238);
-  /* background-color: #bff127; */
+  background-color: var(--main);
   display: flex;
   align-items: center;
   justify-content: center;
   justify-content: space-evenly;
   padding: 25px 25px;
   gap: 20px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+  box-shadow: 0px 0px 20px var(--shadow-gray);
   border-radius: 10px;
   margin-top: 0px;
 }
@@ -82,8 +81,7 @@
 .social-links {
   width: 52px;
   height: 52px;
-  background-color: rgb(44, 44, 44);
-  /* background-color: #bff127; */
+  background-color: var(--secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +91,7 @@
 }
 
 .social-links a {
-  color: #ffffff;
+  color: var(--main);
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -102,7 +100,6 @@
 }
 
 .social-links .instagram:hover {
-  /* background-color: #d62976; */
   background: rgb(254,218,117);
   background: linear-gradient(42deg, rgba(254,218,117,1) 0%, rgba(250,126,30,1) 18%, rgba(214,41,118,1) 40%, rgba(150,47,191,1) 60%, rgba(79,91,213,1) 100%);
   width: 52px;
@@ -141,7 +138,7 @@
 }
 
 .socialLogo i {
-  fill: rgb(255, 255, 255);
+  fill: var(--main)
 }
 
 .social-links:hover .socialLogo {

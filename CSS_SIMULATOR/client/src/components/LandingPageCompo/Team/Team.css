@@ -1,5 +1,5 @@
 .team {
-    background: #ffffff;
+    background: var(--main);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -19,14 +19,14 @@
 
 .team-description {
     font-size: 18px;
-    font-weight: 400;
-    color: #424242;
+    font-weight: 600;
+    color: var(--secondary);
     margin-top: 20px;
 } 
 
 .team-heading {
     font-size: 36px;
     font-weight: 800;
-    color: #000000;
+    color: var(--primary);
     margin-bottom: 20px;
 }

@@ -23,9 +23,9 @@
   .item {
     width: 444.44px;
     height: 250px;
-    background-color: #c6f33f;
+    background-color: var(--accent);
     border-radius: 6px;
-    border: 1px solid #dadada;
+    border: 1px solid var(--tertiary);
     position: absolute;
     left: max(calc(444.44px * 8), 100%);
     animation-name: scrollLeft;

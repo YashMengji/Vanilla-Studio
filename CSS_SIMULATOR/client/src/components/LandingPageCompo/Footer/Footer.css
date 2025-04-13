@@ -1,5 +1,5 @@
 .footer {
-    background: #ffffff;
+    background: var(--main);
     height: 100%;
     width: 100%;
     padding: 50px;
@@ -15,7 +15,7 @@
 }
 
 .footer-btn-top {
-    color: #bff127;
+    color: var(--accent);
     font-weight: 700;
     font-size: 30px;
     align-items: center;
@@ -28,19 +28,19 @@
     padding: 10px 20px;
     border-radius: 100px;
     border: 1px solid transparent;
-    background-color:#bff127;
-    color: #000000;
+    background-color:var(--accent);
+    color: var(--primary);
     font-size: 20px;
 }
 
 .main-heading{
     font-size: 40px;
     font-weight: 700;
-    color: #000000;
+    color: var(--primary);
 }
 
 hr {
-    border-top: 2px solid #8f8f8f;
+    border-top: 2px solid var(--tertiary);
 }
 
 .footer-rights {
@@ -50,7 +50,7 @@ hr {
 }
 
 .copy-rights{
-    color: #000000;
+    color: var(--primary);
     font-size: 20px;
     font-weight: 700;
 }

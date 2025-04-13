@@ -6,22 +6,24 @@
 
 :root {
   --main: #ffffff;
-  --white-color:white;
-  --base: #dfebec;
-  --base-color: #dfebec;
   --primary: #000000;
-  --primary-color: #263f40;
   --secondary: #696969;
-  --secondary-color: #426e70;
   --tertiary: #a8a8a8;
   --accent: #ccff33;
-  --accent-color: #76abae;
   --accent-hover: #bfff00;
-  --accent-hover-color: #5e9da1;
-  --shadow-color: #bfd8d9;
+  --accent-red: #ff574a;
+  --accent-light: rgb(252, 255, 236);
   --shadow-gray: rgba(100, 100, 111, 0.2);
   --sim-width: 70.667vw;
   --calculated-width: calc((100vw - var(--sim-width)) / 2);
+  /* --white-color:white; */
+  /* --base: #dfebec; */
+  /* --base-color: #dfebec; */
+  /* --secondary-color: #426e70; */
+  /* --primary-color: #263f40; */
+  /* --accent-color: #76abae; */
+  /* --accent-hover-color: #5e9da1; */
+  /* --shadow-color: #bfd8d9; */
 }
 
 .div-main {
