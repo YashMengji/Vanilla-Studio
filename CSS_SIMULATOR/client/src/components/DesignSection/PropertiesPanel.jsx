@@ -5,7 +5,6 @@ import PropertiesSection from './PropertiesSection'
 import EditPropertiesPanel from './EditPropertiesPanel'
 
 
-
 function PropertiesPanel() {
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -19,6 +18,7 @@ function PropertiesPanel() {
           {isExpanded ? 'arrow_forward_ios' : 'arrow_back_ios' }
         </span>
       </div>
+      
       <div className={`${isExpanded ? 'div-properties-panel-expand' : 'div-properties-panel' }`}>
         <PropertiesSection/>
         <PropertiesPath/>

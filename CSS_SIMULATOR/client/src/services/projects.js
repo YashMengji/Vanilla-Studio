@@ -1,15 +1,12 @@
 import { makeRequests } from "./makeRequests";
 
-export function getPosts(){
-  return makeRequests("/posts");
+// get all projects for user dashboard 
+export function getProjects(){
+  return makeRequests("/projects");
 }
 
-export function getOnePost(id){
-  return makeRequests(`/posts/${id}`);
-}
-
-export function createPost(formData) {
-  return makeRequests('/posts', {
+export function createProject(formData) {
+  return makeRequests('/projects', {
     method: 'POST',
     data: formData,
     Headers: {
@@ -18,15 +15,20 @@ export function createPost(formData) {
   });
 }
 
-export function deleteSinglePost(id){
-  return makeRequests(`/posts/${id}`, {
+export function deleteProject(id){
+  return makeRequests(`/projects/${id}`, {
     method: 'DELETE'
   });
 }
 
-export function togglePostLike({postId}){
-  return makeRequests(`/posts/${postId}/toggleLike`, {
-    method: 'POST'
+// post settings 
+export function updateProject(id, formData) {
+  return makeRequests(`/projects/${id}`, {
+    method: 'PUT',
+    data: formData,
+    Headers: {
+      'Content-Type': 'multipart/form-data',
+    }
   });
 }
 

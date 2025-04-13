@@ -1,12 +1,16 @@
 import {Outlet} from 'react-router-dom'
 import './App.css'
+import { ResizeProvider } from './components/DesignSection/ResizeContext'
 
 function App() {
   
 
   return (
     <>
-      <Outlet/>
+      <ResizeProvider>
+        <Outlet/>
+      </ResizeProvider>
+      
     </> 
   )
 }

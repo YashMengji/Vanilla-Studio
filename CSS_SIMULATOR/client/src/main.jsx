@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage.jsx'
 import StudioPage from './pages/StudioPage.jsx'
 import LoginSignupPage from './pages/LoginSignupPage.jsx'
 import UserDashboardPage from './pages/UserDashboardPage.jsx'
+import CodeEditingPage from './pages/CodeEditingPage.jsx'
 
 const createRouter = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ const createRouter = createBrowserRouter([
       },
       {
         path: '/studio',
-        element: <StudioPage/>
+        element: <StudioPage/>,
+      },
+      {
+        path: '/studio/codeeditor',
+        element: <CodeEditingPage/>
       }
     ]
   }

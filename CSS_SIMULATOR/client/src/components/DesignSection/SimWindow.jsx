@@ -1,31 +1,40 @@
 import { useEffect, useRef , useState} from 'react';
 import './Css/SimWindow.css';
 import {useResizeContext} from './ResizeContext';
-// import { allowDrop, handleDrop , getReference} from './javascripts/iframeLogic';
-// import { allowDrop, handleDrop, getReference } from './ElementCreation';
 import { getReferenceForLayout } from './LayoutProperties';
 import { initSections, getReferenceInitSections } from './javascripts/initSections';
 
 function SimWindow() {
-  const {handleReference, handleDrop, elementRef, resizableTemplateRef, editorHtml, setEditorHtml, showCodeEditor, pageContent, setPageContent} = useResizeContext()
-  const simwindowRef = useRef(null);
+  const {simwindowRef, isInitialized, setIsInitialized, handleReference, handleDrop, elementRef, resizableTemplateRef, editorHtml, setEditorHtml, showCodeEditor, pageContent, setPageContent, isEditingCode, setIsEditingCode} = useResizeContext()
+
+  
 
   useEffect(() => {
-    handleReference(simwindowRef,resizableTemplateRef);
-    getReferenceForLayout(simwindowRef);
-    // getReference(pageContent, setPageContent);
-    getReferenceInitSections(simwindowRef);
-    // simwindowRef.current.innerHTML = `<h1>Hello world!</h1>`
-    initSections();
+    setEditorHtml(simwindowRef.current.innerHTML);
   }, []);
+
+  // this is initialized only once 
+  // when moving from code editor page to studio page this will not be executed. 
+  // instead the else part will be executed 
+  useEffect(() => {
+    if (!isInitialized) {
+      handleReference();
+      getReferenceForLayout(simwindowRef);
+      getReferenceInitSections(simwindowRef);
+      initSections();
+      setEditorHtml(simwindowRef.current.innerHTML);
+      setIsInitialized(true);
+    } else {
+      simwindowRef.current.innerHTML = editorHtml;
+    }
+  }, [isInitialized]);
 
   useEffect(() => {
     if(showCodeEditor) {
-      setEditorHtml(simwindowRef.current.outerHTML)
+      setEditorHtml(simwindowRef.current.innerHTML);
     }
-  }, [showCodeEditor])
-
-  
+  }, [showCodeEditor, isEditingCode]);
+    
 
   return (
     <>
@@ -35,7 +44,7 @@ function SimWindow() {
         onDragOver={(e, simwindowRef) => {e.preventDefault()}} 
         onDrop={(e, simwindowRef) => {handleDrop(e, simwindowRef)}}
       >
-        <div 
+        {/* <div 
         className="resizable" 
         id="resizableTemplate" 
         style={{display: 'none'}} 
@@ -48,7 +57,7 @@ function SimWindow() {
           <div className="handle bottom-center"></div>
           <div className="handle bottom-left"></div>
           <div className="handle left-center"></div>
-        </div>                        
+        </div>                         */}
         {/*<iframe className="iframe-simwindow" ref={iframeRef} ></iframe>*/}
       </div>
     </>

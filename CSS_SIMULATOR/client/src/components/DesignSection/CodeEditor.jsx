@@ -1,12 +1,15 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useSyncExternalStore } from 'react'
 import {useResizeContext} from './ResizeContext'
 import { Editor } from '@monaco-editor/react';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function CodeEditor() {
+function CodeEditor({viewmode}) {
   
-  const {showCodeEditor, editorHtml, editorCss, setEditorCss} = useResizeContext(); //Used to show the code editor
+  const hasFormatted = useRef(false);
+  const {showCodeEditor, editorHtml, setEditorHtml, iframeHtml, setIframeHtml, editorCss, setEditorCss, isEditingCode, setIsEditingCode, setIsInitialized} = useResizeContext(); //Used to show the code editor
+
   const [fileName, setFileName] = useState("index.html"); //Used to switch between the files in the code editor
   const files = {
     "index.html": {
@@ -33,17 +36,19 @@ function CodeEditor() {
   
   useEffect(() => {
     setFile(files[fileName]);
+    hasFormatted.current = false;
   }, [fileName, editorHtml]); //Used to switch between the files in the code editor
+ 
+  // useEffect(() => {
+  //   if (editorRef.current && viewmode && !hasFormatted.current) {
+  //     setTimeout(() => {
+  //       editorRef.current.getAction('editor.action.formatDocument').run();
+  //       hasFormatted.current = true;
+  //     }, 10);
+  //   }
+  //   console.log(editorHtml);
+  // }, [editorHtml, fileName, viewmode]); //Used to format the code in the code editor
 
-  useEffect(() => {
-    if (editorRef.current) {
-      setTimeout(() => {
-        editorRef.current.getAction('editor.action.formatDocument').run();
-        // editorRef.current.setScrollTop(0);
-      }, 1);
-    }
-    console.log(editorHtml);
-  }, [editorHtml, fileName]); //Used to format the code in the code editor
 
   useEffect(() => {
     if(showCodeEditor) {
@@ -52,7 +57,13 @@ function CodeEditor() {
   }, [showCodeEditor]) //Displays html every time the code editor is opened
 
   const cssCode = useMemo(extractInlineCSS, [editorHtml]); //Used to extract the inline CSS from the HTML
-  setEditorCss(cssCode); //Used to set the CSS code in the code editor
+  // setEditorCss((prev) => );
+  useEffect(() => {
+    if(viewmode) {
+      setEditorCss(cssCode);
+    }
+  },[editorHtml, viewmode]);
+  
 
   function extractInlineCSS() {
     // Create a temporary DOM element to parse the HTML string
@@ -82,15 +93,76 @@ function CodeEditor() {
     return css;
   }
 
+  // used during navigating from codeEditor page to studio page 
+  function applyCssAsInlineStyles(htmlString, cssString) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+
+    // Parse CSS
+    const cssRules = cssString.match(/#[\w-]+\s*\{[^}]+\}/g); // only matches ID selectors
+
+    if (cssRules) {
+        cssRules.forEach(rule => {
+            const selector = rule.match(/#([\w-]+)/)[1]; // extract id
+            const styleBlock = rule.match(/\{([^}]+)\}/)[1]; // extract styles
+            const element = doc.getElementById(selector);
+
+            if (element) {
+                // Get existing inline style (if any)
+                const existingStyle = element.getAttribute('style') || '';
+                // Combine old and new styles
+                const updatedStyle = `${existingStyle} ${styleBlock}`.trim();
+                element.setAttribute('style', updatedStyle);
+            }
+        });
+    }
+
+    return doc.body.innerHTML;
+  }
+
+
+  function handleCodeUpdate() {
+    if (isEditingCode) {
+      // STEP 1: Convert CSS into inline styles
+      const htmlWithInlineStyles = applyCssAsInlineStyles(iframeHtml, editorCss);
+  
+      // STEP 2: Update your ResizeContext or wherever the HTML is stored
+      setEditorHtml(htmlWithInlineStyles);
+    }
+
+    // this prevents reinitialization of simwindow if moved back to studio page
+    setIsInitialized(true);
+    setIsEditingCode(!isEditingCode); // toggle view/edit
+  }
+  
+
+  function handleEditorChange(value) {
+    if (fileName === "index.html") {
+      setIframeHtml(value); // Update the HTML content
+    } else if(fileName === "style.css") {
+      setEditorCss(value);
+    }
+  }
+
+
   return (
     <div className={`div-code-editor ${showCodeEditor ? "" : "display-none"}`}> 
       <div className='div-files-bar'> 
-        <div className="div-html-btn">
-          <button className='html-btn' onClick={() => setFileName("index.html")}>index.html</button>
+        <div>
+          <div className="div-html-btn">
+            <button className='html-btn' onClick={() => setFileName("index.html")}>index.html</button>
+          </div>
+          <div className="div-css-btn">
+            <button className='css-btn' onClick={() => setFileName("style.css")}>style.css</button>
+          </div>
         </div>
-        <div className="div-css-btn">
-          <button className='css-btn' onClick={() => setFileName("style.css")}>style.css</button>
+
+        <Link to={isEditingCode ? '/studio' : '/studio/codeeditor'}>
+        <div onClick={handleCodeUpdate} className="div-edit-code-btn">
+          {isEditingCode ? "Save" : "Edit Code"}
         </div>
+        </Link>
+        
       </div>
       <Editor
         height="100%"
@@ -99,8 +171,14 @@ function CodeEditor() {
         path={file.name}
         defaultLanguage={file.language}
         value={file.value}
-        onMount={(editor) => (editorRef.current = editor)}
-        options={{ scrollBeyondLastLine: false }}
+        onMount={(editor, monaco) => editorRef.current = editor}
+        onChange={viewmode ? undefined : handleEditorChange}
+        options={
+          { 
+            scrollBeyondLastLine: true, 
+            readOnly: viewmode 
+          }
+        }
       />
     </div>
   )

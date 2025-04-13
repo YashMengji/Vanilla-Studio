@@ -60,6 +60,12 @@ export default function Dashboard({ name, username, email, projects }) {
             <ProjectPreviewCard />
             <ProjectPreviewCard />
             <ProjectPreviewCard />
+            <ProjectPreviewCard />
+            <ProjectPreviewCard />
+            <ProjectPreviewCard />
+            <ProjectPreviewCard />
+            <ProjectPreviewCard />
+            <ProjectPreviewCard />
         </div>
       </div>
     </div>

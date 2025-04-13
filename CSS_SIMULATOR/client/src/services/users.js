@@ -14,6 +14,13 @@ export function login({username, password}){
   })
 }
 
+export function updateUser(formData) {
+  return makeRequests("/auth/update", {
+    method: "POST",
+    data: formData,
+  })
+}
+
 export function onLogout(){
   return makeRequests(`/auth/logout`, {
     method: "POST",

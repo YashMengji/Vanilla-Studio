@@ -8,6 +8,8 @@ export function useResizeContext() {
 }
 
 export const ResizeProvider = ({ children }) => {
+  const simwindowRef = useRef(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [xposition, setXPosition] = useState(0);
@@ -16,8 +18,10 @@ export const ResizeProvider = ({ children }) => {
   const [borderRadius, setBorderRadius] = useState(0);
   const [isTextElement, setIsTextElement] = useState(true);
   const [showCodeEditor, setShowCodeEditor] = useState(false);
-  const [editorHtml, setEditorHtml] = useState('');
-  const [editorCss, setEditorCss] = useState('');
+  const [editorHtml, setEditorHtml] = useState('<h1>testing html</h1>');
+  const [editorCss, setEditorCss] = useState('h1{color: red;}');
+  const [iframeHtml, setIframeHtml] = useState("");
+  const [isEditingCode, setIsEditingCode] = useState(false);
   const [backgroundOpacity, setBackgroundOpacity] = useState(1);
   const [pageContent, setPageContent] = useState(
     [
@@ -57,6 +61,9 @@ export const ResizeProvider = ({ children }) => {
   const resizeTemplate = useRef(null);
      
   const propertiesValue = {
+    simwindowRef,
+    isInitialized, 
+    setIsInitialized,
     handleReference,
     handleDrop,
     width,
@@ -82,6 +89,10 @@ export const ResizeProvider = ({ children }) => {
     setEditorHtml,
     editorCss,
     setEditorCss,
+    iframeHtml, 
+    setIframeHtml,
+    isEditingCode, 
+    setIsEditingCode,
     backgroundOpacity,
     setBackgroundOpacity,
     pageContent,
@@ -274,8 +285,8 @@ function handleDrop(e) {
     
   }
 
-function handleReference(simwindowRef) {
-    simwindow = simwindowRef.current;
+function handleReference() {
+    let simwindow = simwindowRef.current;
     
     // create a plus icon for adding new section 
     let addBtn = document.createElement('div');
