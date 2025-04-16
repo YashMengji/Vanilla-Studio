@@ -39,6 +39,7 @@ const LoginSignup = () => {
       setUsername("");
       setPassword("");
       setEmail("");
+      setActive(false);
       // createLocalUser(user);
       toast.success('User Registered successfully!', { position: 'top-right', autoClose: 3000 });
     })
