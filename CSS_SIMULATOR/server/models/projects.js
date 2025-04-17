@@ -22,6 +22,10 @@ const projectSchema = mongoose.Schema({
     type: String, 
     default: ""
   },
+  previewImage: {
+    type: String,
+    default: ""
+  }
 
 }, {timestamps: true})
 

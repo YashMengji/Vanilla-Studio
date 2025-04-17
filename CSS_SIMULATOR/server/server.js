@@ -9,6 +9,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const authRoutes = require("./routes/authRoutes");
 // const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/auth", authRoutes);
-// app.use("/api/u", userRoutes);
+app.use("/api/u", userRoutes);
 app.use("/api/projects", projectRoutes);
 
 

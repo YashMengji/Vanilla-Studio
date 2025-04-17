@@ -1,8 +1,17 @@
 import "./Dashboard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectPreviewCard from "./DashboardProjectCard";
+import { useUser } from "../../contexts/UserContext";
 
 export default function Dashboard({ name, username, email, projects }) {
+
+  const { logUser } = useUser();
+
+  // useEffect(() => {
+  //   console.log(logUser);
+  // }, [logUser]);
+
+
   const names = ["All", "Private", "Public"];
   const [index, setIndex] = useState(0);
 
@@ -76,16 +85,16 @@ export default function Dashboard({ name, username, email, projects }) {
           <div className="dash-profile">
             <h1 className="head-detail-title">My Account</h1>
             <div className="head-detail-item">
-              <h2>Name:</h2>
-              <p>{accountFormData.name}</p>
+              <div className="head-detail-item-name">Name:</div>
+              <div className="head-detail-item-name-value">{logUser?.fname} {logUser?.lname}</div>
             </div>
             <div className="head-detail-item">
-              <h2>Username:</h2>
-              <p>{accountFormData.username}</p>
+              <div className="head-detail-item-username">Username:</div>
+              <div className="head-detail-item-name-value">{logUser?.username}</div>
             </div>
             <div className="head-detail-item">
-              <h2>Email:</h2>
-              <p>{accountFormData.email}</p>
+              <div className="head-detail-item-email">Email:</div>
+              <div className="head-detail-item-name-value">{logUser?.email}</div>
             </div>
             <button className="dash-header-btn" onClick={openEditAccountModal}>
               Update Account Details
