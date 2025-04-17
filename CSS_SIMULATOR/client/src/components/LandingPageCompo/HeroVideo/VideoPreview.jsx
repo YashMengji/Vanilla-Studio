@@ -1,5 +1,5 @@
 import "./VideoPreview.css";
-import previewVideo from "../../../assets/video.mp4";
+import previewVideo from "/videos/video.mp4";
 
 export default function VideoPreview() {
     return (
