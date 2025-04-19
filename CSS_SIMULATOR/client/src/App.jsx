@@ -3,17 +3,19 @@ import './App.css'
 import { ResizeProvider } from './components/DesignSection/ResizeContext'
 import { ToastContainer } from 'react-toastify';
 
+
 function App() {
   
 
   return (
     <>
-      <ResizeProvider>
-        <ToastContainer />
-        <Outlet/>
-      </ResizeProvider>
-      
-    </> 
+
+        <ResizeProvider>
+          <ToastContainer />
+          <Outlet/>
+        </ResizeProvider>
+
+    </>
   )
 }
 

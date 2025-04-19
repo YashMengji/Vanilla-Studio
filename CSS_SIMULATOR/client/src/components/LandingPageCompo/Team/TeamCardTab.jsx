@@ -1,8 +1,8 @@
 import "./TeamCardTab.css";
 import TeamCard from "./TeamCard";
-import Yash from "../../../assets/yash.jpg";
-import Sushant from "../../../assets/sushant.jpg";
-import Dipanjan from "../../../assets/dipanjan.jpg";
+import Yash from "/images/Yash.jpg";
+import Sushant from "/images/Sushant.jpg";
+import Dipanjan from "/images/Dipanjan.jpg";
 
 export default function TeamCardTab() {
     return (

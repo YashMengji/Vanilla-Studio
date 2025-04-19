@@ -1,8 +1,15 @@
 import "./Dashboard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectPreviewCard from "./DashboardProjectCard";
+import { useUser } from "../../contexts/UserContext";
 
 export default function Dashboard({ name, username, email, projects }) {
+  const { logUser } = useUser();
+
+  // useEffect(() => {
+  //   console.log(logUser);
+  // }, [logUser]);
+
   const names = ["All", "Private", "Public"];
   const [index, setIndex] = useState(0);
 
@@ -60,49 +67,36 @@ export default function Dashboard({ name, username, email, projects }) {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-header">
-        <div className="dash-head-profile">
+      <div className="dashboard-userData">
+        <div className="userData1">
           <div className="dash-head-avatar">
             <img
               src="https://www.w3schools.com/howto/img_avatar.png"
               alt="avatar"
             />
-            <div className="dash-head-doodle">
-              <h2>Hello</h2>
+          </div>
+          <h1 className="head-detail-title">My Account Detail:</h1>
+          <div className="userData2">
+            <div className="head-detail-item">
+              <h2 className="head-detail-item-name">Name:</h2>
+              <p className="head-detail-item-name-value">
+                {logUser?.fname} {logUser?.lname}
+              </p>
+            </div>
+            <div className="head-detail-item">
+              <h2 className="head-detail-item-username">Username:</h2>
+              <p className="head-detail-item-name-value">{logUser?.username}</p>
+            </div>
+            <div className="head-detail-item">
+              <h2 className="head-detail-item-email">Email:</h2>
+              <p className="head-detail-item-name-value">{logUser?.email}</p>
             </div>
           </div>
         </div>
-        <div className="dash-head-details">
-          <div className="dash-profile">
-            <h1 className="head-detail-title">My Account</h1>
-            <div className="head-detail-item">
-              <h2>Name:</h2>
-              <p>{accountFormData.name}</p>
-            </div>
-            <div className="head-detail-item">
-              <h2>Username:</h2>
-              <p>{accountFormData.username}</p>
-            </div>
-            <div className="head-detail-item">
-              <h2>Email:</h2>
-              <p>{accountFormData.email}</p>
-            </div>
-            <button className="dash-header-btn" onClick={openEditAccountModal}>
-              Update Account Details
-            </button>
-          </div>
 
-          <div className="dash-project">
-            <h1 className="head-detail-title">My Projects</h1>
-            <div className="head-detail-item">
-              <h2>Projects:</h2>
-              <p>{projects}</p>
-            </div>
-            <button className="dash-header-btn" onClick={openProjectModal}>
-              Add New Project
-            </button>
-          </div>
-        </div>
+        <button className="userProfile-btn" onClick={openEditAccountModal}>
+          Update Account Details
+        </button>
       </div>
 
       <div className="dashboard-project">
@@ -149,8 +143,15 @@ export default function Dashboard({ name, username, email, projects }) {
 
             <div className="indicator"></div>
           </div>
+          <button className="newProject-btn" onClick={openProjectModal}>
+            Add New Project
+          </button>
         </div>
         <div className="project-listings">
+          <ProjectPreviewCard />
+          <ProjectPreviewCard />
+          <ProjectPreviewCard />
+          <ProjectPreviewCard />
           <ProjectPreviewCard />
           <ProjectPreviewCard />
           <ProjectPreviewCard />

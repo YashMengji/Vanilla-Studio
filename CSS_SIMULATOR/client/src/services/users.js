@@ -1,5 +1,11 @@
 import { makeRequests } from "./makeRequests"
 
+export function getUser(){
+  return makeRequests(`/u/users`, {
+    method: "GET",
+  })
+}
+
 export function createUser({fname, lname, username, password, email}){
   return makeRequests(`/auth/register`, {
     method: "POST",

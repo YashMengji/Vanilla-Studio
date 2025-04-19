@@ -8,7 +8,7 @@ import { useAsyncFn } from '../../hooks/useAsync';
 import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate hook
 
 const LoginSignup = () => {
-  const [active, setActive] = useState(true); // ✅ Default to Sign-Up page
+  const [active, setActive] = useState(false); // ✅ Default to Sign-Up page
 
   // const {active, setActive} = useContext(ModalContext);
   const [fname, setFname] = useState("");

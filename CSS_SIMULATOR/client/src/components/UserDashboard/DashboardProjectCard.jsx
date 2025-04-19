@@ -28,16 +28,19 @@ export default function DashboardProjectCard({
 
   return (
     <>
-      <div
-        className="project-card"
-        style={{ backgroundImage: `url(${cardData.backgroundImage})` }}
-      >
-        <div className="project-card-border">
-          <span className="project-card-title">{cardData.title}</span>
+      <div className="project-card">
+        <div className="project-image">
+          <img src={cardData.backgroundImage} alt="Project" />
         </div>
-        <div className="project-card-icons">
-          <i className="fa-solid fa-pen-to-square" onClick={openModal}></i>
-          <i className="fa-solid fa-trash"></i>
+        <span className="project-card-title">{cardData.title}</span>
+        <div className="project-card-btn">
+          <button className="card-edit" onClick={openModal}>
+            Edit |&nbsp; <i className="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button></button>
+          <button className="card-delete">
+            Delete |&nbsp;<i class="fa-solid fa-trash-can"></i>
+          </button>
         </div>
       </div>
 
@@ -64,8 +67,10 @@ export default function DashboardProjectCard({
                   onChange={handleChange}
                 />
               </label>
-              <button className="btnSubmit" type="submit">Save</button>
-              <button className="btnClose"type="button" onClick={closeModal}>
+              <button className="btnSubmit" type="submit">
+                Save
+              </button>
+              <button className="btnClose" type="button" onClick={closeModal}>
                 Cancel
               </button>
             </form>
