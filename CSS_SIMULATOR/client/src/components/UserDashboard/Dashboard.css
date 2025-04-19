@@ -1,20 +1,21 @@
 .dashboard {
   height: 94vh;
   width: 100vw;
-  padding: 40px;
+  padding: 18px 30px;
   display: flex;
   flex-direction: row;
   background-color: var(--main);
-  gap: 40px;
+  gap: 15px;
 }
 
 /* dashboard left */
 
 .dashboard-userData {
-  height: 100%;
-  width: 20vw;
-  padding: 40px;
-  display: flex;
+  height: 650px;
+  width: 305px;
+  padding: 30px;
+  display: flex
+;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -46,6 +47,7 @@
   font-weight: 900;
   color: var(--primary);
 }
+
 .head-detail-item {
   height: fit-content;
   width: 100%;
@@ -82,9 +84,14 @@
 /* dashboard right */
 
 .dashboard-project {
-  width: 100%;
-  display: flex;
+  width: 100%; 
+  padding: 20px;
+  height: max-content;
+  display: flex
+;
+  flex: 1;
   flex-direction: column;
+  gap: 20px;
   align-items: center;
   justify-content: flex-start;
   border-radius: 20px;
@@ -92,10 +99,12 @@
 }
 
 .dash-project-header {
-  padding: 50px 40px;
-  height: 5vh;
+  padding: 0px 15px;
+  height: 65px;
+  /* background-color: lightblue; */
   width: 100%;
-  display: flex;
+  display: flex
+;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -109,14 +118,15 @@
 }
 
 .tab-container {
-  height: 3.4vh;
+  height: 34px;
   position: relative;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   background-color: var(--shadow-gray);
   border-radius: 9px;
 }
+
 .indicator {
   content: "";
   width: 130px;
@@ -131,6 +141,7 @@
   border-radius: 7px;
   transition: all 0.2s ease-out;
 }
+
 .tab {
   width: 130px;
   height: 28px;
@@ -139,6 +150,7 @@
   outline: none;
   opacity: 0;
 }
+
 .tab_label {
   width: 130px;
   height: 28px;
@@ -152,15 +164,16 @@
   opacity: 0.6;
   cursor: pointer;
 }
-.tab--1:checked ~ .indicator {
+
+.tab--1:checked~.indicator {
   left: 2px;
 }
 
-.tab--2:checked ~ .indicator {
+.tab--2:checked~.indicator {
   left: calc(130px + 2px);
 }
 
-.tab--3:checked ~ .indicator {
+.tab--3:checked~.indicator {
   left: calc(130px * 2 + 2px);
 }
 
@@ -181,15 +194,16 @@
 }
 
 .project-listings {
-  /* height: 100%; */
   width: 100%;
   overflow: auto;
-  display: flex;
+  display: grid
+;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 8px;
+  row-gap: 8px;
   flex-wrap: wrap;
-  gap: 34px;
-  padding: 10px 40px 40px 40px;
-  justify-content: flex-start;
-  margin-bottom: 40px;
+  /* gap: 34px; */
+  padding: 15px;
 }
 
 .project-listings::-webkit-scrollbar {
