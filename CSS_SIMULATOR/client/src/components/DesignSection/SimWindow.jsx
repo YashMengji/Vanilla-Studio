@@ -11,6 +11,7 @@ function SimWindow() {
 
   useEffect(() => {
     setEditorHtml(simwindowRef.current.innerHTML);
+    handleReference();
   }, []);
 
   // this is initialized only once 
@@ -18,7 +19,7 @@ function SimWindow() {
   // instead the else part will be executed 
   useEffect(() => {
     if (!isInitialized) {
-      handleReference();
+      
       getReferenceForLayout(simwindowRef);
       getReferenceInitSections(simwindowRef);
       initSections();
