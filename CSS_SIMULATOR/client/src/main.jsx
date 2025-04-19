@@ -9,6 +9,7 @@ import LoginSignupPage from './pages/LoginSignupPage.jsx'
 import UserDashboardPage from './pages/UserDashboardPage.jsx'
 import CodeEditingPage from './pages/CodeEditingPage.jsx'
 import UserContext from './contexts/UserContext';
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 const createRouter = createBrowserRouter([
   {
@@ -17,22 +18,33 @@ const createRouter = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <LandingPage />
+        element:
+          <UserContext>
+            <LandingPage />
+          </UserContext>
       },
       {
         path: '/signup',
-        element: <LoginSignupPage />
+        element:
+          <UserContext>
+            <LoginSignupPage />
+          </UserContext>
       },
       {
         path: '/dashboard',
         element:
-          <UserContext>
-            <UserDashboardPage />
-          </UserContext>
+          <ProtectedRoute>
+            <UserContext>
+              <UserDashboardPage />
+            </UserContext>
+          </ProtectedRoute>
       },
       {
         path: '/studio',
-        element: <StudioPage />,
+        element:
+          <ProtectedRoute>
+            <StudioPage />
+          </ProtectedRoute>,
       },
       {
         path: '/studio/codeeditor',
