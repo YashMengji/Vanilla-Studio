@@ -6,12 +6,9 @@ export function getProjects(){
 }
 
 export function createProject(formData) {
-  return makeRequests('/projects', {
+  return makeRequests('/projects/create', {
     method: 'POST',
     data: formData,
-    Headers: {
-      'Content-Type': 'multipart/form-data',
-    }
   });
 }
 
@@ -23,7 +20,7 @@ export function deleteProject(id){
 
 // post settings 
 export function updateProject(id, formData) {
-  return makeRequests(`/projects/${id}`, {
+  return makeRequests(`/projects/${id}/update`, {
     method: 'PUT',
     data: formData,
     Headers: {
@@ -32,3 +29,15 @@ export function updateProject(id, formData) {
   });
 }
 
+// apis for studio page 
+export function getProject(id) {
+  return makeRequests(`/projects/${id}`);
+}
+
+// service for autosave feature : 
+export function saveChanges(id, htmlObj) {  
+  return makeRequests(`/projects/${id}/edit`, {
+    method: 'PUT',
+    data: htmlObj,
+  })
+}

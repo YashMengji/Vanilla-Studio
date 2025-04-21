@@ -3,11 +3,14 @@ import './Css/SimWindow.css';
 import {useResizeContext} from './ResizeContext';
 import { getReferenceForLayout } from './LayoutProperties';
 import { initSections, getReferenceInitSections } from './javascripts/initSections';
+import { useLocation } from 'react-router-dom';
+import { saveChanges } from '../../services/projects';
 
 function SimWindow() {
-  const {simwindowRef, isInitialized, setIsInitialized, handleReference, handleDrop, elementRef, resizableTemplateRef, editorHtml, setEditorHtml, showCodeEditor, pageContent, setPageContent, isEditingCode, setIsEditingCode} = useResizeContext()
+  const {simwindowRef, isInitialized, setIsInitialized, handleReference, handleDrop, elementRef, resizableTemplateRef, editorHtml, setEditorHtml, editorCss, showCodeEditor, pageContent, setPageContent, isEditingCode, setIsEditingCode, simwindowHtml, setSimwindowHtml} = useResizeContext();
 
-  
+  const location = useLocation();
+  const projectId = location.state?.projectId;
 
   useEffect(() => {
     setEditorHtml(simwindowRef.current.innerHTML);
@@ -35,7 +38,49 @@ function SimWindow() {
       setEditorHtml(simwindowRef.current.innerHTML);
     }
   }, [showCodeEditor, isEditingCode]);
-    
+
+
+  // tracking the simwindow's innerHTML code 
+  useEffect(() => {
+    // this native browser API takes a callback which is used to observe the node 
+    const observer = new MutationObserver((mutationsList, observer) => {
+      const updatedHTML = simwindowRef.current.innerHTML;
+      // update the changes in this state and later save it using autosave 
+      setEditorHtml(updatedHTML); // This will trigger the autosave useEffect
+    });
+  
+    // observer starts tracking the give dom node 
+    // extra options is to track different parts of that node 
+    if (simwindowRef.current) {
+      observer.observe(simwindowRef.current, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        characterData: true,
+      });
+    }
+  
+    return () => {
+      observer.disconnect(); // Clean up
+    };
+  }, []);
+  
+
+  // autosave functionality 
+  useEffect(() => {
+    if (!editorHtml) return;
+
+    const timeout = setTimeout(async () => {
+      try {
+        await saveChanges(projectId, { HTML: editorHtml }); // 👈 Send HTML to backend
+        console.log("Auto-saved project HTML");
+      } catch (err) {
+        console.error("Auto-save error:", err);
+      }
+    }, 2000); // Save 2 seconds after last change
+
+    return () => clearTimeout(timeout); // Reset debounce timer
+  }, [editorHtml]);
 
   return (
     <>

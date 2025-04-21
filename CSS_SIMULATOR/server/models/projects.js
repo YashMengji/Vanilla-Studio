@@ -9,7 +9,7 @@ const projectSchema = mongoose.Schema({
     type: String, 
     required: true 
   },
-  access: { 
+  visibility: { 
     type: String,
     enum: ['public', 'private'],
     required: true

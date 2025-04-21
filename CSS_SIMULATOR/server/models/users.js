@@ -27,6 +27,12 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "https://res.cloudinary.com/du5jkj6pi/image/upload/v1736188016/FriendSphere/jp3evvshq3hdgmvfacid.png"
   }, // URL to user's profile
+  projects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "project"
+    }
+  ]
 })
 
 module.exports = mongoose.model("user", userSchema);

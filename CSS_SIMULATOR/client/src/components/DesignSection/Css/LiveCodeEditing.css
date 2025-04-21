@@ -1,7 +1,17 @@
+/* styles for CodeEditingPage */
+.div-code-editing-page {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+ 
 .live-preview-screen {
     height: 81vh;
-    width: 90%;
+    width: var(--sim-width);
     margin: auto;
-    box-shadow: 0 0 20px 0px;
+    box-shadow: var(--shadow-gray) 0px 0px 29px 0px;
 }
 

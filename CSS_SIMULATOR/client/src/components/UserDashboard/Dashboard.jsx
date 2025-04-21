@@ -1,14 +1,32 @@
 import "./Dashboard.css";
 import { useEffect, useState } from "react";
-import ProjectPreviewCard from "./DashboardProjectCard";
+import DashboardProjectCard from "./DashboardProjectCard";
 import { useUser } from "../../contexts/UserContext";
+import {updateUser} from "../../services/users";
+import { createProject, getProjects } from "../../services/projects";
 
 export default function Dashboard({ name, username, email, projects }) {
-  const { logUser } = useUser();
+  const { logUser, setLogUser , setUsers} = useUser();
+  const [userProjects, setUserProjects] = useState([]);
 
-  // useEffect(() => {
-  //   console.log(logUser);
-  // }, [logUser]);
+  useEffect(() => {
+    console.log(logUser);
+    setAccountFormData((...prevForm) => ({...prevForm, fname: logUser?.fname || "", lname: logUser?.lname || ""}));
+  }, [logUser]);
+
+  // get user projects during the component's first render 
+  useEffect(() => {
+    async function getUserProjects() {
+      try {
+        const response = await getProjects();
+        console.log("Fetched Projects:", response);
+        setUserProjects(response);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      }
+    }
+    getUserProjects();
+  }, [])
 
   const names = ["All", "Private", "Public"];
   const [index, setIndex] = useState(0);
@@ -19,16 +37,14 @@ export default function Dashboard({ name, username, email, projects }) {
 
   // Forms
   const [projectFormData, setProjectFormData] = useState({
-    name: "",
-    description: "",
+    projectTitle: "",
+    projectDesc: "",
     visibility: "public",
-    backgroundImage: "",
   });
 
   const [accountFormData, setAccountFormData] = useState({
-    name,
-    username,
-    email,
+    fname: "",
+    lname: "",
   });
 
   const handleClick = () => {
@@ -42,7 +58,7 @@ export default function Dashboard({ name, username, email, projects }) {
   const openEditAccountModal = () => setIsEditAccountModalOpen(true);
   const closeEditAccountModal = () => setIsEditAccountModalOpen(false);
 
-  // Form Handlers
+  // form input, state handlers 
   const handleProjectChange = (e) => {
     const { name, value } = e.target;
     setProjectFormData({ ...projectFormData, [name]: value });
@@ -53,15 +69,39 @@ export default function Dashboard({ name, username, email, projects }) {
     setAccountFormData({ ...accountFormData, [name]: value });
   };
 
-  const handleProjectSubmit = (e) => {
+  // Form Handlers
+  const handleProjectSubmit = async (e) => {
     e.preventDefault();
-    console.log("Project submitted:", projectFormData);
+    try{
+      let response = await createProject(projectFormData);
+      console.log("new project : ",response);
+      if(response.status) {
+        setUserProjects((prev) => ([...prev, response.project]));
+      }
+    }catch(err) {
+      console.log("Error in creating new project:", err);
+    }
     closeProjectModal();
   };
 
-  const handleAccountSubmit = (e) => {
+  const handleAccountSubmit = async (e) => {
     e.preventDefault();
-    console.log("Account details updated:", accountFormData);
+    try{
+      let response = await updateUser(accountFormData);
+      console.log(response);
+      if(response.status) {
+        setLogUser(prev => ({ ...prev, fname: accountFormData.fname, lname: accountFormData.lname }));
+
+        setUsers(prevUsers =>
+          prevUsers.map(user =>
+            user._id === logUser._id ? { ...user, fname: accountFormData.fname, lname: accountFormData.lname } : user
+          )
+        );
+      }
+    } catch(err) {
+      console.log("Error updating user info:", err);
+    } 
+    // console.log("Account details updated:", accountFormData);
     closeEditAccountModal();
   };
 
@@ -148,16 +188,10 @@ export default function Dashboard({ name, username, email, projects }) {
           </button>
         </div>
         <div className="project-listings">
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
-          <ProjectPreviewCard />
+          {userProjects.map((project) => (
+            <DashboardProjectCard projectTitle={project.projectTitle} projectDesc={project.projectDesc} visibility={project.visibility} key={project._id} projectId={project._id}/>
+          ))} 
+          {/* <ProjectPreviewCard /> */}
         </div>
       </div>
 
@@ -171,7 +205,7 @@ export default function Dashboard({ name, username, email, projects }) {
                 Project Name:
                 <input
                   type="text"
-                  name="name"
+                  name="projectTitle"
                   value={projectFormData.name}
                   onChange={handleProjectChange}
                   required
@@ -181,7 +215,7 @@ export default function Dashboard({ name, username, email, projects }) {
                 Description:
                 <input
                   type="text"
-                  name="description"
+                  name="projectDesc"
                   value={projectFormData.description}
                   onChange={handleProjectChange}
                   required
@@ -214,16 +248,7 @@ export default function Dashboard({ name, username, email, projects }) {
                   </label>
                 </div>
               </label>
-              <label>
-                Background Image URL:
-                <input
-                  type="text"
-                  name="backgroundImage"
-                  value={projectFormData.backgroundImage}
-                  onChange={handleProjectChange}
-                  required
-                />
-              </label>
+              
               <button className="btnSubmit" type="submit">
                 Create
               </button>
@@ -246,31 +271,21 @@ export default function Dashboard({ name, username, email, projects }) {
             <h2>Edit Account Details</h2>
             <form onSubmit={handleAccountSubmit}>
               <label>
-                Name:
+                Firstname:
                 <input
                   type="text"
-                  name="name"
-                  value={accountFormData.name}
+                  name="fname"
+                  value={accountFormData.fname}
                   onChange={handleAccountChange}
                   required
                 />
               </label>
               <label>
-                Username:
+                Lastname:
                 <input
                   type="text"
-                  name="username"
-                  value={accountFormData.username}
-                  onChange={handleAccountChange}
-                  required
-                />
-              </label>
-              <label>
-                Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={accountFormData.email}
+                  name="lname"
+                  value={accountFormData.lname}
                   onChange={handleAccountChange}
                   required
                 />

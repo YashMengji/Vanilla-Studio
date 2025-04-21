@@ -4,11 +4,15 @@ import { Editor } from '@monaco-editor/react';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 
 function CodeEditor({viewmode}) {
   
   const hasFormatted = useRef(false);
-  const {showCodeEditor, editorHtml, setEditorHtml, iframeHtml, setIframeHtml, editorCss, setEditorCss, isEditingCode, setIsEditingCode, setIsInitialized} = useResizeContext(); //Used to show the code editor
+  const [editorHeight, setEditorHeight] = useState(220); // default height
+  const isResizing = useRef(false);
+  const {showCodeEditor, setShowCodeEditor, editorHtml, setEditorHtml, iframeHtml, setIframeHtml, editorCss, setEditorCss, isEditingCode, setIsEditingCode, setIsInitialized} = useResizeContext(); //Used to show the code editor
 
   const [fileName, setFileName] = useState("index.html"); //Used to switch between the files in the code editor
   const files = {
@@ -28,7 +32,7 @@ function CodeEditor({viewmode}) {
     "style.css": {
       name: "style.css",
       language: "css",
-      value: editorCss
+      value: editorCss,
     }
   }; //Used for the files in the code editor
   const [file, setFile] = useState(files[fileName]); 
@@ -51,6 +55,11 @@ function CodeEditor({viewmode}) {
 
 
   useEffect(() => {
+    const defaultEditorHeight = 220;
+    if (showCodeEditor && editorHeight === 0) {
+      setEditorHeight(defaultEditorHeight);
+    }
+
     if(showCodeEditor) {
       setFileName("index.html");
     }
@@ -120,6 +129,44 @@ function CodeEditor({viewmode}) {
     return doc.body.innerHTML;
   }
 
+  const handleMouseOver = () => {
+    document.body.style.cursor = 'row-resize';
+  }
+
+  const handleMouserOut = () => {
+    document.body.style.cursor = 'default';
+  }
+
+  const handleMouseDown = () => {
+    isResizing.current = true;
+  };
+
+  const handleMouseUp = () => {
+    isResizing.current = false;
+    document.body.style.cursor = 'default';
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isResizing.current) return;
+    const newHeight = window.innerHeight - e.clientY;
+    // setEditorHeight(Math.max(newHeight, 150)); // set a minimum height
+    if(newHeight < 50) {
+        setEditorHeight(0);
+        setShowCodeEditor(false);
+    } else {
+      setEditorHeight(newHeight);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
 
   function handleCodeUpdate() {
     if (isEditingCode) {
@@ -146,7 +193,21 @@ function CodeEditor({viewmode}) {
 
 
   return (
-    <div className={`div-code-editor ${showCodeEditor ? "" : "display-none"}`}> 
+    <>
+    {isEditingCode && 
+      <div className="show-editor-toggle" onClick={() => setShowCodeEditor(true)}>
+        Code
+        <span className="material-symbols-outlined">
+        keyboard_arrow_up
+        </span>
+      </div>
+    }
+      <div className={`div-code-editor ${showCodeEditor ? "" : "display-none"}`} 
+        style={{
+          height: editorHeight === 0 ? "0px" : `${editorHeight}px`,
+        }}
+      > 
+      <div className="div-resize-handle" onMouseDown={handleMouseDown} onMouseOver={handleMouseOver} onMouseOut={handleMouserOut}></div>
       <div className='div-files-bar'> 
         <div>
           <div className="div-html-btn">
@@ -180,7 +241,10 @@ function CodeEditor({viewmode}) {
           }
         }
       />
-    </div>
+      </div>
+    </>
+      
+    
   )
 }
 

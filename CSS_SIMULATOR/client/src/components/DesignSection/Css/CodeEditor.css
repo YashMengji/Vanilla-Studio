@@ -1,14 +1,37 @@
 .div-code-editor{
+  user-select: none;
   visibility: visible;
   opacity: 1;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 220px;
+  /* height: 100%; */
+  /* height: 220px; */
   background-color: var(--primary);
   z-index: 20;
   transition: all .3s;
+}
+/*this is only for code editor page*/
+.show-editor-toggle {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid black;
+  border-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 15px;
+}
+.div-resize-handle {
+  height: 10px;
+  background-color: rgb(164, 164, 164);
+  border-top: 2px solid black;
 }
 .display-none{
   visibility: hidden;

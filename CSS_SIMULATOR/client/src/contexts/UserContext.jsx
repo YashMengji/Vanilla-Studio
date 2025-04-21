@@ -56,6 +56,7 @@ function UserContext({ children }) {
         // showLogoutBtn,
         // setShowLogoutBtn,
         logUser,
+        setLogUser
       }
     }
     >

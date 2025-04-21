@@ -9,4 +9,19 @@ async function getUsers(req, res) { // API to get all users
   }
 }
 
-module.exports = { getUsers };
+async function updateUser(req, res) {
+  // fetch user data 
+  // update fname and lname if they are not same as in DB 
+  
+  try {
+    let {fname, lname} = req.body;
+    console.log(fname, lname);
+    console.log(req.signData);
+    await userModel.findOneAndUpdate({_id: req.signData.userId}, {fname, lname});
+    res.json({status: true, message: "User data updated !"});
+  }catch(err) {
+    res.status(400).json({status: false, message: "Error updating user!"});
+  }
+}
+
+module.exports = { getUsers, updateUser };

@@ -20,6 +20,7 @@ export const ResizeProvider = ({ children }) => {
   const [showCodeEditor, setShowCodeEditor] = useState(false);
   const [editorHtml, setEditorHtml] = useState('<h1>testing html</h1>');
   const [editorCss, setEditorCss] = useState('h1{color: red;}');
+  const [simwindowHtml, setSimwindowHtml] = useState("");
   const [iframeHtml, setIframeHtml] = useState("");
   const [isEditingCode, setIsEditingCode] = useState(false);
   const [backgroundOpacity, setBackgroundOpacity] = useState(1);
@@ -85,6 +86,8 @@ export const ResizeProvider = ({ children }) => {
     setIsTextElement,
     showCodeEditor,
     setShowCodeEditor,
+    simwindowHtml, 
+    setSimwindowHtml,
     editorHtml,
     setEditorHtml,
     editorCss,

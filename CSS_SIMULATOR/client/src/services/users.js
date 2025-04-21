@@ -21,8 +21,8 @@ export function login({loginUsername: username, loginPassword: password}){
 }
 
 export function updateUser(formData) {
-  return makeRequests("/auth/update", {
-    method: "POST",
+  return makeRequests("/u/update", {
+    method: "PUT",
     data: formData,
   })
 }

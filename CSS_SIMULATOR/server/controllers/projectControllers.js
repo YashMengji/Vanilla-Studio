@@ -1,12 +1,30 @@
 const projectModel = require("../models/projects");
+const userModel = require("../models/users");
+
+async function getProjects(req, res) {
+  try {
+    const userId = req.signData.userId; // assuming token is decoded and userId is available
+
+    const userWithProjects = await userModel.findById(userId).populate("projects");
+
+    if (!userWithProjects) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(userWithProjects.projects);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching projects", error: err.message });
+  }
+}
 
 async function createProject (req, res) {
   try {
-    const { projectTitle, projectDesc, visibility, HTML, CSS } = req.body;
+    const { projectTitle, projectDesc, visibility} = req.body;
     const project = await projectModel.create({ projectTitle, projectDesc, visibility });
-    res.status(201).json(project);
+    await userModel.findOneAndUpdate({_id: req.signData.userId}, {$push: {projects: project._id}});
+    res.status(201).json({status: true, project});
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({status: false, message: error.message });
   }
 }
 
@@ -22,6 +40,7 @@ async function getProject (req, res) {
 async function updateProjectDetails (req, res) {
   try {
     const { projectTitle, projectDesc, visibility } = req.body;
+    console.log(visibility);
     const project = await projectModel.findByIdAndUpdate(req.params.id, { projectTitle, projectDesc, visibility }, { new: true });
     res.status(200).json(project);
   } catch (error) {
@@ -31,9 +50,10 @@ async function updateProjectDetails (req, res) {
 
 async function editProject (req, res) {
   try {
-    const { HTML, CSS } = req.body;
-    const project = await projectModel.findByIdAndUpdate(req.params.id, { HTML, CSS }, { new: true });
-    res.status(200).json(project);
+    const { HTML } = req.body;
+    const project = await projectModel.findByIdAndUpdate(req.params.id, { HTML }, { new: true });
+    // res.status(200).json(project);
+    res.status(200).json({status: true, message: "project code updated!"});
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -48,4 +68,4 @@ async function deleteProject (req, res) {
   }
 }
 
-module.exports = { createProject, getProject, updateProjectDetails, editProject, deleteProject };
+module.exports = { createProject, getProject, updateProjectDetails, editProject, deleteProject, getProjects };
