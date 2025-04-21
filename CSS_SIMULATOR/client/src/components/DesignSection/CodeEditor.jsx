@@ -3,13 +3,12 @@ import {useResizeContext} from './ResizeContext'
 import { Editor } from '@monaco-editor/react';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 
-function CodeEditor({viewmode}) {
-  
-  const hasFormatted = useRef(false);
+function CodeEditor({viewmode, projectId}) {
+
   const [editorHeight, setEditorHeight] = useState(220); // default height
   const isResizing = useRef(false);
   const {showCodeEditor, setShowCodeEditor, editorHtml, setEditorHtml, iframeHtml, setIframeHtml, editorCss, setEditorCss, isEditingCode, setIsEditingCode, setIsInitialized} = useResizeContext(); //Used to show the code editor
@@ -40,7 +39,7 @@ function CodeEditor({viewmode}) {
   
   useEffect(() => {
     setFile(files[fileName]);
-    hasFormatted.current = false;
+    // hasFormatted.current = false;
   }, [fileName, editorHtml]); //Used to switch between the files in the code editor
  
   // useEffect(() => {
@@ -218,7 +217,7 @@ function CodeEditor({viewmode}) {
           </div>
         </div>
 
-        <Link to={isEditingCode ? '/studio' : '/studio/codeeditor'}>
+        <Link to={isEditingCode ? `/studio/${projectId}` : `/studio/codeeditor/${projectId}`}>
         <div onClick={handleCodeUpdate} className="div-edit-code-btn">
           {isEditingCode ? "Save" : "Edit Code"}
         </div>

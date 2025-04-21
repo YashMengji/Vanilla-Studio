@@ -13,7 +13,7 @@ export function createProject(formData) {
 }
 
 export function deleteProject(id){
-  return makeRequests(`/projects/${id}`, {
+  return makeRequests(`/projects/${id}/delete`, {
     method: 'DELETE'
   });
 }

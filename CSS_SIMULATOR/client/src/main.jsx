@@ -40,14 +40,14 @@ const createRouter = createBrowserRouter([
           </ProtectedRoute>
       },
       {
-        path: '/studio',
+        path: '/studio/:projectId',
         element:
           <ProtectedRoute>
             <StudioPage />
           </ProtectedRoute>,
       },
       {
-        path: '/studio/codeeditor',
+        path: '/studio/codeeditor/:projectId',
         element: <CodeEditingPage />
       }
     ]

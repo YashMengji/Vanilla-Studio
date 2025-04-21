@@ -3,8 +3,10 @@ import "./Css/CodeEditor.css";
 import "./Css/LiveCodeEditing.css";
 import { useEffect, useRef } from "react";
 import { useResizeContext } from "./ResizeContext";
+import { useParams } from "react-router-dom";
 
 export default function LiveCodeEditing() {
+    const {projectId} = useParams();
     const iframeRef = useRef(null);
     const {editorHtml, setEditorHtml, editorCss, setShowCodeEditor, simwindowRef, iframeHtml, setIframeHtml, iframeCss, setIframeCss} = useResizeContext();
 
@@ -37,7 +39,7 @@ export default function LiveCodeEditing() {
     return (
         <>
             <iframe ref={iframeRef} className="live-preview-screen"></iframe>
-            <CodeEditor viewmode={false}/>    
+            <CodeEditor viewmode={false} projectId={projectId}/>    
         </>
     )
 }

@@ -189,7 +189,7 @@ export default function Dashboard({ name, username, email, projects }) {
         </div>
         <div className="project-listings">
           {userProjects.map((project) => (
-            <DashboardProjectCard projectTitle={project.projectTitle} projectDesc={project.projectDesc} visibility={project.visibility} key={project._id} projectId={project._id}/>
+            <DashboardProjectCard projectTitle={project.projectTitle} projectDesc={project.projectDesc} visibility={project.visibility} key={project._id} projectId={project._id} userProjectsArr={setUserProjects}/>
           ))} 
           {/* <ProjectPreviewCard /> */}
         </div>

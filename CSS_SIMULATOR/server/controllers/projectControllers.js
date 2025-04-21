@@ -61,8 +61,10 @@ async function editProject (req, res) {
 
 async function deleteProject (req, res) {
   try {
-    const project = await projectModel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Project deleted successfully" });
+    const projectId = req.params.id
+    let project = await projectModel.findByIdAndDelete(projectId);
+    await userModel.findByIdAndUpdate(req.signData.userId, {$pull: {projects: projectId}});
+    res.status(200).json({status: true, message: "Project deleted successfully", project });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

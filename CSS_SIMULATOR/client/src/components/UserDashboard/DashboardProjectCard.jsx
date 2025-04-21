@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./DashboardProjectCard.css";
-import {updateProject, getProject} from "../../services/projects";
+import {updateProject, getProject, deleteProject} from "../../services/projects";
 import { Link } from "react-router-dom";
 import {useResizeContext} from '../DesignSection/ResizeContext';
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,8 @@ export default function DashboardProjectCard({
   projectTitle,
   projectDesc,
   visibility,
-  projectId
+  projectId,
+  userProjectsArr
 }) {
   const navigate = useNavigate();
   const {editorHtml, setEditorHtml, editorCss, setEditorCss, isInitialized, setIsInitialized} = useResizeContext();
@@ -62,9 +63,21 @@ export default function DashboardProjectCard({
         setEditorHtml(response.HTML);
         setEditorCss(response.CSS);
       }
-      navigate("/studio", {replace: true,  state: { projectId, projectTitle }});
+      navigate(`/studio/${projectId}`, {replace: true});
     } catch(err) {
       console.log("Error getting project : ", err);
+    }
+  }
+
+  async function handleProjectDelete() {
+    try {
+      let response = await deleteProject(projectId);
+      if(response.status) {
+        console.log(response.project);
+        userProjectsArr((prevProj) => prevProj.filter(project => project._id != projectId));
+      }
+    } catch(err) {
+      console.log("error deleting project : ", err);
     }
   }
 
@@ -83,7 +96,7 @@ export default function DashboardProjectCard({
             Edit |&nbsp; <i className="fa-solid fa-pen-to-square"></i>
           </button>
           <button></button>
-          <button className="card-delete">
+          <button className="card-delete" onClick={handleProjectDelete}>
             Delete |&nbsp;<i class="fa-solid fa-trash-can"></i>
           </button>
         </div>

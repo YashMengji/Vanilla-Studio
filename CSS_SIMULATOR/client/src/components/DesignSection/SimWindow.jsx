@@ -3,14 +3,11 @@ import './Css/SimWindow.css';
 import {useResizeContext} from './ResizeContext';
 import { getReferenceForLayout } from './LayoutProperties';
 import { initSections, getReferenceInitSections } from './javascripts/initSections';
-import { useLocation } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import { saveChanges } from '../../services/projects';
 
-function SimWindow() {
+function SimWindow({projectId}) {
   const {simwindowRef, isInitialized, setIsInitialized, handleReference, handleDrop, elementRef, resizableTemplateRef, editorHtml, setEditorHtml, editorCss, showCodeEditor, pageContent, setPageContent, isEditingCode, setIsEditingCode, simwindowHtml, setSimwindowHtml} = useResizeContext();
-
-  const location = useLocation();
-  const projectId = location.state?.projectId;
 
   useEffect(() => {
     setEditorHtml(simwindowRef.current.innerHTML);
