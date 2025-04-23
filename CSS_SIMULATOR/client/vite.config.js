@@ -9,9 +9,12 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: process.env.VITE_SERVER_URL, // URL of backend
-        changeOrigin: true, //Changes the origin of the host header to the target URL
+        changeOrigin: true, // Changes the origin of the host header to the target URL
       }
     },
+  },
+  preview: {
+    allowedHosts: ["vanilla-studio-client.onrender.com"], // Allow this host
   },
   plugins: [react()],
 })
