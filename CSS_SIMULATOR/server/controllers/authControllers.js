@@ -65,7 +65,7 @@ async function login (req, res) {
 function logout (req, res)  {
   try {
     res.clearCookie("token");
-    return res.send(true);
+    return res.json({status : true, message: "User logged out successfully."})
   } catch (error) {
     return res.status(400).json({message: error.message});
   }
