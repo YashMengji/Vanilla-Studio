@@ -2,17 +2,22 @@ import "./Dashboard.css";
 import { useEffect, useState } from "react";
 import DashboardProjectCard from "./DashboardProjectCard";
 import { useUser } from "../../contexts/UserContext";
-import {updateUser} from "../../services/users";
+import {updateUser, onLogout} from "../../services/users";
 import { createProject, getProjects } from "../../services/projects";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard({ name, username, email, projects }) {
   const { logUser, setLogUser , setUsers} = useUser();
   const [userProjects, setUserProjects] = useState([]);
+  const navigate = useNavigate();
+  const names = ["All", "Private", "Public"];
+  const [projectFilter, setProjectFilter] = useState("All");
 
   useEffect(() => {
     console.log(logUser);
     setAccountFormData((...prevForm) => ({...prevForm, fname: logUser?.fname || "", lname: logUser?.lname || ""}));
   }, [logUser]);
+
 
   // get user projects during the component's first render 
   useEffect(() => {
@@ -28,8 +33,7 @@ export default function Dashboard({ name, username, email, projects }) {
     getUserProjects();
   }, [])
 
-  const names = ["All", "Private", "Public"];
-  const [index, setIndex] = useState(0);
+  
 
   // Modals
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
@@ -105,6 +109,23 @@ export default function Dashboard({ name, username, email, projects }) {
     closeEditAccountModal();
   };
 
+  function handleProjectDisplayFilter(e, idx) { 
+    // console.log(e.target.id , idx, names[idx]);
+    setProjectFilter(names[idx]);
+  }
+
+  async function handleLogout() {
+    try{
+      let response = await onLogout();
+      console.log(response);
+      if(response.status) {
+        navigate("/", {replace: true});
+      }
+    } catch (err) {
+      console.log("error logging out : ", err);
+    }
+  }
+
   return (
     <div className="dashboard">
       <div className="dashboard-userData">
@@ -133,10 +154,15 @@ export default function Dashboard({ name, username, email, projects }) {
             </div>
           </div>
         </div>
-
-        <button className="userProfile-btn" onClick={openEditAccountModal}>
-          Update Account Details
-        </button>
+        <div className="sidebar-btns">
+          <button className="userProfile-btn" onClick={openEditAccountModal}>
+            Update Account Details
+          </button>
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+        
       </div>
 
       <div className="dashboard-project">
@@ -150,8 +176,8 @@ export default function Dashboard({ name, username, email, projects }) {
               name="tab"
               id="tab1"
               className="tab tab--1"
-              checked={index === 0}
-              onChange={() => setIndex(0)}
+              checked={projectFilter === "All"}
+              onChange={(e) => handleProjectDisplayFilter(e, 0)}
             />
             <label className="tab_label" htmlFor="tab1">
               All
@@ -162,8 +188,8 @@ export default function Dashboard({ name, username, email, projects }) {
               name="tab"
               id="tab2"
               className="tab tab--2"
-              checked={index === 1}
-              onChange={() => setIndex(1)}
+              checked={projectFilter === "Private"}
+              onChange={(e) => handleProjectDisplayFilter(e, 1)}
             />
             <label className="tab_label" htmlFor="tab2">
               Private
@@ -174,8 +200,8 @@ export default function Dashboard({ name, username, email, projects }) {
               name="tab"
               id="tab3"
               className="tab tab--3"
-              checked={index === 2}
-              onChange={() => setIndex(2)}
+              checked={projectFilter === "Public"}
+              onChange={(e) => handleProjectDisplayFilter(e, 2)}
             />
             <label className="tab_label" htmlFor="tab3">
               Public
@@ -188,9 +214,28 @@ export default function Dashboard({ name, username, email, projects }) {
           </button>
         </div>
         <div className="project-listings">
-          {userProjects.map((project) => (
-            <DashboardProjectCard projectTitle={project.projectTitle} projectDesc={project.projectDesc} visibility={project.visibility} key={project._id} projectId={project._id} userProjectsArr={setUserProjects}/>
-          ))} 
+        {userProjects.filter((project) => {
+          if (projectFilter === "All") return true;
+          return project.visibility.toLowerCase() === projectFilter.toLowerCase();
+        }).length === 0 ? (
+          <p className="no-projects-msg">No projects yet</p>
+        ) : (
+          userProjects
+            .filter((project) => {
+              if (projectFilter === "All") return true;
+              return project.visibility.toLowerCase() === projectFilter.toLowerCase();
+            })
+            .map((project) => (
+              <DashboardProjectCard
+                key={project._id}
+                projectTitle={project.projectTitle}
+                projectDesc={project.projectDesc}
+                visibility={project.visibility}
+                projectId={project._id}
+                userProjectsArr={setUserProjects}
+              />
+            ))
+        )} 
           {/* <ProjectPreviewCard /> */}
         </div>
       </div>
@@ -233,7 +278,7 @@ export default function Dashboard({ name, username, email, projects }) {
                       value="public"
                       checked={projectFormData.visibility === "public"}
                       onChange={handleProjectChange}
-                    />{" "}
+                    />
                     Public
                   </label>
                   <label>
@@ -243,7 +288,7 @@ export default function Dashboard({ name, username, email, projects }) {
                       value="private"
                       checked={projectFormData.visibility === "private"}
                       onChange={handleProjectChange}
-                    />{" "}
+                    />
                     Private
                   </label>
                 </div>
