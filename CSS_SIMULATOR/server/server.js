@@ -20,7 +20,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
   
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  // res.send("Hello World");
+  return res.redirect("https://vanilla-studio-client.onrender.com/")
 })
 
 app.use("/api/auth", authRoutes);
